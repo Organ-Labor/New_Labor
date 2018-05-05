@@ -50,7 +50,7 @@
 	   
    })
     
-</script>
+</script>   
 </head>
 <body>
 <form name="form1" action="" method="post">

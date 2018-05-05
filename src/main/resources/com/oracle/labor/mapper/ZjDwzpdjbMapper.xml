@@ -96,8 +96,8 @@
   
   <!-- 根据单位法人码和单位名称查找匹配单位 -->
   <select id="getDw" resultType="map" parameterType="String">
-      SELECT bio_name bioName,bio_bua_address bioAddress,LXRSJ tel,DJSJ date FROM bio LEFT JOIN zj_dwzpdjb
-ON bio_id=DWBH WHERE bio_name=#{bio_name} AND bio_id=#{bio_id}
+      SELECT bio_id bioId,bio_name bioName,bio_bua_address bioAddress,LXRSJ tel,DJSJ date FROM bio LEFT JOIN zj_dwzpdjb
+ON bio_id=DWBH WHERE bio_name=#{bioName} AND bio.bio_id=#{bioNo}
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">

@@ -17,7 +17,6 @@ import com.oracle.labor.common.codetable.PoliticsaspectOperation;
 import com.oracle.labor.common.codetable.ProficiencyOperation;
 import com.oracle.labor.common.codetable.QualificationOperation;
 import com.oracle.labor.common.codetable.RprtypeOperation;
-import com.oracle.labor.common.codetable.SexOperation;
 
 @Controller
 public class CommonHandler {
