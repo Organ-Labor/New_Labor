@@ -40,36 +40,42 @@
 </script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.1.js"></script>
 <script type="text/javascript">
-	$(function (){
-	
-		$("#citizenid").blur(function (){
-		$.post("<%=request.getContextPath()%>/service/zj/grqz/GrTjName.do", { bip_citizenid :$("#citizenid").val()+":0"},
-   		function(data){
-     		  $("#name").val(data);
-   		});
-		})
-		
-		
-		$("#dwbip_citizenid").blur(function (){
-		$.post("<%=request.getContextPath()%>/service/zj/grqz/GrTjName.do", { bip_citizenid :$("#dwbip_citizenid").val()+":0"},
-   		function(data){
-     		  $("#dwbip_name").val(data);
-   		});
-		})
-		
-		
-		
-		
-		$("#bio_no").blur(function (){
-		$.post("<%=request.getContextPath()%>/service/zj/grqz/GrTjName.do", { bip_citizenid :$("#bio_no").val()+":1"},
-   		function(data){
-     		  $("#bio_name").val(data);
-   		});
-		})
-   		
-   		
-   		
+
    
+
+	//用ajax做回显
+	$(function (){
+		//条件匹配中根据身份证号回显对应姓名
+		$("#citizenid").blur(function (){
+		$.post(
+				"<%=request.getContextPath()%>/service/zj/grqz/GrTjName.do", 
+				{ bip_citizenid:$("#citizenid").val()+":0"},
+   				function(data){
+     		 		$("#name").val(data);
+   				});
+		})
+		//意向匹配中根据身份证号回显对应姓名
+		$("#dwbip_citizenid").blur(function (){
+		$.post(
+				"<%=request.getContextPath()%>/service/zj/grqz/GrTjName.do", 
+				{ bip_citizenid :$("#dwbip_citizenid").val()+":0"},
+   				function(data){
+     		  		$("#dwbip_name").val(data);
+   				});
+		})
+		//意向匹配中根据单位法人码回显对应单位名称
+		$("#bio_no").blur(function (){
+		$.post(
+				"<%=request.getContextPath()%>/service/zj/grqz/GrTjName.do", 
+				{ bip_citizenid :$("#bio_no").val()+":1"},
+   				function(data){
+     		  		$("#bio_name").val(data);
+   				});
+		})
+   		
+   		
+   		
+
 	});
 </script>
 </head>

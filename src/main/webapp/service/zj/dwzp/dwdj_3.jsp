@@ -12,6 +12,7 @@
 			src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript">
 	$(function(){
+
 	     //文化程度
 		$("#whcd").load("../../Educationallevels/10");
 		//岗位类别
@@ -25,6 +26,45 @@
 		//健康状况
 		$("#jkzk").load("../../Healthstates/10");
 		
+
+	
+		$.get("dwdj_1.do",{code:"whcd"},function(data){
+			$("#whcd").html(data);
+		});
+		$.get("dwdj_1.do",{code:"ygxs"},function(data){
+			$("#ygxs").html(data);
+		});
+		$.get("dwdj_1.do",{code:"hyzk"},function(data){
+			$("#hyzk").html(data);
+		});
+		$.get("dwdj_1.do",{code:"jkzk"},function(data){
+			$("#jkzk").html(data);
+		});
+		$.get("dwdj_1.do",{code:"rylb"},function(data){
+			$("#rylb").html(data);
+		});
+		$.get("dwdj_1.do",{code:"zpdq"},function(data){
+			$("#zpdq").html(data);
+		});
+		$.get("dwdj_1.do",{code:"jsjdj"},function(data){
+			$("#jsjdj").html(data);
+		});
+		$.get("dwdj_1.do",{code:"jsjslcd"},function(data){
+			$("#jsjslcd").html(data);
+		});
+		$.get("dwdj_1.do",{code:"jyyz"},function(data){
+			$("#jyyz").html(data);
+		});
+		$.get("dwdj_1.do",{code:"yzslcd"},function(data){
+			$("#yzslcd").html(data);
+		});
+		$.get("dwdj_1.do",{code:"gwlb"},function(data){
+			$("#gwlb").html(data);
+		});
+		$.get("dwdj_1.do",{code:"hjxz"},function(data){
+			$("#hjxz").html(data);
+		});
+
 		
 		$.getJSON("dwdjInfo.do",{code:"dwbh",dwbh:$("#dwbh").val()},function(data){
 

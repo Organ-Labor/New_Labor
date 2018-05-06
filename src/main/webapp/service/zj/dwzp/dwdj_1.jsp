@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%-- <%@ page contentType="text/html; charset=UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -11,11 +11,22 @@
 </script>
 <script type="text/javascript">
 	$(function(){
+<<<<<<< HEAD
     		alert("sss");
     	     $("#dwxz").load("../getOrgtypes/10");
     	});
 </script>
 
+=======
+    		$.get("dwdj_1.do",{},function(data){
+    		alert(data);
+    			//$("#dwxz").html(data);
+    				
+    		});
+    	
+    	});
+</script>
+>>>>>>> refs/remotes/origin/master
 
 </head>
 <body>
@@ -128,4 +139,4 @@
 </table>
 </form>
 </body>
-</html>
+</html> --%>
