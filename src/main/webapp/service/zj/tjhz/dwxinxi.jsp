@@ -9,9 +9,10 @@
 	rel="stylesheet" type="text/css">
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/js/j.js"></script>
+<!-- 
 <script>
 	$(function() {
-		var aa = "${s}";
+		var aa = "${bio}";
 		var a = aa.split(",");
 		$("#i1").val(a[0]);
 		$("#i2").val(a[1]);
@@ -41,7 +42,7 @@
 		$("#i12").attr("readonly","readonly");
 		$("#i13").attr("readonly","readonly");
 	});
-</script>
+</script>  -->
 </head>
 <body>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -89,41 +90,41 @@
 								<tr class="line2">
 									<td width="13%" align="right"><span class="redtxt"></span>单位法人码</td>
 									<td width="18%"><input id="i1" name="dwfrm"
-										style="WIDTH: 100%" maxlength="32" value=""></td>
+										style="WIDTH: 100%" maxlength="32" value="${bio.bioNo}" ></td>
 									<td width="13%" align="right"><span class="redtxt"></span>单位全称</td>
 									<td width="20%"><INPUT id="i2" name="dwqc"
-										style="WIDTH: 100%" maxlength="64" value="">
+										style="WIDTH: 100%" maxlength="64" value="${bio.bioName }">
 									</td>
 									<td width="14%" align="right">单位简称</td>
 									<td width="20%"><INPUT id="i3" name="dwjc"
-										style="WIDTH: 100%" maxlength="32" value="">
+										style="WIDTH: 100%" maxlength="32" value="${bio.bioShortname }">
 									</td>
 								</tr>
 								<tr class="line1">
 									<td align="right"><span class="redtxt"></span>单位性质</td>
 									<td width="18%"><input id="i4" name="dwxz"
-										style="WIDTH: 100%;">
+										style="WIDTH: 100%;" value="${bio.bioOrgtype}">
 									</td>
 									<td align="right"><span class="redtxt"></span>经济类型</td>
-									<td><input id="i5" name="dwjjlx" style="WIDTH: 100%">
+									<td><input id="i5" name="dwjjlx" style="WIDTH: 100%" value="${bio.cdgRegtype }">
 									</td>
 									<td align="right"><span class="redtxt"></span>单位行业</td>
-									<td><input id="i6" name="dwhy" style="WIDTH: 100%">
+									<td><input id="i6" name="dwhy" style="WIDTH: 100%" value="${bio.bioIndustry }">
 									</td>
 								</tr>
 								<tr class="line2">
 
 									<td align="right">邮政编码</td>
 									<td><INPUT id="i7" name="yzbm" style="WIDTH: 100%"
-										maxlength="32">
+										maxlength="32" value="${bio.bioBuaPostcode }">
 									</td>
 									<td align="right">传真机号</td>
 									<td><input id="i8" name="czjh" style="WIDTH: 100%"
-										maxlength="32" value="">
+										maxlength="32" value="${bio.bioConFax }">
 									</td>
 									<td align="right">Email</td>
 									<td><INPUT id="i9" name="email" style="WIDTH: 100%"
-										maxlength="64" value="">
+										maxlength="64" value="${bio.bioConMail }">
 									</td>
 								</tr>
 								<tr class="line1">
@@ -142,7 +143,7 @@
 								<tr class="line2">
 									<td align="right"><span class="redtxt"></span>经营地址</td>
 									<td colspan="5"><INPUT id="i13" name="lxdz"
-										style="WIDTH: 100%" maxlength="64" value="">
+										style="WIDTH: 100%" maxlength="64" value="${bio.bioBuaAddress }">
 									</td>
 								</tr>
 

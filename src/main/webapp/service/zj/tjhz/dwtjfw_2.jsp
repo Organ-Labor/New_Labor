@@ -53,11 +53,11 @@
         </TR>
         <c:forEach items="${info.list}" var="s">
         	<TR> 
-        	  <TD align="center" class="line2"><a href="<%=request.getContextPath()%>/service/zj/tjhz/ServletTJXX.do?farenma=${s[4]}">推荐</a></TD>
-        	  <TD align="center" class="line2"><a href="<%=request.getContextPath()%>/service/zj/tjhz/dwtjfw_4xinxi.do?bj=dw&&farenma=${s[4]}">${s[0]}</a></TD>
-        	  <TD align="center" class="line2">${s[1]}</TD>
-        	  <TD align="center" class="line2">${s[2]}</TD>
-        	  <TD align="center" class="line2">${s[3]}</TD>
+        	  <TD align="center" class="line2"><a href="<%=request.getContextPath()%>/service/getDwmc/${s.bioId}">推荐</a></TD>
+        	  <TD align="center" class="line2"><a href="<%=request.getContextPath()%>/service/getDwxq/${s.bioId}">${s.bioName}</a></TD>
+        	  <TD align="center" class="line2">${s.bioAddress}</TD>
+        	  <TD align="center" class="line2">${s.tel}</TD>
+        	  <TD align="center" class="line2">${s.date}</TD>
         	</TR>        
         </c:forEach>
 </TABLE>

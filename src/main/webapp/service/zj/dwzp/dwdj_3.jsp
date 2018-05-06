@@ -12,7 +12,6 @@
 			src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript">
 	$(function(){
-
 	     //文化程度
 		$("#whcd").load("../../Educationallevels/10");
 		//岗位类别
@@ -20,54 +19,24 @@
 		//户籍性质
 		$("#hjxz").load("../../Rprtypes/10");
 		//用工形式
-		$("#ygxs").load("../../Employtypes/10");
+		$("#ygxs").load("../../Employtypes/1");
 		//婚姻状况
-		$("#hyzk").load("../../Marriages/10");
+		$("#hyzk").load("../../Marriages/1");
 		//健康状况
-		$("#jkzk").load("../../Healthstates/10");
+		$("#jkzk").load("../../Healthstates/1");
+		//人员类别
+		$("#rylb").load("../../Personneltypes/20");
+		//计算机等级
+		$("#jsjdj").load("../../Computergrades/1");
+		//熟练程度
+		$("#jsjslcd").load("../../Proficiencys/1");
+		$("#yzslcd").load("../../Proficiencys/1");
+		//外语
+	    $("#jyyz").load("../../Languages/01");
 		
-
-	
-		$.get("dwdj_1.do",{code:"whcd"},function(data){
-			$("#whcd").html(data);
-		});
-		$.get("dwdj_1.do",{code:"ygxs"},function(data){
-			$("#ygxs").html(data);
-		});
-		$.get("dwdj_1.do",{code:"hyzk"},function(data){
-			$("#hyzk").html(data);
-		});
-		$.get("dwdj_1.do",{code:"jkzk"},function(data){
-			$("#jkzk").html(data);
-		});
-		$.get("dwdj_1.do",{code:"rylb"},function(data){
-			$("#rylb").html(data);
-		});
-		$.get("dwdj_1.do",{code:"zpdq"},function(data){
-			$("#zpdq").html(data);
-		});
-		$.get("dwdj_1.do",{code:"jsjdj"},function(data){
-			$("#jsjdj").html(data);
-		});
-		$.get("dwdj_1.do",{code:"jsjslcd"},function(data){
-			$("#jsjslcd").html(data);
-		});
-		$.get("dwdj_1.do",{code:"jyyz"},function(data){
-			$("#jyyz").html(data);
-		});
-		$.get("dwdj_1.do",{code:"yzslcd"},function(data){
-			$("#yzslcd").html(data);
-		});
-		$.get("dwdj_1.do",{code:"gwlb"},function(data){
-			$("#gwlb").html(data);
-		});
-		$.get("dwdj_1.do",{code:"hjxz"},function(data){
-			$("#hjxz").html(data);
-		});
-
+	  
 		
 		$.getJSON("dwdjInfo.do",{code:"dwbh",dwbh:$("#dwbh").val()},function(data){
-
 			$("#dwlxr").val(data.dwlxr);
 			$("#lxrsfzhm").val(data.lxrsfzhm);
 			$("#lxrsj").val(data.lxrsj);
@@ -176,25 +145,12 @@
 	
 	
 	});
-
-
-
-
-
 	
 	
 		
-
-
-
 </script>
 
-		<script>
-
-
-
-	
-	
+<script>
 	function doInsert(){
 		if(form1.zpgz.value==""){
 			alert("职业名称不能为空!");
@@ -278,11 +234,18 @@
 </script>
 	</head>
 	<body>
-		<form method="post" name="form1" action="dwdjInfo.do">
+	<div>
+	
+	
+		<form method="post" name="form1" action="dwdjInfo.do" >
+			
 			<input type="hidden" name="dwdj" value="dwdj3" />
 			<input type="hidden" name="dwbh" id="dwbh"
 				value=<%=request.getSession().getAttribute("dwbh")%>>
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" style="position:reletive;">
+				<div style="background: blue;width: 200px;height: 200px;position:absolute;left:50%;top:175px;transform:translate(-50%,-50%);display: none;" >
+				sss	
+				</div>
 				<tr>
 					<td>
 						<table width="98%" border="0" align="center" cellpadding="0"
@@ -363,7 +326,7 @@
 								</td>
 								<td id="zpgztd">
 									<select name="zpgz" id="zpgz" style="WIDTH: 100%"
-										onclick=setZymc();>
+										>
 										<!--弹出ModalDialog-->
 									</select>
 								</td>
@@ -633,5 +596,6 @@
 						</tr>
 			</table>
 		</form>
+		</div>
 	</body>
 </html>

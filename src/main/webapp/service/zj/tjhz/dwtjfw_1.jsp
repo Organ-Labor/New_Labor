@@ -50,7 +50,7 @@
 	   
    })
     
-</script>
+</script>   
 </head>
 <body>
 <form name="form1" action="" method="post">
@@ -100,7 +100,7 @@ border=1 cellPadding=0 cellSpacing=0 bordercolor="#FFFFFF" class=tablebody>
         <input name="button2" type="button" id="but_1" class=BUTTONs3 value="确 定" > 
       <!--   <input name="button2" type="button" id="but_1" class=BUTTONs3 value="确 定" onClick="doSubmit()">  -->
         &nbsp;&nbsp;<INPUT class=BUTTONs3  type="reset" value="取 消" name=button> 
-      </TD></TR>
+      </TD>  </TR>
 </table> 
 </form>     
 </body>

@@ -12,7 +12,6 @@
 			src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript">
 	$(function(){
-<<<<<<< HEAD
 		
 	
     
@@ -143,12 +142,10 @@
 			data="../../save/"+data;
 			//alert(data);
 	        $("#form1").attr('action',data).submit();
-
 	});
 	
 	
 	});
-
 </script>
 
 
@@ -187,11 +184,7 @@ $(function(){
 		//alert(data);
 		$("#dwszj").load("../../villages/"+data);
 	});
-
-
 });
-
-
 </script>
 		<script>
 	var xmlHttp = false;
@@ -231,7 +224,6 @@ $(function(){
 		}
 	}
 	function doInsert(){
-
 								
 		form1.bc.disabled=true;
 		form1.fh.disabled=true;
@@ -243,108 +235,9 @@ $(function(){
 		form1.bioShortname.value = form1.bioName.value;
 	}
 </script>
-
-
-
-		<script type="text/javascript">
-$(function(){
-	
-//单位性质
-	$.get("dwdj_1.do",{code:"dwxz"},function(data){
-		$("#dwxz").html(data);
-	});
-	//单位经济
-	$.get("dwdj_1.do",{code:"dwjjlx"},function(data){
-		$("#dwjjlx").html(data);
-	});
-	//单位行业
-	$.get("dwdj_1.do",{code:"dwhy"},function(data){
-		$("#dwhy").html(data);
-	});
-	
-	//省
-	$.get("dwdj_1.do",{code:"dwszs"},function(data){
-		var c=$("#dwszs").html(data);
-	});
-	$("#dwszs").change(function(){
-		var p=$("#dwszs").val();
-		
-		$.get("dwdj_1.do",{code:"dwszq",province:p},function(data){
-		$("#dwszq").html(data);
-		
-		});
-		$("#dwszq").change();
-	});
-	$("#dwszq").change(function(){
-		var c=$("#dwszq").val();
-	$.get("dwdj_1.do",{code:"dwszj",city:c},function(data){
-		$("#dwszj").html(data);
-	
-	
-	});
-	
-	});
-	
-	
-
-
-});
-
-
-</script>
-		<script>
-	var xmlHttp = false;
-	function initCity(){
-		var province = form1.dwszs.options[form1.dwszs.selectedIndex].value;
-		createXMLHttpRequest();
-		xmlHttp.onreadystatechange = cityProcessor;
-		xmlHttp.open("get","<%=request.getContextPath()%>/ldlsc/dw/dwdj.do?method=initRegion&obj=city&selectname=dwszq&provinceid="+province);
-		xmlHttp.send(null);
-	}
-	function initVillage(){
-		var city = form1.dwszq.options[form1.dwszq.selectedIndex].value;
-		createXMLHttpRequest();
-		xmlHttp.onreadystatechange = villageProcessor;
-		xmlHttp.open("get","<%=request.getContextPath()%>/ldlsc/dw/dwdj.do?method=initRegion&obj=village&selectname=dwszj&cityid="+city);
-		xmlHttp.send(null);
-	}
-	function cityProcessor(){
-		var responseText;
-		if(xmlHttp.readyState==4){
-			if(xmlHttp.status==200){
-				responseText = xmlHttp.responseText;
-				document.all.sqx.removeChild(form1.dwszq);
-				document.all.sqx.innerHTML=responseText;
-				form1.dwszj.innerHTML="";
-			}
-		}
-	}
-	function villageProcessor(){
-		var responseText;
-		if(xmlHttp.readyState==4){
-			if(xmlHttp.status==200){
-				responseText = xmlHttp.responseText;
-				document.all.jzx.removeChild(form1.dwszj);
-				document.all.jzx.innerHTML=responseText;
-			}
-		}
-	}
-	function doInsert(){
-
-								
-		form1.bc.disabled=true;
-		form1.fh.disabled=true;
-		form1.action="<%=request.getContextPath()%>
-	/service/zj/dwzp/dwdj_3.jsp";
-		form1.submit();
-	}
-	function copyValue() {
-		form1.dwjc.value = form1.dwqc.value;
-	}
-</script>
 	</head>
 	<body>
-		<form name="form1" action="dwdjInfo.do" method="post">
+		<form id="form1" name="form1" method="post">
 			<input type="hidden" name="dwdj" value="dwdj2" />
 			<input type="hidden" name="dwbh" id="dwbh" />
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -404,14 +297,14 @@ $(function(){
 														<span class="redtxt">*</span>单位法人码
 													</td>
 													<td width="18%">
-														<input name="dwfrm" id="dwfrm" style="WIDTH: 100%"
+														<input name="bioNo" id="bioNo" style="WIDTH: 100%"
 															maxlength="32">
 													</td>
 													<td width="13%" align="right">
 														<span class="redtxt">*</span>单位全称
 													</td>
 													<td width="20%">
-														<INPUT name="dwqc" id="dwqc" style="WIDTH: 100%"
+														<INPUT name="bioName" id="bioName" style="WIDTH: 100%"
 															maxlength="64" value="" onkeyup=
 	copyValue();;
 >
@@ -420,7 +313,7 @@ $(function(){
 														单位简称
 													</td>
 													<td width="20%">
-														<INPUT name="dwjc" id="dwjc" style="WIDTH: 100%"
+														<INPUT name="bioShortname" id="bioShortname" style="WIDTH: 100%"
 															maxlength="32" value="">
 													</td>
 												</tr>
@@ -429,7 +322,7 @@ $(function(){
 														<span class="redtxt">*</span>单位性质
 													</td>
 													<td width="18%">
-														<select id="dwxz" name="dwxz" style="WIDTH: 100%;">
+														<select id="bioOrgtype" name="bioOrgtype" style="WIDTH: 100%;">
 
 														</select>
 													</td>
@@ -437,7 +330,7 @@ $(function(){
 														<span class="redtxt">*</span>经济类型
 													</td>
 													<td>
-														<select id="dwjjlx" name="dwjjlx" style="WIDTH: 100%">
+														<select id="cdgRegtype" name="cdgRegtype" style="WIDTH: 100%">
 
 
 														</select>
@@ -446,7 +339,7 @@ $(function(){
 														<span class="redtxt">*</span>单位行业
 													</td>
 													<td>
-														<select id="dwhy" name="dwhy" style="WIDTH: 100%">
+														<select id="bioIndustry" name="bioIndustry" style="WIDTH: 100%">
 
 
 														</select>
@@ -458,21 +351,21 @@ $(function(){
 														邮政编码
 													</td>
 													<td>
-														<INPUT name="yzbm" id="yzbm" style="WIDTH: 100%"
+														<INPUT name="bioBuaPostcode" id="bioBuaPostcode" style="WIDTH: 100%"
 															maxlength="32">
 													</td>
 													<td align="right">
 														传真机号
 													</td>
 													<td>
-														<input name="czjh" id="czjh" style="WIDTH: 100%"
+														<input name="bioConFax" id="bioConFax" style="WIDTH: 100%"
 															maxlength="32" value="">
 													</td>
 													<td align="right">
-														Email
+														Mail
 													</td>
 													<td>
-														<INPUT name="email" id="email" style="WIDTH: 100%"
+														<INPUT name="bioConMail" id="bioConMail" style="WIDTH: 100%"
 															maxlength="64" value="">
 													</td>
 												</tr>
@@ -508,7 +401,7 @@ $(function(){
 														<span class="redtxt">*</span>经营地址
 													</td>
 													<td colspan="5">
-														<INPUT name="lxdz" id="lxdz" style="WIDTH: 100%"
+														<INPUT name="bioBuaAddress" id="bioBuaAddress" style="WIDTH: 100%"
 															maxlength="64" value="">
 													</td>
 												</tr>

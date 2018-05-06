@@ -6,12 +6,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oracle.labor.common.codetable.ComputergradeOperation;
 import com.oracle.labor.common.codetable.EducationallevelOperation;
 import com.oracle.labor.common.codetable.EmploytypeOperation;
 import com.oracle.labor.common.codetable.HealthstateOperation;
 import com.oracle.labor.common.codetable.IndustryOperation;
+import com.oracle.labor.common.codetable.LanguageOperation;
 import com.oracle.labor.common.codetable.MarriageOperation;
 import com.oracle.labor.common.codetable.OrgtypeOperation;
+import com.oracle.labor.common.codetable.PersonneltypeOperation;
+import com.oracle.labor.common.codetable.ProficiencyOperation;
 import com.oracle.labor.common.codetable.RegioncodeOperation;
 import com.oracle.labor.common.codetable.RegtypeOperation;
 import com.oracle.labor.common.codetable.RprtypeOperation;
@@ -125,6 +129,30 @@ public class DWZPHandler {
 		@RequestMapping(value="/service/Healthstates/{value}",produces="text/html;charset=UTF-8")
 		public String getHealthstates(@PathVariable("value") String value){
 			return HealthstateOperation.getOption(value);
+		}
+		//获得人员类别 下拉列表
+		@ResponseBody
+		@RequestMapping(value="/service/Personneltypes/{value}",produces="text/html;charset=UTF-8")
+		public String getPersonneltypes(@PathVariable("value") String value){
+			return PersonneltypeOperation.getOption(value);
+		}
+		//获得计算机等级 下拉列表
+		@ResponseBody
+		@RequestMapping(value="/service/Computergrades/{value}",produces="text/html;charset=UTF-8")
+		public String getComputergrades(@PathVariable("value") String value){
+			return ComputergradeOperation.getOption(value);
+		}
+		//获得熟练程度 下拉列表
+		@ResponseBody
+		@RequestMapping(value="/service/Proficiencys/{value}",produces="text/html;charset=UTF-8")
+		public String getProficiencys(@PathVariable("value") String value){
+			return ProficiencyOperation.getOption(value);
+		}
+		//获得语种 下拉列表
+		@ResponseBody
+		@RequestMapping(value="/service/Languages/{value}",produces="text/html;charset=UTF-8")
+		public String getLanguages(@PathVariable("value") String value){
+			return LanguageOperation.getOption(value);
 		}
 	
 		

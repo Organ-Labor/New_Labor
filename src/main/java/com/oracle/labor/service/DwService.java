@@ -15,8 +15,9 @@ public class DwService {
 	ZjDwzpdjbMapper dwDao;
 	
 	//查询符合条件的单位
-	public List<Map<String,Object>> getDw(String bio_id,String bio_name){
-		return dwDao.getDw(bio_id, bio_name);
+	public List<Map<String,Object>> getDw(String bioNo,String bioName){
+		//System.out.println(dwDao.getDw(bioNo,bioName).toString());
+		return dwDao.getDw(bioNo,bioName);
 	}
 
 }

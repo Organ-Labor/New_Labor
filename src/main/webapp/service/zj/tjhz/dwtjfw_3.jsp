@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<%=request.getContextPath()%>/styles/css/common.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/j.js"></script>
+
+<!-- 
 <script>
 	$(function(){
 		var a;
@@ -70,6 +72,31 @@
 		});
 	});
 </script>
+
+ -->
+ 
+ <script type="text/javascript">
+     $(function(){
+    	 //加载下拉列表
+    	 //1.求职工种
+    	 $("#qzgz").load("<%=request.getContextPath()%>/service/getQzgz/1000000");
+    	 //2.性别
+    	 $("#xb").load("<%=request.getContextPath()%>/service/getSex/1");
+    	 //3.加载婚姻状况
+ 		 $("#hyzk").load("<%=request.getContextPath()%>/service/hyzk/1");
+ 		 //4.文化程度
+ 		 $("#whcd").load("<%=request.getContextPath()%>/service/whcd/10");
+ 		 //5.户籍性质
+ 		 $("#hjxz").load("<%=request.getContextPath()%>/service/hjxz/10");
+ 		 //6.加载人员类别
+ 		 $("#rylb").load("<%=request.getContextPath()%>/service/rylb/20");
+ 		 //7.健康状况
+ 		 $("#jkzk").load("<%=request.getContextPath()%>/service/jkzk/1");
+ 		 //8.工作地区
+ 		 $("#gzdq").load("<%=request.getContextPath()%>/service/getGzdq");
+    	 
+     })
+ </script>
 </head>
 <body>
 <form name="form1" action="" method="post">
@@ -93,7 +120,7 @@
     <td><input type="hidden" name="bio_id" value="<bean:write name='bio_id' scope='request'/>"></td>
     <td><input type="hidden" name="bio_bua_address" value="<bean:write name='bio_bua_address' scope='request'/>"></td>
     <td><input type="hidden" name="lxdh" value="<bean:write name='lxdh' scope='request'/>"></td>
-			    <td  valign="bottom">单位名称:&nbsp;&nbsp;${dwmc}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单位地址:&nbsp;&nbsp;${dwdz}</td>
+			    <td  valign="bottom">单位名称:&nbsp;&nbsp;${bioInfo.bioName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单位地址:&nbsp;&nbsp;${bioInfo.bioBuaAddress}</td>
 			  </tr>
 </table>
 
@@ -112,7 +139,7 @@
 						<td width="11%">
 						<table border="0" cellspacing="2" cellpadding="0">
                         <tr>
-                          <td><select name="qzgz" style="width:120px;" id = "selects"></select></td>
+                          <td><select name="qzgz" style="width:120px;" id = "qzgz"></select></td>
                   		  <td class="line2"></td>
                 		</tr>
               			</table>
@@ -126,38 +153,41 @@
   <tbody>
     <tr>
       <td width="16%" align="right" class="line2">性　　别</td>
-      <td width="20%" align="center" class="line2"> <select id="s1" name="xb" style="WIDTH: 100%">
+      <td width="20%" align="center" class="line2"> <select id="xb" name="xb" style="WIDTH: 100%">
         
         </select></td>
       <td width="12%" align="right" class="line2">婚姻状况</td>
-      <td width="20%" align="center" class="line2"> <select id="s2" name="hyzk" style="WIDTH: 100%">
+      <td width="20%" align="center" class="line2"> <select id="hyzk" name="hyzk" style="WIDTH: 100%">
         
         </select></td>
       <td width="11%"  align="right" class="line2">文化程度</td>
-      <td width="20%" align="center" class="line2"> <select id="s3" name="whcd" style="WIDTH: 100%">
+      <td width="20%" align="center" class="line2"> <select id="whcd" name="whcd" style="WIDTH: 100%">
 					
         </select></td>
     </tr>
     <tr>
       <td align="right" class="line1">户籍性质</td>
-      <td align="center" class="line1"><select id="s4" name="hjxz" style="WIDTH: 100%">
+      <td align="center" class="line1"><select id="hjxz" name="hjxz" style="WIDTH: 100%">
         
         </select></td>
 	  <td align="right" class="line2">人员类别</td>
-      <td align="center" class="line2"><select id="s5" name="rylb" style="WIDTH: 100%">
+      <td align="center" class="line2"><select id="rylb" name="rylb" style="WIDTH: 100%">
           
         </select></td>
      <td align="right" class="line1">健康状况</td>
-      <td align="center" class="line1"><select id="s6" name="jkzk" style="WIDTH:100%">
+      <td align="center" class="line1"><select id="jkzk" name="jkzk" style="WIDTH:100%">
         
         </select></td>
     </tr>    
     <tr>
       <td align="right" class="line2">应届毕业生</td>
       <td align="center" class="line2"><select id="s7" name="sfyj" style="WIDTH: 100%">
+        <option value="y">是</option>
+        <option value="n">否</option>
+        <option value="k">无要求</option>
         </select></td>
       <td align="right" class="line1">工作地区</td>
-      <td align="center" class="line1"> <select id="s8" name="gzdq" style="WIDTH: 100%"></select></td>
+      <td align="center" class="line1"> <select id="gzdq" name="gzdq" style="WIDTH: 100%"></select></td>
     </tr>
   <tr>
       <td align="right" class="line1">年　　龄</td>
