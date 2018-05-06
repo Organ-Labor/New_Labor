@@ -11,6 +11,9 @@
 <script>
 	$(function(){
 		//$.get("qzdj_1.do",{code:"bip_id"},function(data){$("#bip_id").html(data);})
+		
+		//9.性别
+		$("#xb").load("../../sex/1");
 		//1.加载民族下拉列表
 		$("#mz").load("../../nations/01");
 		//2.加载政治面貌
@@ -25,19 +28,39 @@
 		$("#cjzk").load("../../cjzk/11");
 		//7.户籍性质
 		$("#hjxz").load("../../hjxz/10");
+		//省份
+		$("#dwszs").load("../../province/110000000000/province");
+		//市区
+		$("#dwszs").change(function(){
+			var data=$("#dwszs").val();
+			$("#dwszq").load("../../city/"+data+"/city");
+			$("#dwszj").val("");
+		
+		})
+		//街道
+		$("#dwszq").change(function(){
+			var data2=$("#dwszq").val();
+			$("#dwszj").load("../../village/"+data2+"/village");
+		})
 		//8.文化程度
 		$("#whcd1").load("../../whcd/10");
-		//9.性别
-		//$("#xb").load("../../xb/1");
+		
 		//10.语言
 		$("#init_jywy").load("../../language/01");
 		//11.计算机等级
 		$("#jsjdj").load("../../jsjdj/1");
-		//12.职业技能
-		$("#init_zyjn").load("../../zyjn/1");
+		
 		//13.熟练程度
 		$("#init_wyslcd").load("../../slcd/1");
 		$("#jsjslcd").load("../../slcd/1");
+		//技术等级
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		//根据身份证号码判断性别和年龄 		
@@ -471,7 +494,7 @@
           <td width="13%" align="right"><span class="redtxt">*</span>身份证号码</td >
           <td width="20%"><INPUT  id="sfzhm" name="sfzhm" style="WIDTH: 100%"  value="" /></td >
           <td width="13%" align="right" ><span class="redtxt">*</span>性　　别</td >
-          <td width="20%"><select name="xb" id="xb" size="1"  style="WIDTH: 100%" disabled></select></td >
+           <td ><select id="xb" name="xb" size="1"  style="WIDTH: 100%" ></select></td >
           <td width="13%" align="right">年　　龄</td >
           <td width="20%"><INPUT id="nl"  name="nl"   style="WIDTH: 100%" value="${Age} " disabled></td >
         </tr>
