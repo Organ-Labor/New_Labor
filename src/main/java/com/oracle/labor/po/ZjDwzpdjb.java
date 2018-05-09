@@ -13,7 +13,13 @@ public class ZjDwzpdjb {
 
     private String sfdj;
 
-    private Integer djyxq;
+    @Override
+	public String toString() {
+		return "ZjDwzpdjb [zpbh=" + zpbh + ", dwbh=" + dwbh + ", dwlxr=" + dwlxr + ", lxrsfzhm=" + lxrsfzhm + ", lxrsj="
+				+ lxrsj + ", sfdj=" + sfdj + ", djyxq=" + djyxq + ", djsj=" + djsj + ", gdsj=" + gdsj + "]";
+	}
+
+	private Integer djyxq;
 
     private String djsj;
 

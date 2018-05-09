@@ -1,5 +1,7 @@
 package com.oracle.labor.web;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +27,64 @@ import com.oracle.labor.common.codetable.SpecialtyOperation;
 import com.oracle.labor.common.codetable.ZjdgwlbOperation;
 import com.oracle.labor.common.util.GenerateID;
 import com.oracle.labor.po.Bio;
+import com.oracle.labor.po.ZjDwzpdjb;
+import com.oracle.labor.po.ZjDwzpgzb;
 import com.oracle.labor.service.BioService;
+import com.oracle.labor.service.DwService;
 
 @Controller
-public class DWZPHandler {
+public class DwzpHandler {
 	
 	@Autowired
 	BioService bioservice;
+	
+	@Autowired
+	DwService dwservice;
+	
+	//保存单位的登记信息
+	 @RequestMapping("/service/dwzp_save")
+	    public String dwzp_save(ZjDwzpdjb b1,ZjDwzpgzb b2) {
+		    //设置基本信息
+		    String id=GenerateID.getGenerateId();
+		    //计算总人数
+		    int a=0,b=0,c=0;
+		    if(b2.getZprsn()!=null&&b2.getZprsn()!="")
+		         a=Integer.parseInt(b2.getZprsn());
+		    if(b2.getZprsnv()!=null&&b2.getZprsnv()!="")
+		         b=Integer.parseInt(b2.getZprsnv());
+		    if(b2.getXbbx()!=null&&b2.getXbbx()!="")
+		         c=Integer.parseInt(b2.getXbbx());
+            int num=a+b+c;
+		    b2.setZrs(num+"");
+		    
+		    //获取登记时间
+		    SimpleDateFormat date=new SimpleDateFormat("yyyy-MM-dd");
+		    String now=date.format(new Date());
+		    b2.setDjsj(now);
+		    //设置成功人数
+		    b2.setCgrsn("0");
+		    b2.setCgrsnv("0");
+		    //有效期默认为12天
+		    b2.setDjyxq("12");
+		    //未冻结
+		    b1.setSfdj("n");
+		    b1.setDjsj(now);
+		    b1.setDjyxq(12);
+		    
+		    b1.setZpbh(id);
+		    b2.setZpbh(id);
+		    System.out.println();System.out.println();System.out.println();
+		    System.out.println("====================================================================================");
+		    System.out.println("b1:"+b1);
+		    System.out.println("b2:"+b2);
+		    dwservice.DwZp_save(b1, b2);
+		 	return "";
+	    }
+	
+	
+	
+	
+	
 	
     //单位性质
 	@ResponseBody

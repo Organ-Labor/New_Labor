@@ -11,7 +11,18 @@ public class ZjDwzpgzb {
 
     private String gwlb;
 
-    private String zrs;
+    @Override
+	public String toString() {
+		return "ZjDwzpgzb [zpgzbh=" + zpgzbh + ", zpbh=" + zpbh + ", zpgz=" + zpgz + ", zpgzbm=" + zpgzbm + ", gwlb="
+				+ gwlb + ", zrs=" + zrs + ", zprsn=" + zprsn + ", zprsnv=" + zprsnv + ", xbbx=" + xbbx + ", hjxz="
+				+ hjxz + ", kssj=" + kssj + ", jssj=" + jssj + ", zxnl=" + zxnl + ", zdnl=" + zdnl + ", whcd=" + whcd
+				+ ", ygxs=" + ygxs + ", zzyx=" + zzyx + ", zgyx=" + zgyx + ", hyzk=" + hyzk + ", jkzk=" + jkzk
+				+ ", rylb=" + rylb + ", sfbys=" + sfbys + ", zpdq=" + zpdq + ", jyyz=" + jyyz + ", slcd=" + slcd
+				+ ", jsjdj=" + jsjdj + ", jsjslcd=" + jsjslcd + ", gwms=" + gwms + ", gzdd=" + gzdd + ", cgrsn=" + cgrsn
+				+ ", cgrsnv=" + cgrsnv + ", djyxq=" + djyxq + ", djsj=" + djsj + ", gdsj=" + gdsj + "]";
+	}
+
+	private String zrs;
 
     private String zprsn;
 
