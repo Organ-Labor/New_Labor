@@ -1,5 +1,7 @@
 package com.oracle.labor.web;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +23,7 @@ import com.oracle.labor.common.codetable.RegtypeOperation;
 import com.oracle.labor.common.codetable.RprtypeOperation;
 import com.oracle.labor.common.codetable.SpecialtyOperation;
 import com.oracle.labor.common.codetable.ZjdgwlbOperation;
+import com.oracle.labor.common.util.GenerateID;
 import com.oracle.labor.po.Bio;
 import com.oracle.labor.service.BioService;
 
@@ -74,16 +77,19 @@ public class DWZPHandler {
 	 @RequestMapping("/service/save/{value}")
 	    public String save(Bio bio,@PathVariable("value") String value) {
 		    bio.setBioRgaRegioncode(value);
+		    String dwbm=GenerateID.getGenerateId();
+		    bio.setBioId(dwbm);
 	        bioservice.save(bio);
-	        return "redirect:/service/zj/dwzp/dwdj_3.jsp";
+	        return "redirect:/service/getBioById/"+dwbm;
 	    }
-	//工种
-		@ResponseBody
-		@RequestMapping(value="/service/Specialtys",produces="text/html;charset=UTF-8")
-		public String getSpecialty(){
-			return SpecialtyOperation.getHy();
-		}
-		
+	 //根据id获取单位基本信息
+	 @RequestMapping("/service/getBioById/{value}")
+	    public String getBioByid(@PathVariable("value") String value,Map<String,Object> map) {
+		   Bio bio;
+		   bio=bioservice.getBio(value);
+	       map.put("company", bio);
+	        return "forward:/service/zj/dwzp/dwdj_3.jsp";
+	    }
 		//根据参数得到省市区升级版
 		@ResponseBody
 		@RequestMapping(value="/service/Provinces/{id}/{code}",produces="text/html;charset=UTF-8")
@@ -98,12 +104,6 @@ public class DWZPHandler {
 			return EducationallevelOperation.getOption(value);
 		}
 		
-		//获得岗位类别下拉列表
-		@ResponseBody
-		@RequestMapping(value="/service/Zjdgwlbs/{value}",produces="text/html;charset=UTF-8")
-		public String getZjdgwlbs(@PathVariable("value") String value){
-			return ZjdgwlbOperation.getOption(value);
-		}
 		//获得户籍性质下拉列表
 		@ResponseBody
 		@RequestMapping(value="/service/Rprtypes/{value}",produces="text/html;charset=UTF-8")
@@ -154,6 +154,26 @@ public class DWZPHandler {
 		public String getLanguages(@PathVariable("value") String value){
 			return LanguageOperation.getOption(value);
 		}
-	
+	   
+		//获得岗位类别下拉列表
+		@ResponseBody
+		@RequestMapping(value="/service/Zjdgwlbs/{value}",produces="text/html;charset=UTF-8")
+		public String getZjdgwlbs(@PathVariable("value") String value){
+			return ZjdgwlbOperation.getOption(value);
+		}
+		
+		//工种大类
+		@ResponseBody
+		@RequestMapping(value="/service/Specialtys",produces="text/html;charset=UTF-8")
+		public String getSpecialty(){
+			return SpecialtyOperation.getHy();
+		}
+		
+		//工种类
+		@ResponseBody
+		@RequestMapping(value="/service/Specialty/{ID}/{value}",produces="text/html;charset=UTF-8")
+		public String getSpecialty(@PathVariable("ID") String ID,@PathVariable("value") String value){
+			return SpecialtyOperation.getSelectedGz(ID, value);
+		}
 		
 }

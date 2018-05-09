@@ -120,14 +120,4 @@ public class Bio {
     public void setBioBuaAddress(String bioBuaAddress) {
         this.bioBuaAddress = bioBuaAddress == null ? null : bioBuaAddress.trim();
     }
-
-	@Override
-	public String toString() {
-		return "Bio [bioId=" + bioId + ", bioNo=" + bioNo + ", bioName=" + bioName + ", bioShortname=" + bioShortname
-				+ ", bioOrgtype=" + bioOrgtype + ", cdgRegtype=" + cdgRegtype + ", bioIndustry=" + bioIndustry
-				+ ", bioRgaRegioncode=" + bioRgaRegioncode + ", bioBuaPostcode=" + bioBuaPostcode + ", bioConFax="
-				+ bioConFax + ", bioConMail=" + bioConMail + ", bioBuaAddress=" + bioBuaAddress + "]";
-	}
-    
-    
 }

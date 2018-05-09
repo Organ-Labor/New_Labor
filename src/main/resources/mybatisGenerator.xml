@@ -50,6 +50,8 @@
         <table schema="" tableName="bio"></table><!-- 单位基本表 -->
         <!-- <table schema="" tableName="ldlsc_user"></table> -->
         <!--   <table schema="" tableName="account"></table> -->
+       <!--  <table schema="" tableName="zj_dwzpgzb"></table>单位招聘工种表 -->
+      
         
         <!-- 有些表的字段需要指定java类型
          <table schema="" tableName="">

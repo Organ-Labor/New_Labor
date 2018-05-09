@@ -12,6 +12,7 @@
 			src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript">
 	$(function(){
+		
 	     //文化程度
 		$("#whcd").load("../../Educationallevels/10");
 		//岗位类别
@@ -135,9 +136,9 @@
 		
 		}
 		
-		form1.submit();
-		
-		
+		//alert("sss");
+		$("#form1").attr('action','').submit();
+	
 		
 		});
 	
@@ -231,21 +232,184 @@
 			document.all.fwcstd.innerHTML = "<input name=\"fwcs\" style=\"WIDTH: 100%\" maxlength=\"4\" value=\"\">";
 		}
 	}
+	 
+	 $(function(){
+		 //加载工种大类
+		 $("#gzdl").load("../../Specialtys");
+		 //寻找工种中类
+		 $("#gzdl").change(function(){
+			 var data=$("#gzdl").val();
+			// alert(data);
+			 $("#gzzl").load("../../Specialty/"+data+"/gz1");
+			 $("#gzxl").empty();
+			 $("#gzxl2").empty();
+			 $("#gzdm").val("");
+			 $("#gzmc").val("");
+		 });
+		 //小类
+		 $("#gzzl").change(function(){
+			 var data=$("#gzzl").val();
+			 $("#gzxl").load("../../Specialty/"+data+"/gz2");
+			 $("#gzxl2").empty();
+			 $("#gzdm").val("");
+			 $("#gzmc").val("");
+		 });
+		 //细类
+		 $("#gzxl").change(function(){
+			 var data=$("#gzxl").val();
+			 $("#gzxl2").load("../../Specialty/"+data+"/gz3",function(){
+				 var ss=$("#gzxl2").val();
+				 var dd=$("#gzxl2 option:selected").text();;
+				 $("#gzdm").val(ss);
+				 $("#gzmc").val(dd);
+			 });
+		 });
+		 //细类改变加载
+		 $("#gzxl2").change(function(){
+			 var ss=$("#gzxl2").val();
+			 var dd=$("#gzxl2 option:selected").text();;
+			 $("#gzdm").val(ss);
+			 $("#gzmc").val(dd);
+		 });
+		 
+		 //close 弹窗
+		 $("#bt_close").click(function(){
+			 $("#work_type").css('display','none');
+		 });
+		 //弹出工种
+		 $("#zpgz").click(function(){
+			 
+			 $("#work_type").css('display','block');
+		 });
+		 //提交工种
+		 $("#bt_gzqd").click(function(){
+			 var data=$("#gzmc").val();
+			 $("#zpgz").val(data);
+			 $("#work_type").css('display','none');
+		 });
+		 //招聘地区
+		 $("#zpdq").click(function(){
+			 $("#work_eara").css('display','block');
+		 });
+		 //close
+		 $("#bt_close2").click(function(){
+			 $("#work_eara").css('display','none');
+		 });
+		 //
+		 
+		//省
+			$("#sheng").load("../../Provinces");
+			
+			$("#sheng").change(function(){
+				var data=$("#sheng").val();
+				//alert(data);
+				$("#shi").load("../../Citys/"+data);
+				$("#qu").empty();
+				$("#dq_code").val("");
+				$("#dq_name").val("");
+			});
+			
+			$("#shi").change(function(){
+				var data=$("#shi").val();
+				//alert(data);
+				$("#qu").load("../../villages/"+data);
+				$("#dq_code").val("");
+				$("#dq_name").val("");
+			});
+			$("#qu").change(function(){
+				var aa=$("#qu").val();
+				var ss=$("#qu").find("option:selected").text();
+				$("#dq_code").val(aa);
+				$("#dq_name").val(ss);
+			});
+			//提交地区
+			$("#bt_dq").click(function(){
+				 var data=$("#dq_name").val();
+				 $("#zpdq").val(data);
+				 $("#work_eara").css('display','none');
+			 });
+		
+	 })
 </script>
 	</head>
 	<body>
-	<div>
-	
-	
-		<form method="post" name="form1" action="dwdjInfo.do" >
+	<div style="position:reletive;">
+	   
+
+		<div id="work_type" style="background: white;width: 370px;height: 150px;position:absolute;left:50%;top:175px;transform:translate(-50%,-50%);display: none;" >
+				<div>
+	   				<input type="button" id="bt_close" value="close" style="float: right;">
+	   			</div>
+				
+				<table align="center" style="top: 50px">
+				<tr>
+				<td>大&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类</td>
+				<td><select id="gzdl" name="gzdl" style="width:120px"></select></td>
+				<td>中&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类</td>
+				<td><select id="gzzl" name="gzzl" style="width:120px"></select></td>
+				</tr>
+				<tr>
+				<td>小&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类</td>
+				<td><select id="gzxl" name="gzxl" style="width:120px"> </select></td>
+				<td>细&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类</td>
+				<td><select id="gzxl2" name="gzxl2" style="width:120px"></select></td>
+				</tr>
+				<tr>
+				<td>工种代码</td>
+				<td><input type="text" id="gzdm" name="gzdm" readonly="readonly" style="width:120px"></td>
+				<td>工种名称</td>
+				<td><input type="text" id="gzmc" name="gzmc" readonly="readonly" style="width:120px"></td>
+				</tr>
+				</table>
+				
+				<table align="center">
+				<tr>
+				<td><input type="button" value="确定" id="bt_gzqd"></td>
+				</tr>
+				</table>
+		</div>
+		<div id="work_eara" style="background: white;width: 370px;height: 150px;position:absolute;left:50%;top:175px;transform:translate(-50%,-50%);display: none;" >
+			<div>
+	   			<input type="button" id="bt_close2" value="close" style="float: right;">
+	   		</div>
+		<br>
+		<table align="center">
+		<tr>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;省</td>
+		<td><select id="sheng" name="sheng" style="width:120px"></select></td>
+		</tr>
+		<tr>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市</td>
+		<td><select id="shi" name="shi" style="width:120px"></select></td>
+		</tr>
+		<tr>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区</td>
+		<td><select id="qu" name="qu" style="width:120px"></select></td>
+		</tr>
+		</table>
+		<table align="center">
+		<tr><td>地区代码</td><td><input id="dq_code" name="dq_code"  style="width:120px" type="text" readonly="readonly"></td></tr>
+		<tr><td>地区名称</td><td><input id="dq_name" name="dq_code" style="width:120px" type="text" readonly="readonly"></td></tr>
+		</table>
+		<table align="center">
+				<tr>
+				<td><input type="button" value="确定" id="bt_dq"></td>
+				</tr>
+				</table>
+		</div>
+				
+				
+		<form method="post" name="form1" id="form1" action="dwdjInfo.do" >
 			
 			<input type="hidden" name="dwdj" value="dwdj3" />
 			<input type="hidden" name="dwbh" id="dwbh"
 				value=<%=request.getSession().getAttribute("dwbh")%>>
-			<table width="100%" border="0" cellspacing="0" cellpadding="0" style="position:reletive;">
-				<div style="background: blue;width: 200px;height: 200px;position:absolute;left:50%;top:175px;transform:translate(-50%,-50%);display: none;" >
-				sss	
-				</div>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+				
+			
+				
+				
+				
 				<tr>
 					<td>
 						<table width="98%" border="0" align="center" cellpadding="0"
@@ -284,7 +448,7 @@
 									</table>
 								</td>
 								<td valign="bottom">
-									招聘信息[公司名称法人码]
+						<span style="display: none" id="dwbh">${company.bioId}</span>招聘信息[公司名称:<span id="gs_name">${company.bioName}</span>,法人码:<span id="frm">${company.bioNo}</span>]
 								</td>
 							</tr>
 						</table>
@@ -325,8 +489,8 @@
 									<span class="redtxt">*</span>招聘工种
 								</td>
 								<td id="zpgztd">
-									<select name="zpgz" id="zpgz" style="WIDTH: 100%"
-										>
+									<input type="text" name="zpgz" id="zpgz" style="WIDTH: 100%"
+										readonly="readonly">
 										<!--弹出ModalDialog-->
 									</select>
 								</td>
@@ -498,10 +662,10 @@
 									招聘地区
 								</td>
 								<td>
-									<select id="zpdq" name="zpdq" style="WIDTH: 100%">
-										${Regioncode}
-
-									</select>
+									<input type="text" id="zpdq" name="zpdq" style="WIDTH: 100%"
+									readonly="readonly"
+									>
+										
 								</td>
 								<td align="right"></td>
 								<td></td>
