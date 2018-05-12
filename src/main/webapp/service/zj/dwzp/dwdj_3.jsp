@@ -30,8 +30,8 @@
 		//计算机等级
 		$("#jsjdj").load("../Computergrades/1");
 		//熟练程度
+		$("#jsjslcd").load("../Proficiencys/1");
 		$("#slcd").load("../Proficiencys/1");
-		$("#yzslcd").load("../Proficiencys/1");
 		//外语
 	    $("#jyyz").load("../Languages/01");
 		
@@ -45,7 +45,7 @@
         
       		var regthree=/[_a-z0-9]+@([_a-z0-9]+\.)+[a-z0-9]{2,3}$/;   
 		
-      		if(form1.zpgz.value==""){
+      		if(form1.zpgz_name.value==""){
 			alert("招聘工种不允许为空!");
 				return;
 			}
@@ -129,7 +129,7 @@
 			$("#xbbx").val("0");
 			}
 		
-		alert("sss");
+		//alert("sss");
 		$("#form1").attr('action','../dwzp_save').submit();
 		});
 	
@@ -183,7 +183,7 @@
 			 $("#work_type").css('display','none');
 		 });
 		 //弹出工种
-		 $("#zpgz").click(function(){
+		 $("#zpgz_name").click(function(){
 			 
 			 $("#work_type").css('display','block');
 		 });
@@ -192,8 +192,8 @@
 			 var data=$("#gzmc").val();
 			 var dm=$("#gzdm").val();
 			// alert(dm);
-			 $("#zpgzbh").val(dm);
-			 $("#zpgz").val(data);
+			 $("#zpgz").val(dm);
+			 $("#zpgz_name").val(data);
 			 $("#work_type").css('display','none');
 		 });
 		 //招聘地区
@@ -214,7 +214,7 @@
 				//alert(data);
 				$("#shi").load("../Citys/"+data);
 				$("#qu").empty();
-				$("#zpdq").val("");
+				$("#zpdq_code").val("");
 				$("#dq_name").val("");
 			});
 			
@@ -222,18 +222,20 @@
 				var data=$("#shi").val();
 				//alert(data);
 				$("#qu").load("../villages/"+data);
-				$("#zpdq").val("");
+				$("#zpdq_code").val("");
 				$("#dq_name").val("");
 			});
 			$("#qu").change(function(){
 				var aa=$("#qu").val();
 				var ss=$("#qu").find("option:selected").text();
-				$("#zpdq").val(aa);
+				$("#zpdq_code").val(aa);
 				$("#dq_name").val(ss);
 			});
 			//提交地区
 			$("#bt_dq").click(function(){
 				 var data=$("#dq_name").val();
+				 var aa=$("#qu").val();
+				 $("#zpdq").val(aa);
 				 $("#zpdq_name").val(data);
 				 $("#work_eara").css('display','none');
 			 });
@@ -297,8 +299,8 @@
 		</tr>
 		</table>
 		<table align="center">
-		<tr><td>地区代码</td><td><input id="zpdq" name="zpdq"  style="width:120px" type="text" readonly="readonly"></td></tr>
-		<tr><td>地区名称</td><td><input id="dq_name" name="zpdq" style="width:120px" type="text" readonly="readonly"></td></tr>
+		<tr><td>地区代码</td><td><input id="zpdq_code" name="zpdq_code"  style="width:120px" type="text" readonly="readonly"></td></tr>
+		<tr><td>地区名称</td><td><input id="dq_name" name="dq_name" style="width:120px" type="text" readonly="readonly"></td></tr>
 		</table>
 		<table align="center">
 				<tr>
@@ -396,8 +398,8 @@
 									<span class="redtxt">*</span>招聘工种
 								</td>
 								<td id="zpgztd">
-								    <input type="hidden" id="zpgzbh" name="zpgzbh" value="">
-									<input type="text" name="zpgz" id="zpgz" style="WIDTH: 100%"
+								    <input type="hidden" id="zpgz" name="zpgz" value="">
+									<input type="text" name="zpgz_name" id="zpgz_name" style="WIDTH: 100%"
 										readonly="readonly">
 									
 								</td>
@@ -561,6 +563,7 @@
 									招聘地区
 								</td>
 								<td>
+								    <input type="hidden" id="zpdq" name="zpdq">
 									<input type="text" id="zpdq_name" name="zpdq_name" style="WIDTH: 100%"
 									readonly="readonly"
 									>
@@ -584,7 +587,7 @@
 									熟练程度
 								</td>
 								<td>
-									<select id="slcd" name="slcd" style="WIDTH: 100%">
+									<select id="jsjslcd" name="jsjslcd" style="WIDTH: 100%">
 									
 									</select>
 								</td>
@@ -602,9 +605,8 @@
 									熟练程度
 								</td>
 								<td>
-									<select id="yzslcd" name="yzslcd" style="WIDTH: 100%">
-										${Proficiency}
-
+									<select id="slcd" name="slcd" style="WIDTH: 100%">
+								
 									</select>
 								</td>
 

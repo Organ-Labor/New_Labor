@@ -70,6 +70,7 @@ public class DwzpHandler {
 		    b1.setSfdj("n");
 		    b1.setDjsj(now);
 		    b1.setDjyxq(12);
+		    b2.setZpgzbh(GenerateID.getGenerateId());
 		    
 		    b1.setZpbh(id);
 		    b2.setZpbh(id);
