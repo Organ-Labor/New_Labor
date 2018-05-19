@@ -46,9 +46,11 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
         <!-- 指定数据库表 -->
-        <table schema="" tableName="zj_dwzpdjb"></table><!-- 单位招聘登记表 -->
-        <table schema="" tableName="bio"></table><!-- 单位基本表 -->
-        <table schema="" tableName="zj_dwzpgzb"></table><!-- 单位招聘工种表 -->
+        <table schema="" tableName="zj_dwdjjdb"></table><!-- 单位等级冻结表 -->
+        
+<!--    <table schema="" tableName="zj_dwzpdjb"></table>单位招聘登记表
+        <table schema="" tableName="bio"></table>单位基本表
+        <table schema="" tableName="zj_dwzpgzb"></table>单位招聘工种表 -->
         <!-- <table schema="" tableName="ldlsc_user"></table> -->
         <!--   <table schema="" tableName="account"></table> -->
         

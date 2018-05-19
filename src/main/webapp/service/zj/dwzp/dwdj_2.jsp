@@ -419,7 +419,7 @@ $(function(){
 											
 											&nbsp;&nbsp;
 											<INPUT name="fh" type="button"
-												onclick="window.location.href='<%=request.getContextPath()%>/service/zj/dwzp/dwdj_1_querybase.jsp';"
+												onclick="window.history.go(-1);"
 												class="BUTTONs3" value="返 回">
 										</TD>
 									</TR>

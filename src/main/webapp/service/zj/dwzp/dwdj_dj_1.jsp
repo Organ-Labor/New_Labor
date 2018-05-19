@@ -5,40 +5,33 @@
 <title>冻结解冻</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<%=request.getContextPath()%>/styles/css/common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../../js/jquery-1.11.1.min.js"></script>
 <script>
-	function doSubmit(){
-		if(form1.bio_no.value==""&form1.bio_name.value==""){
-			alert("请填写至少一项信息！");
-			return;
-		}
-		form1.button1.disabled="true";
-		form1.button2.disabled="true";
-		form1.action="<%=request.getContextPath()%>/service/zj/dwzp/dwdj_dj.do?flag=selectDwById";
-			form1.submit();
-	}
-	function huitian2(){
+	  $(function(){
 		
-	var p=document.getElementById("bio_no").value;
-
-	var xhr=new XMLHttpRequest();
-		xhr.open("get","<%=request.getContextPath()%>/service/zj/dwzp/dwdj_dj.do?bio_no="+p,true);		
-	xhr.onreadystatechange=function(){
-		if(xhr.readyState==4){
-			var nn=xhr.responseText.split(",");
-			if(nn[1]=="w"){
-			alert("无此用户");
-			}
-				document.getElementById("bio_name").value=nn[0];
+		  
+		  $("#bt_submit").click(function(){
 			
-			}
-			}
-			xhr.send(null);
-}
-	
+			  var aa=$("#bio_no").val();//法人码
+			  var bb=$("#bio_name").val();//公司名称
+		
+			  if(aa==""&&bb!=""){
+				  $("#form1").attr('action',"../../dwzp_djs/1/"+bb+"/0").submit();
+			  }else if(aa!=""&&bb==""){
+				  $("#form1").attr('action',"../../dwzp_djs/1/"+aa+"/1").submit();
+			  }else{
+				  alert("法人码与公司名称不能同时为空！");
+			  }
+
+		  });
+		  
+
+	  });	
+				
 </script>
 </head>
 <body>
-<form method="post"  name="form1" action="">
+<form method="post" id="form1" name="form1" action="">
 <table width="98%"  border="0" align="center" cellpadding="0" cellspacing="0">
 	<tr>
 	  <td height="20" valign="bottom"><img src="<%=request.getContextPath()%>/styles/images/right/now.gif" width="11" height="12">
@@ -91,8 +84,10 @@ border=1 cellPadding=0 cellSpacing=0 bordercolor="#FFFFFF" class=tablebody>
 <table width="98%" border="0" align="center">
   <TR align="center"  class="line2"> 
     <TD>
-      <INPUT name="button1" type="button"class="BUTTONs3" value="确 定" onClick="doSubmit()">
-      &nbsp;&nbsp;<INPUT class="BUTTONs3" type="reset" value="取 消" name="button2"> 
+      <INPUT name="bt_submit" id="bt_submit" type="button"class="BUTTONs3" value="确 定">
+      &nbsp;&nbsp;
+     
+      <INPUT class="BUTTONs3" type="reset" value="取 消" name="button2"> 
     </TD>
   </TR>
 </table>

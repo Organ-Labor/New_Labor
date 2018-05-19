@@ -31,4 +31,12 @@ public interface ZjDwzpdjbMapper {
     int updateByPrimaryKey(ZjDwzpdjb record);
     
     List<Map<String,Object>> getDw(@Param("bioNo") String bioNo,@Param("bioName") String bioName);
+    
+    public List<Map<String,Object>> getDw_djbyId(@Param("value") String value);
+    
+    public List<Map<String,Object>> getDw_djbyName(@Param("name") String name);
+    
+    public List<Map<String,Object>> getDw_djbyBioId(@Param("bio_id") String bio_id);
+    
+    public void dwzp_jxdj(@Param("id") String id, @Param("reason") String reason);
 }

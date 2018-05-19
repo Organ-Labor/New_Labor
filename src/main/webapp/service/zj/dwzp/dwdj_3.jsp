@@ -14,26 +14,26 @@
 	$(function(){
 		
 	     //文化程度
-		$("#whcd").load("../Educationallevels/10");
+		$("#whcd").load("../../Educationallevels/10");
 		//岗位类别
-		$("#gwlb").load("../Zjdgwlbs/10");
+		$("#gwlb").load("../../Zjdgwlbs/10");
 		//户籍性质
-		$("#hjxz").load("../Rprtypes/10");
+		$("#hjxz").load("../../Rprtypes/10");
 		//用工形式
-		$("#ygxs").load("../Employtypes/1");
+		$("#ygxs").load("../../Employtypes/1");
 		//婚姻状况
-		$("#hyzk").load("../Marriages/1");
+		$("#hyzk").load("../../Marriages/1");
 		//健康状况
-		$("#jkzk").load("../Healthstates/1");
+		$("#jkzk").load("../../Healthstates/1");
 		//人员类别
-		$("#rylb").load("../Personneltypes/20");
+		$("#rylb").load("../../Personneltypes/20");
 		//计算机等级
-		$("#jsjdj").load("../Computergrades/1");
+		$("#jsjdj").load("../../Computergrades/1");
 		//熟练程度
-		$("#jsjslcd").load("../Proficiencys/1");
-		$("#slcd").load("../Proficiencys/1");
+		$("#jsjslcd").load("../../Proficiencys/1");
+		$("#slcd").load("../../Proficiencys/1");
 		//外语
-	    $("#jyyz").load("../Languages/01");
+	    $("#jyyz").load("../../Languages/01");
 		
 	  
 	
@@ -130,7 +130,7 @@
 			}
 		
 		//alert("sss");
-		$("#form1").attr('action','../dwzp_save').submit();
+		$("#form1").attr('action','../../dwzp_save').submit();
 		});
 	
 	});
@@ -141,12 +141,12 @@
 	 
 	 $(function(){
 		 //加载工种大类
-		 $("#gzdl").load("../Specialtys");
+		 $("#gzdl").load("../../Specialtys");
 		 //寻找工种中类
 		 $("#gzdl").change(function(){
 			 var data=$("#gzdl").val();
 			// alert(data);
-			 $("#gzzl").load("../Specialty/"+data+"/gz1");
+			 $("#gzzl").load("../../Specialty/"+data+"/gz1");
 			 $("#gzxl").empty();
 			 $("#gzxl2").empty();
 			 $("#gzdm").val("");
@@ -155,7 +155,7 @@
 		 //小类
 		 $("#gzzl").change(function(){
 			 var data=$("#gzzl").val();
-			 $("#gzxl").load("../Specialty/"+data+"/gz2");
+			 $("#gzxl").load("../../Specialty/"+data+"/gz2");
 			 $("#gzxl2").empty();
 			 $("#gzdm").val("");
 			 $("#gzmc").val("");
@@ -163,7 +163,7 @@
 		 //细类
 		 $("#gzxl").change(function(){
 			 var data=$("#gzxl").val();
-			 $("#gzxl2").load("../Specialty/"+data+"/gz3",function(){
+			 $("#gzxl2").load("../../Specialty/"+data+"/gz3",function(){
 				 var ss=$("#gzxl2").val();
 				 var dd=$("#gzxl2 option:selected").text();;
 				 $("#gzdm").val(ss);
@@ -207,12 +207,12 @@
 		 //
 		 
 		//省
-			$("#sheng").load("../Provinces");
+			$("#sheng").load("../../Provinces");
 			
 			$("#sheng").change(function(){
 				var data=$("#sheng").val();
 				//alert(data);
-				$("#shi").load("../Citys/"+data);
+				$("#shi").load("../../Citys/"+data);
 				$("#qu").empty();
 				$("#zpdq_code").val("");
 				$("#dq_name").val("");
@@ -221,7 +221,7 @@
 			$("#shi").change(function(){
 				var data=$("#shi").val();
 				//alert(data);
-				$("#qu").load("../villages/"+data);
+				$("#qu").load("../../villages/"+data);
 				$("#zpdq_code").val("");
 				$("#dq_name").val("");
 			});
@@ -310,14 +310,10 @@
 		</div>
 				
 				
-		<form method="post" name="form1" id="form1" action="../dwzp_save" >
+		<form method="post" name="form1" id="form1" action="../../dwzp_save" >
 		
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" >
-				
-			
-				
-				
-				
+
 				<tr>
 					<td>
 						<table width="98%" border="0" align="center" cellpadding="0"

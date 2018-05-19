@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -7,14 +8,6 @@
 <link href="<%=request.getContextPath()%>/styles/css/common.css" rel="stylesheet" type="text/css">
 <script src="<%=request.getContextPath()%>/js/commonjs.js"></script>
 <script>
-function doSubmit(){
-
-	form1.button1.disabled="true";
-	form1.button2.disabled="true";
-	form1.action="<%=request.getContextPath()%>/service/zj/dwzp/dwdj_dj.do?flag=select";
-	form1.submit();
-
-}
 
 function toBack(){
 		window.location.href="<%=request.getContextPath()%>/service/zj/dwzp/dwdj_dj_1.jsp";
@@ -40,7 +33,7 @@ function toBack(){
         <td width="30"><img src="<%=request.getContextPath()%>/styles/css/bb_d.gif"></td>
       </tr>
     </table></td>
-    <td  valign="bottom">查询结果&nbsp;&nbsp;&nbsp;提示：[共有2个单位符合查询条件，点击单位名称可以查看详细信息]
+    <td  valign="bottom">查询结果&nbsp;&nbsp;&nbsp;提示：[共有${info.total }个单位符合查询条件，点击单位名称可以查看详细信息]
     </td>
   </tr>
 </table>
@@ -56,13 +49,20 @@ function toBack(){
         <td class="line4">登记时间</td>
        
       </tr>
-      <tr align="center"  >
-		<td class="line4">${DwInfo.s}</td>
-        <td class="line4">${DwInfo.bio_name}</td>
-        <td class="line4">${DwInfo.bio_bua_address}</td>
-        <td class="line4">${DwInfo.lxrsj}</td>
-        <td class="line4">${DwInfo.djsj}</td>
-</tr>     
+      <c:forEach var="common" items="${info.list }">
+		      <tr align="center"  >
+				<td class="line4"><c:if test="${common.SFDJ=='n' }">正常</c:if>
+				<c:if test="${common.SFDJ=='y' }">已冻结</c:if></td>
+		        <td class="line4">
+		        ${common.bio_name}
+		        </td>
+		        <td class="line4">${common.bio_bua_address}</td>
+		        <td class="line4">${common.LXRSJ}</td>
+		        <td class="line4">${common.DJSJ}</td>
+			  </tr>     
+      </c:forEach>
+      
+      
     </table> </td>
 </tr>
 </table>
@@ -70,11 +70,13 @@ function toBack(){
 <TABLE width="98%" align="center" 
         border=0 cellPadding=0 cellSpacing=1 bordercolor="#9DCBEC" class="tablebody" align="center">
   <TR align="center"> 
-   <TD  align="right" class="line2">
-      <INPUT name="button1" type="button" class="BUTTONs3" value="确定" onClick="doSubmit()">
+  
+  	<TD  align="right" class="line2">
+     <a href="<%=request.getContextPath()%>/service/zj/dwzp/dwdj_dj_3.jsp"><font class="BUTTONs3">确定</font></a>
     </TD>
+  
     <TD  align="left" class="line2">
-      <INPUT name="button2" type="button" class="BUTTONs3" value="返回" onClick="toBack()">
+      <INPUT name="button2" type="button" class="BUTTONs3" value="返回" onClick="window.history.go(-1);">
     </TD>
     
   </TR>
