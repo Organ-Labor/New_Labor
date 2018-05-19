@@ -53,7 +53,7 @@
         </TR>
         <c:forEach items="${info.list}" var="s">
         	<TR> 
-        	  <TD align="center" class="line2"><a href="<%=request.getContextPath()%>/service/getDwmc/${s.bioId}">推荐</a></TD>
+        	  <TD align="center" class="line2"><a href="<%=request.getContextPath()%>/service/getBio2/${s.bioId}">推荐</a></TD>
         	  <TD align="center" class="line2"><a href="<%=request.getContextPath()%>/service/getDwxq/${s.bioId}">${s.bioName}</a></TD>
         	  <TD align="center" class="line2">${s.bioAddress}</TD>
         	  <TD align="center" class="line2">${s.tel}</TD>

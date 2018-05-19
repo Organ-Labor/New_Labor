@@ -43,6 +43,31 @@
 		$("#i13").attr("readonly","readonly");
 	});
 </script>  -->
+
+<%-- <script type="text/javascript">
+       $(function(){
+    	   //加载注册地区的下拉列表
+    	   alert("我要加载城市了！");
+    	   var code=${b.bioRgaRegioncode};
+    	   alert(code);
+    	   $("#province").load("<%=request.getContextPath()%>/service/getRegions",{code:code,region:"province"});
+    	   $("#city").load("<%=request.getContextPath()%>/service/getRegions",{code:code,region:"city"});
+    	   $("#village").load("<%=request.getContextPath()%>/service/getRegions",{code:code,region:"village"});
+    	   alert("城市加载完了！");
+       })
+</script> --%>
+
+<script type="text/javascript">
+     $(function(){
+    	 //alert("我要加载城市了！");
+    	 var code=$("#region").val();
+  	     //alert(code);
+  	     $("#province").load("<%=request.getContextPath()%>/service/getRegions",{code:code,region:"province"});
+  	     $("#city").load("<%=request.getContextPath()%>/service/getRegions",{code:code,region:"city"});
+  	     $("#village").load("<%=request.getContextPath()%>/service/getRegions",{code:code,region:"village"});
+  	     //alert("城市加载完了！");
+     })
+</script>
 </head>
 <body>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -85,68 +110,75 @@
 					style="display:block">
 
 					<tr>
+					
 						<td valign="top"><table width="100%" border="0"
 								cellspacing="1" cellpadding="0">
+								<c:forEach items="${bio}" var="b">
+								<input type="hidden" id="region" value=${b.bioRgaRegioncode }>
 								<tr class="line2">
+								    
 									<td width="13%" align="right"><span class="redtxt"></span>单位法人码</td>
 									<td width="18%"><input id="i1" name="dwfrm"
-										style="WIDTH: 100%" maxlength="32" value="${bio.bioNo}" ></td>
+										style="WIDTH: 100%" maxlength="32" value="${b.bioNo}" readonly="readonly"></td>
 									<td width="13%" align="right"><span class="redtxt"></span>单位全称</td>
 									<td width="20%"><INPUT id="i2" name="dwqc"
-										style="WIDTH: 100%" maxlength="64" value="${bio.bioName }">
+										style="WIDTH: 100%" maxlength="64" value="${b.bioName }" readonly="readonly">
 									</td>
 									<td width="14%" align="right">单位简称</td>
 									<td width="20%"><INPUT id="i3" name="dwjc"
-										style="WIDTH: 100%" maxlength="32" value="${bio.bioShortname }">
+										style="WIDTH: 100%" maxlength="32" value="${b.bioShortname }" readonly="readonly">
 									</td>
 								</tr>
 								<tr class="line1">
 									<td align="right"><span class="redtxt"></span>单位性质</td>
 									<td width="18%"><input id="i4" name="dwxz"
-										style="WIDTH: 100%;" value="${bio.bioOrgtype}">
+										style="WIDTH: 100%;" value="${b.orgtypeName}" readonly="readonly">
 									</td>
 									<td align="right"><span class="redtxt"></span>经济类型</td>
-									<td><input id="i5" name="dwjjlx" style="WIDTH: 100%" value="${bio.cdgRegtype }">
+									<td><input id="i5" name="dwjjlx" style="WIDTH: 100%" value="${b.regtypeName }" readonly="readonly">
 									</td>
 									<td align="right"><span class="redtxt"></span>单位行业</td>
-									<td><input id="i6" name="dwhy" style="WIDTH: 100%" value="${bio.bioIndustry }">
+									<td><input id="i6" name="dwhy" style="WIDTH: 100%" value="${b.industryName }" readonly="readonly">
 									</td>
 								</tr>
 								<tr class="line2">
 
 									<td align="right">邮政编码</td>
 									<td><INPUT id="i7" name="yzbm" style="WIDTH: 100%"
-										maxlength="32" value="${bio.bioBuaPostcode }">
+										maxlength="32" value="${b.bioBuaPostcode }" readonly="readonly">
 									</td>
 									<td align="right">传真机号</td>
 									<td><input id="i8" name="czjh" style="WIDTH: 100%"
-										maxlength="32" value="${bio.bioConFax }">
+										maxlength="32" value="${b.bioConFax }" readonly="readonly">
 									</td>
 									<td align="right">Email</td>
 									<td><INPUT id="i9" name="email" style="WIDTH: 100%"
-										maxlength="64" value="${bio.bioConMail }">
+										maxlength="64" value="${b.bioConMail }" readonly="readonly">
 									</td>
 								</tr>
 								<tr class="line1">
 									<td align="right"><span class="redtxt"></span>注册省(市)</td>
-									<td><input id="i10" name="dwszs" style="WIDTH: 100%">
+									<td><!--  <input id="province" name="dwszs" style="WIDTH: 100%" readonly="readonly" value="">-->
+									    <select id="province" name="dwszs" style="WIDTH: 100%" readonly="readonly" disabled="disabled"></select>
 									</td>
 									<td align="right">市(区\县)</td>
-									<td id="sqx"><input id="i11" name="dwszq"
-										style="WIDTH: 100%">
+									<td id="sqx"><!-- <input id="city" name="dwszq"
+										style="WIDTH: 100%" readonly="readonly"> -->
+										<select id="city" name="dwszq" style="WIDTH: 100%" readonly="readonly" disabled="disabled"></select>
 									</td>
 									<td align="right">街(镇\乡)</td>
-									<td id="jzx"><input id="i12" name="dwszj"
-										style="WIDTH: 100%">
+									<td id="jzx"><!--  <input id="village" name="dwszj"
+										style="WIDTH: 100%" readonly="readonly">-->
+										<select id="village" name="dwszj" style="WIDTH: 100%" readonly="readonly" disabled="disabled"></select>
 									</td>
 								</tr>
 								<tr class="line2">
 									<td align="right"><span class="redtxt"></span>经营地址</td>
 									<td colspan="5"><INPUT id="i13" name="lxdz"
-										style="WIDTH: 100%" maxlength="64" value="${bio.bioBuaAddress }">
+										style="WIDTH: 100%" maxlength="64" value="${b.bioAddress }" readonly="readonly">
 									</td>
 								</tr>
-
+                                </c:forEach>
 							</table></td>
 					</tr>
 				</table> <br></td>

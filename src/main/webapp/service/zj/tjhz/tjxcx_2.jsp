@@ -28,7 +28,7 @@
     <td valign="top"><TABLE width="1580" border=0 cellPadding=0 cellSpacing=0 bordercolor="#FFFFFF" class=tablebody>
       <TR>
         <TD width="30" height=20 class="title"><img src="<%=request.getContextPath()%>/styles/css/bb_d.gif" width="30" height="19"></TD>
-        <TD class="title" style="padding-top:5px">查询结果&nbsp;&nbsp;&nbsp;提示：[共xx条符合查询条件的记录，点击姓名可查看详细信息]</TD>
+        <TD class="title" style="padding-top:5px">查询结果&nbsp;&nbsp;&nbsp;提示：[共${info.total }条符合查询条件的记录，点击姓名可查看详细信息]</TD>
       </TR>
     </TABLE>
         <table width="1580" border="0" cellspacing="0" cellpadding="0">
@@ -51,23 +51,23 @@
                 <td width="110">联系电话</td>
                 <td width="150">联系地址</td>
               </tr>
-             <c:forEach var="b"  items="${Info}"  varStatus="state">
+             <c:forEach var="b"  items="${info.list}"  varStatus="state">
 			  <tr align="center" class="line4">
                 <td width="25" >${state.count}</td>
-                <td width="110">${b.bip_citizenid}</td>
-                <td width="70"><a href="">${b.bip_name}</td>
-                <td width="25">${b.sex}</td>
-                <td width="25">${b.bip_age}</td>
-                <td width="155">${b.whcd}</td>
-                <td width="180">${b.gz1}</td>
-                <td width="180"><a href="">${b.bio_name}</td>
-                <td width="100">${b.bio_no}</td>
-                <td width="80"> ${Info2.cc}</td>
+                <td width="110">${b.bipSfz}</td>
+                <td width="70"><a href="<%=request.getContextPath()%>/service/getQzzxx/${b.bipId}">${b.bipName}</a></td>
+                <td width="25">${b.bipSex}</td>
+                <td width="25">${b.bipAge}</td>
+                <td width="155">${b.xueLi}</td>
+                <td width="180">${b.zygw}</td>
+                <td width="180"><a href="<%=request.getContextPath()%>/service/getDwxq/${b.bioId}">${b.bioName}</a></td>
+                <td width="100">${b.bioNo}</td>
+                <td width="80"> ${b.wcgrs}</td>
                 <td width="90">${b.tjsj}</td>
-                <td width="180">${b.gwlb1}</td>
-                <td width="90">${b.tjxlx}</td>
-                <td width="110">${b.bip_con_telephone}</td>
-                <td width="150">${b.bip_res_address}</td>
+                <td width="180">${b.tjzy}</td>
+                <td width="90">${b.tjxlb}</td>
+                <td width="110">${b.bioTel}</td>
+                <td width="150">${b.bioAddress}</td>
               </tr>
     </c:forEach>
             </table>

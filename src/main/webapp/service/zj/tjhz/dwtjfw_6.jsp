@@ -12,11 +12,11 @@
 <script type="text/javascript">
    
    $(function(){
-	   alert("确认后打印");
-	   $("#besure").click(function(){
+	   alert("请打印");
+	  <%--  $("#besure").click(function(){
 		   form1.action="<%=request.getContextPath()%>/service/getBB";
 		   form1.submit();
-	   })
+	   }) --%>
    })
 
 </script>
@@ -60,18 +60,18 @@
 		<tr>
 			<TD align="left" class="line4" colspan="7">联系电话:&nbsp;&nbsp;${sessionScope.bioInfomation[0].contactTel}</TD>
 		</tr>
-		<tr align="left">
+		<!-- <tr align="left">
 		
 			<TD align="center" class="line2" colspan="7"><input
 				type="button" name="button" class="BUTTONs3" value="确认" id="besure"
 				></TD>
-		</tr>
-		<!-- <tr align="left">
+		</tr> -->
+		<tr align="left">
 		   
 			<TD align="center" class="line2" colspan="7"><input
 				type="button" name="button" class="BUTTONs3" value="打印"
 				onclick="window.print()"></TD>
-		</tr> -->
+		</tr>
 	</table>
 </form>
 </body>

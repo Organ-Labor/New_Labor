@@ -9,25 +9,35 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.11.1.js"></script>
 <script>
 $(function(){
-	$("#zpgz").click(function(){
+	
+		 <%-- var id=$("#ID").val();
+    	 alert(id);
+    	 var url="<%=request.getContextPath()%>/service/getZpgz/"+id;
+    	 alert(url); --%>
+    	 //求职工种
+    	 $("#zpgw").load("<%=request.getContextPath()%>/service/getQzgz/1");
+		
+		<%-- alert("zpgw");
 			var dx,dy;
 			var dx=(screen.height/2-105)+"";
    			var dy=(screen.width/2-200)+"";
 			var rValue,iTem;
 			var qzgz=$(this).val();
+			alert(qzgz);
 			rValue=window.showModalDialog("<%=request.getContextPath() %>/common/choosegz_ModalDialog_qyc.jsp",qzgz,"dialogTop="+dx+";dialogLeft="+dy+";dialogHeight=210px;dialogWidth=400px;help=no;fullscreen=1;status=no;center=yes");		
 			if(rValue != null){				
 				$(this).html(rValue);				
 			}
-				return;			
-		})
+				return;			 --%>
+		
 
 })
 
 </script>
 </head>
 <body>
-<form method="post"	name="form1" action="<%=request.getContextPath() %>/service/zj/grqz/DwCxServlet.do">
+<input type="hidden" id="ID" name="bioId" value="${sessionScope.bioInfomation[0].bioId} ">
+<form method="post"	name="form1" action="<%=request.getContextPath() %>/service/selectToDw/1">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td><table width="98%"  border="0" align="center" cellpadding="0" cellspacing="0">
@@ -67,26 +77,26 @@ $(function(){
         <tr class="line2">
           <td width="75" align="right">单位法人码</td>
           <td> 
-            <INPUT type="text" name="dwfrm" style="WIDTH: 100%" maxlength="18" ></td>
+            <INPUT type="text" name="bioNo" style="WIDTH: 100%" maxlength="18" ></td>
           <td width="55" align="right">单位名称</td>
-          <td><INPUT type="text"  name="dwqc"  style="WIDTH: 100%" maxlength="18" ></td>
+          <td><INPUT type="text"  name="bioName"  style="WIDTH: 100%" maxlength="18" ></td>
 
         </tr>
         <tr class="line2">
           <td align="right">登记时间</td>
-          <td><textarea name="djrqq" style='width:100%' class='mask'  htcurl="url(<%=request.getContextPath()%>/common/htc/format.htc)"  rows="1" cols="10" mask='date' maxlength='10' ></textarea></td>
+          <td><textarea name="djsj1" style='width:100%' class='mask'  htcurl="url(<%=request.getContextPath()%>/common/htc/format.htc)"  rows="1" cols="10" mask='date' maxlength='10' ></textarea></td>
           <td width="50" align="center">至</td>
-          <td><textarea name="djrqz" style='width:100%' class='mask'  htcurl="url(<%=request.getContextPath()%>/common/htc/format.htc)"  rows="1" cols="10" mask='date' maxlength='10' ></textarea></td>
+          <td><textarea name="djsj2" style='width:100%' class='mask'  htcurl="url(<%=request.getContextPath()%>/common/htc/format.htc)"  rows="1" cols="10" mask='date' maxlength='10' ></textarea></td>
 
         </tr>
         <tr class="line2">
           <td align="right">经济类型</td>
-          <td><select name="dwjjlx" size=1 style="WIDTH: 100%">
+          <td><select name="regType" size=1 style="WIDTH: 100%">
 						<%=RegtypeOperation.getOption() %>
 				
             </select></td>
           <td align="right">单位性质</td>
-          <td><select name="dwxz" size=1 style="WIDTH: 100%">
+          <td><select name="orgType" size=1 style="WIDTH: 100%">
 						<%=OrgtypeOperation.getOption() %>
 				
             </select></td>
@@ -98,11 +108,11 @@ $(function(){
 						
 						</select></td>
           <td align="right">招聘岗位</td>
-          <td id="o1"><select id='zpgz' name="zpgz"	style="WIDTH: 100%"><option value="">请选择</option></select></td>
+          <td id="o1"><select id='zpgw' name="zpgw"	style="WIDTH: 100%"><option value="">请选择</option></select></td>
         </tr>
         <tr class="line2">
           <td align="right">人员类别</td>
-          <td><select name="rylb" size=1 style="WIDTH: 100%"><%=PersonneltypeOperation.getOption()%></selecst></td>        
+          <td><select name="rylb" size=1 style="WIDTH: 100%"><%=PersonneltypeOperation.getOption()%></select></td>        
           <td align="right">户籍性质</td>
           <td><select name="hjxz" size=1 style="WIDTH: 100%">
 						<%=RprtypeOperation.getOption() %>
@@ -118,7 +128,7 @@ $(function(){
           </select></td>  
       
           <td align="right">单位行业</td>
-          <td><select name="dwhy" size=1 style="WIDTH: 100%">
+          <td><select name="industry" size=1 style="WIDTH: 100%">
 						<%=IndustryOperation.getOption() %>
 						
             </select></td>   

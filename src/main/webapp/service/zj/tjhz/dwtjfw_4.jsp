@@ -7,8 +7,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<%=request.getContextPath()%>/styles/css/common.css"
 	rel="stylesheet" type="text/css">
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/j.js"></script>
 <script>
-	function doSubmit(){
+	$(function(){
+		alert("function");
+		
+	    //alert(check_val);
+		$("#qd").click(function(){
+			//alert($("input[name='bipId']").val());获得第一个CheckBox的值
+			<%-- alert("<%=request.getContextPath()%>/service/getXxByID/100000"); --%>
+			//var value=$("input[name='bipId']").val();
+			obj = document.getElementsByName("bipId");
+		    check_val = [];
+		    for(k in obj){
+		        if(obj[k].checked)
+		            check_val.push("'"+obj[k].value+"'");
+		    }
+			alert(check_val);
+			form1.action = "<%=request.getContextPath()%>/service/getXxByID/"+check_val;
+			alert("<%=request.getContextPath()%>/service/getXxByID/"+check_val);
+			form1.submit();
+			alert("提交成功!");
+			
+		})
+	})
+	
+	<%-- function doSubmit(){
 		var checkbox = form1.bip_ids;
 		var flag = false;
 		if(checkbox.checked){
@@ -29,7 +53,8 @@
 				return;
 			}
 		}
-	}
+	} --%>
+	
 </script>
 </head>
 
@@ -49,7 +74,7 @@
 				</td>
 			</tr>
 		</table>
-		<table width="98%" align="center" border="0" cellpadding="0"
+		<table width="98%" align="center" border=" 0" cellpadding="0"
 			cellspacing="0" class="title">
 			<tr>
 				<td width="30">
@@ -61,10 +86,11 @@
 						</tr>
 					</table>
 				</td>
-				<td valign="bottom">查询结果&nbsp;&nbsp;&nbsp;提示：[共${sl}条记录，点击姓名可查看个人详细信息]</td>
+				<td valign="bottom">查询结果&nbsp;&nbsp;&nbsp;提示：[共${info.total}条记录，点击姓名可查看个人详细信息]</td>
 			</tr>
 		</table>
-		<form name="form1" method="post" action="">
+		</form>
+		<form name="form" method="post" action="">
 			<TABLE width="98%" align="center" border=1 cellPadding=0
 				cellSpacing=0 bordercolor="#FFFFFF" class=tablebody>
 				<TR>
@@ -80,20 +106,20 @@
 
 				<tr>
 				</tr>
-				<c:forEach items="${xinxi}" varStatus="sum" var="s">
+				<c:forEach items="${info.list}" varStatus="sum" var="s">
 					<TR>
 						<TD align="center" class="line2">${sum.count}</TD>
 						<TD align="center" class="line2"><input type="checkbox"
-							name="bip_ids" value="${s[6]}">
+							name="bipId"  value="${s.bipId}">
 						</TD>
 						<TD align="center" class="line2"><a
-							href="<%=request.getContextPath()%>/service/zj/tjhz/dwtjfw_4xinxi.do?bj=gr&&bip_id=${s[6]}">${s[0]}</a>
+							href="<%=request.getContextPath()%>/service/getQzzxx/${s.bipId}">${s.bipName}</a>
 						</TD>
-						<TD align="center" class="line2">${s[1]}</TD>
-						<TD align="center" class="line2">${s[2]}</TD>
-						<TD align="center" class="line2">${s[3]}</TD>
-						<TD align="center" class="line2">${s[4]}</TD>
-						<TD align="center" class="line2">${s[5]}</TD>
+						<TD align="center" class="line2">${s.sex}</TD>
+						<TD align="center" class="line2">${s.age}</TD>
+						<TD align="center" class="line2">${s.gz}</TD>
+						<TD align="center" class="line2">${s.address}</TD>
+						<TD align="center" class="line2">${s.createDate}</TD>
 					</TR>
 				</c:forEach>
 			</TABLE>
@@ -102,7 +128,7 @@
 				cellpadding="0">
 				<tr>
 					<td class="line2" align="center"><input name="button2"
-						type="button" class=BUTTONs3 value="确 定" onClick="doSubmit()">&nbsp;&nbsp;
+						type="button" class=BUTTONs3 value="确 定" id="qd">&nbsp;&nbsp;
 						<input name="fh" type="button" class=BUTTONs3 onClick="toBack()"
 						value="返 回">
 					</td>

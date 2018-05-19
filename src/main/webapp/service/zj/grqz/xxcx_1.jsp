@@ -4,17 +4,17 @@
 <head>
 <script>
 	function AS(){
-		var sfzhm=form1.sfzhm.value;
-		var name=form1.xm.value;
-		var xb=form1.xb.value;
-		var age1=form1.nl1.value;
-		var age2=form1.nl2.value;
-		var xl1=form1.xl1.value;
-		var xl2=form1.xl2.value;
+		var sfzhm=form1.bipSfz.value;
+		var name=form1.bipName.value;
+		var xb=form1.bipSex.value;
+		var age1=form1.minAge.value;
+		var age2=form1.maxAge.value;
+		var xl1=form1.whcd1.value;
+		var xl2=form1.whcd2.value;
 		var hyzk=form1.hyzk.value;
 		var jkzk=form1.jkzk.value;
-		var djrq1=form1.djrq1.value;
-		var djrq2=form1.djrq2.value;
+		var djrq1=form1.djsj1.value;
+		var djrq2=form1.djsj2.value;
 		var zzmm =form1.zzmm.value;
 		var qzgw =form1.qzgw.value;
 		var rylb=form1.rylb.value;
@@ -23,7 +23,7 @@
 		var flag=false;
 		if(sfzhm!=""||name!=""||xb!=""||age1!=""||age2!=""||xl1!=""||xl2!=""
 		||hyzk!=""||jkzk!=""||djrq1!=""||djrq2!=""||zzmm!=""||qzgw!=""||rylb!=""||hjxz!=""||cxfw!=""){
-		form1.action="<%=request.getContextPath()%>/Ldlsc_Servlet";
+		form1.action="<%=request.getContextPath()%>/service/selectToGr/1";
         form1.submit();
 		}else{
 		alert("至少有一个条件不能为空");
@@ -73,30 +73,30 @@
 			border="0" cellPadding="0" cellSpacing="1" bordercolor="#FFFFFF" class="tablebody">
         <tr class="line2"> 
 			<td width="85" align="right" class="line2">身份证号码</td>
-			<td colspan="3" align="center" class="line2"><input type="text" name="sfzhm" style="WIDTH: 100%" maxlength="18" ></td>
+			<td colspan="3" align="center" class="line2"><input type="text" name="bipSfz" style="WIDTH: 100%" maxlength="18" ></td>
         </tr>
         <tr class="line1">
         	<td align="right" >姓　　名</td>
-			<td align="center" ><input type="text" name="xm"  style="WIDTH: 100%" ></td>
+			<td align="center" ><input type="text" name="bipName"  style="WIDTH: 100%" ></td>
 			<td width="55" align="right" >性　　别</td>
-			<td align="center" ><select name="xb"  style="WIDTH: 100%">
+			<td align="center" ><select name="bipSex"  style="WIDTH: 100%">
 				<%=SexOperation.getOption()%>
 			  </select></td>
         </tr>
         <tr class="line2"> 
 			<td align="right" >年　　龄</td>
-			<td align="center" ><input type="text" name="nl1" maxlength="2" style="WIDTH: 100%"></td>
+			<td align="center" ><input type="text" name="minAge" maxlength="2" style="WIDTH: 100%"></td>
 			<td width="50" align="center" >到</td>
-			<td align="center" ><input type="text" name="nl2" maxlength="2" style="WIDTH: 100%"></td>
+			<td align="center" ><input type="text" name="maxAge" maxlength="2" style="WIDTH: 100%"></td>
         </tr>
         <tr class="line1">
 			<td align="right">学　　历</td>
-			<td align="center" ><select  name="xl2" style="WIDTH: 100%">
+			<td align="center" ><select  name="whcd1" style="WIDTH: 100%">
 			<%=EducationallevelOperation.getOption()%>
 	
 			</select></td>
 			<td align="center" >到</td>
-			<td align="center" ><select  name="xl1" style="WIDTH: 100%">
+			<td align="center" ><select  name="whcd2" style="WIDTH: 100%">
 			<%=EducationallevelOperation.getOption()%>
 		
 			</select></td>     
@@ -115,9 +115,9 @@
         </tr>
         <tr class="line1"> 
 			<td align="right" >登记日期</td>
-			<td align="center" ><textarea type="text" name="djrq1"  style='width:110%' class='mask'  htcurl="url(<%=request.getContextPath()%>/common/htc/format.htc)"  rows="1" cols="10" mask='date' maxlength='10' ></textarea>
+			<td align="center" ><textarea type="text" name="djsj1"  style='width:110%' class='mask'  htcurl="url(<%=request.getContextPath()%>/common/htc/format.htc)"  rows="1" cols="10" mask='date' maxlength='10' ></textarea>
 			<td align="center" >到</td>
-			<td align="center"><textarea type="text" name="djrq2"  style='width:110%' class='mask'  htcurl="url(<%=request.getContextPath()%>/common/htc/format.htc)"  rows="1" cols="10" mask='date' maxlength='10' ></textarea></td>
+			<td align="center"><textarea type="text" name="djsj2"  style='width:110%' class='mask'  htcurl="url(<%=request.getContextPath()%>/common/htc/format.htc)"  rows="1" cols="10" mask='date' maxlength='10' ></textarea></td>
         </tr>
         <tr class="line2"> 
 			<td align="right" class="line2">政治面貌</td>
@@ -127,7 +127,7 @@
 			</select></td>
 			<td align="right" class="line2">求职岗位</td>
 			<td align="center" class="line2"><select name="qzgw" style="WIDTH: 100%" onclick="">
-				<%=ZjdgwlbOperation.getOption()%>				
+				<%=SpecialtyOperation.getOption()%>				
 			</select></td>
         </tr>
         <tr class="line1">

@@ -27,7 +27,7 @@
         <td ><img src="<%=request.getContextPath()%>/styles/css/bb_d.gif"></td>
       </tr>
     </table></td>
-    <td  valign="bottom">查询结果&nbsp;&nbsp;&nbsp;提示：[共有x个单位符合信息查询条件，请选择单位名称查看详细信息]</td>
+    <td  valign="bottom">查询结果&nbsp;&nbsp;&nbsp;提示：[共有${info.total }个单位符合信息查询条件，请选择单位名称查看详细信息]</td>
   </tr>
 </table>
 
@@ -41,14 +41,15 @@
               <TD>登记日期</TD>
               <TD>登记职介</TD>
               <TD>归档日期</TD>
-              <c:forEach items="${zj_dwcx}" var="b" varStatus="xxcount" >
+             
             </TR>
+             <c:forEach items="${info.list}" var="b" varStatus="xxcount" >
 			 <TR class="line4" align="center">
               <TD>${xxcount.count }</TD>
 			  <TD><input type="checkbox" name="hobby"></TD>
-              <TD>${b.bio_name}</TD>
-              <TD>${b.bio_bua_address}</TD>
-              <TD>${b.lxrsj}</TD>
+              <TD><a href="<%=request.getContextPath()%>/service/getDwxq/${b.bioId}">${b.bioName}</a></TD>
+              <TD>${b.bioAddress}</TD>
+              <TD>${b.bioTel}</TD>
               <TD>${b.djsj }</TD>
               <TD>登记职介</TD>
               <TD>${b.gdsj}</TD>
