@@ -9,15 +9,20 @@ import com.oracle.labor.common.codetable.ComputergradeOperation;
 import com.oracle.labor.common.codetable.Deformity;
 import com.oracle.labor.common.codetable.EducationallevelOperation;
 import com.oracle.labor.common.codetable.HealthstateOperation;
+import com.oracle.labor.common.codetable.IndustryOperation;
 import com.oracle.labor.common.codetable.LanguageOperation;
 import com.oracle.labor.common.codetable.MarriageOperation;
 import com.oracle.labor.common.codetable.NationOperation;
+import com.oracle.labor.common.codetable.OrgtypeOperation;
 import com.oracle.labor.common.codetable.PersonneltypeOperation;
 import com.oracle.labor.common.codetable.PoliticsaspectOperation;
 import com.oracle.labor.common.codetable.ProficiencyOperation;
 import com.oracle.labor.common.codetable.QualificationOperation;
+import com.oracle.labor.common.codetable.RegioncodeOperation;
+import com.oracle.labor.common.codetable.RegtypeOperation;
 import com.oracle.labor.common.codetable.RprtypeOperation;
 import com.oracle.labor.common.codetable.SexOperation;
+import com.oracle.labor.common.codetable.SpecialtyOperation;
 
 @Controller
 public class CommonHandler {
@@ -32,6 +37,12 @@ public class CommonHandler {
 	}
 	
 	//ResponseBody返回方法体不经过视图解析器
+	//返回性别的下拉列表
+	@ResponseBody
+	@RequestMapping(value="/service/sex/{value}",produces="text/html;charset=UTF-8")
+	public String getSex(@PathVariable("value") String value){
+		return SexOperation.getOption(value);
+	}
 	//返回民族的下拉列表
 	@ResponseBody
 	@RequestMapping(value="/service/nations/{value}",produces="text/html;charset=UTF-8")
@@ -79,6 +90,25 @@ public class CommonHandler {
 		return RprtypeOperation.getOption(value);
 	}
 	
+	//返回省份的下拉列表
+	@ResponseBody
+	@RequestMapping(value="/province/{value1}/{value2}",produces="text/html;charset=UTF-8")
+	public String getProvince(@PathVariable("value1") String value1 ,@PathVariable("value2") String value2){
+		return  RegioncodeOperation.getSelectedRegion(value1,value2);
+	}
+	//返回市区
+		@ResponseBody
+		@RequestMapping(value="/city/{value1}/{value2}",produces="text/html;charset=UTF-8")
+		public String getCity(@PathVariable("value1") String value1 ,@PathVariable("value2") String value2){
+			return  RegioncodeOperation.getSelectedRegion(value1,value2);
+		}
+	//返回街道
+		@ResponseBody
+		@RequestMapping(value="/village/{value1}/{value2}",produces="text/html;charset=UTF-8")
+		public String getVillage(@PathVariable("value1") String value1 ,@PathVariable("value2") String value2){
+			return  RegioncodeOperation.getSelectedRegion(value1,value2);
+		}
+		
 	//文化程度
 	@ResponseBody
 	@RequestMapping(value="/service/whcd/{value}",produces="text/html;charset=UTF-8")
@@ -86,12 +116,7 @@ public class CommonHandler {
 		return EducationallevelOperation.getOption(value);
 	}
 	
-//	//性别
-//	@ResponseBody
-//	@RequestMapping(value="/service/xb/{value}",produces="text/html;charset=UTF-8")
-//	public String getXb(@PathVariable("value") String value){
-//		return SexOperation.getOption(value);
-//	}
+	
 	
 	//计算机等级
 	@ResponseBody
@@ -101,11 +126,31 @@ public class CommonHandler {
 	}
 	
 	//职业技能
-	@ResponseBody
-	@RequestMapping(value="/service/zyjn/{value}",produces="text/html;charset=UTF-8")
-	public String getZyjn(@PathVariable("value") String value){
-		return QualificationOperation.getOption(value);
-	}
+		//大类
+		@ResponseBody
+		@RequestMapping(value="/common/gw/{value1}/{value2}",produces="text/html;charset=UTF-8")
+		public String getgw(@PathVariable("value1") String value1 ,@PathVariable("value2") String value2){
+			return  SpecialtyOperation.getSelectedGz(value1,value2);
+		}
+		//中类
+		@ResponseBody
+		@RequestMapping(value="/common/gz1/{value1}/{value2}",produces="text/html;charset=UTF-8")
+		public String getgz1(@PathVariable("value1") String value1 ,@PathVariable("value2") String value2){
+			return  SpecialtyOperation.getSelectedGz(value1,value2);
+		}
+		//小类
+		@ResponseBody
+		@RequestMapping(value="/common/gz2/{value1}/{value2}",produces="text/html;charset=UTF-8")
+		public String getgz2(@PathVariable("value1") String value1 ,@PathVariable("value2") String value2){
+			return  SpecialtyOperation.getSelectedGz(value1,value2);
+		}
+		//中类
+		@ResponseBody
+		@RequestMapping(value="/common/gz3/{value1}/{value2}",produces="text/html;charset=UTF-8")
+		public String getgz3(@PathVariable("value1") String value1 ,@PathVariable("value2") String value2){
+			return  SpecialtyOperation.getSelectedGz(value1,value2);
+		}
+	//技术等级
 	
 	//熟练程度
 	@ResponseBody
@@ -114,5 +159,23 @@ public class CommonHandler {
 		return ProficiencyOperation.getOption(value);
 	}
 	
+	//单位行业
+	@ResponseBody
+	@RequestMapping(value="/service/dwhy/{value}",produces="text/html;charset=UTF-8")
+	public String getDwhy(@PathVariable("value") String value){
+		return IndustryOperation.getOption(value);
+	}
+	//单位性质
+	@ResponseBody
+	@RequestMapping(value="/service/dwxz/{value}",produces="text/html;charset=UTF-8")
+	public String getDwxz(@PathVariable("value") String value){
+		return OrgtypeOperation.getOption(value);
+	}
+	//经济类型
+	@ResponseBody
+	@RequestMapping(value="/service/dwjjlx/{value}",produces="text/html;charset=UTF-8")
+	public String getDwjjlx(@PathVariable("value") String value){
+		return RegtypeOperation.getOption(value);
+	}
 	
 }

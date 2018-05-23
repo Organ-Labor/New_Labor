@@ -20,6 +20,11 @@ public class UserHandler {
 	@Autowired
 	UserService userService;
 	
+//	@RequestMapping("/service/saveqzb.do")
+//	public void save() {
+//		System.out.println("haha");
+//	}
+	
 	@RequestMapping("/service/test/getUsers/{page}")
 	public String getUsers(@PathVariable("page") Integer page,Map<String,Object> map) {
 		

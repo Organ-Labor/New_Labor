@@ -7,42 +7,41 @@
 <script src="<%=request.getContextPath()%>/js/commonjs.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
-	$(function(){
 	
-		$("#gw").change(function(){
-		//var rtValue=$("#gw").val();
-			var str=$("#gw").val();
-			$.get("<%=request.getContextPath()%>/service/zj/dwzp/dwdj_1.do",{code:"zhong",str:str},function(data){
-				$("#gz1").html(data);
-				$("#gzdm").val($("#gw option:selected").val());
-				$("#gzmc").val($("#gw option:selected").text());
-			});
-			
-			$("#gz1").change();
-		});
-		$("#gz1").change(function(){
-		//var rtValue=$("#gw").val();
-			var str=$("#gz1").val();
-			$.get("<%=request.getContextPath()%>/service/zj/dwzp/dwdj_1.do",{code:"gz1",str:str},function(data){
-				$("#gz2").html(data);
-				$("#gzdm").val($("#gz1 option:selected").val());
-				$("#gzmc").val($("#gz1 option:selected").text());
-			});
-			$("#gz2").change();
-		});
-		$("#gz2").change(function(){
-		//var rtValue=$("#gw").val();
-			var str=$("#gz2").val();
-			$.get("<%=request.getContextPath()%>/service/zj/dwzp/dwdj_1.do",{code:"gz2",str:str},function(data){
-				$("#gz3").html(data);
-				$("#gzdm").val($("#gz2 option:selected").val());
-				$("#gzmc").val($("#gz2 option:selected").text());
-			});
-		});
-	
-		$("#gw").change();
-	});
+$(function(){	
 
+//中类
+$("#gw").change(function(){
+	var data=$("#gw").val();
+	$("#gz1").load("gz1/"+data+"/gz1");
+	$("#gz2").val("");
+
+})
+//小类
+$("#gz1").change(function(){
+	var data=$("#gz1").val();
+	$("#gz2").load("gz2/"+data+"/gz2");
+	$("#gz3").val("");
+
+})
+//细类
+$("#gz2").change(function(){
+	var data3=$("#gz2").val();
+	$("#gz3").load("gz3/"+data3+"/gz3");
+})
+
+	
+	$("#gz3").change(function(){
+		var data3=$("#gz3").val();
+		$("#gzdm").val(data3);
+		var data4=$("#gz3").find("option:selected").text();
+		$("#gzmc").val(data4);
+		
+})
+
+})	
+
+	
 
 </script>
 <script>
@@ -157,8 +156,8 @@
 	<tr class ="line1"> 
 	  <td align="right" >大&nbsp;&nbsp;&nbsp;&nbsp;类</td>
 	  <td id="gwtd">
-		<select id="gw"  style="width:120px"  onchange="initGz1()">
-			<%=SpecialtyOperation.getGwmc()%>
+		<select id="gw"  style="width:120px"  onchange="initGz1()">	
+		<%=SpecialtyOperation.getGwmc()%>
 		</select>
 		</td>
 	  <td  align="right" >中&nbsp;&nbsp;&nbsp;&nbsp;类</td>

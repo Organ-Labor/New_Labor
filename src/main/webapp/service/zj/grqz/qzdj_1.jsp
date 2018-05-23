@@ -8,109 +8,82 @@
 <link href="<%=request.getContextPath()%>/styles/css/common.css" rel="stylesheet" type="text/css">
 <script src="<%=request.getContextPath() %>/js/commonjs.js"></script>
 <script src="<%=request.getContextPath() %>/js/jquery-1.11.1.js"></script>
-<script>
-	$(function(){
-		//$.get("qzdj_1.do",{code:"bip_id"},function(data){$("#bip_id").html(data);})
-		
-		//9.性别
-		$("#xb").load("../../sex/1");
-		//1.加载民族下拉列表
-		$("#mz").load("../../nations/01");
-		//2.加载政治面貌
-		$("#zzmm").load("../../zzmm/13");
-		//3.加载婚姻状况
-		$("#hyzk").load("../../hyzk/1");
-		//4.加载人员类别
-		$("#rylb").load("../../rylb/20");
-		//5.健康状况
-		$("#jkzk").load("../../jkzk/1");
-		//6.残疾状况
-		$("#cjzk").load("../../cjzk/11");
-		//7.户籍性质
-		$("#hjxz").load("../../hjxz/10");
-		//省份
-		$("#dwszs").load("../../province/110000000000/province");
-		//市区
-		$("#dwszs").change(function(){
-			var data=$("#dwszs").val();
-			$("#dwszq").load("../../city/"+data+"/city");
-			$("#dwszj").val("");
-		
-		})
-		//街道
-		$("#dwszq").change(function(){
-			var data2=$("#dwszq").val();
-			$("#dwszj").load("../../village/"+data2+"/village");
-		})
-		//8.文化程度
-		$("#whcd1").load("../../whcd/10");
-		
-		//10.语言
-		$("#init_jywy").load("../../language/01");
-		//11.计算机等级
-		$("#jsjdj").load("../../jsjdj/1");
-		
-		//13.熟练程度
-		$("#init_wyslcd").load("../../slcd/1");
-		$("#jsjslcd").load("../../slcd/1");
-		//技术等级
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//根据身份证号码判断性别和年龄 		
-		$("#sfzhm").blur(function(){
-			var len=$("#sfzhm").val().length;	
-			if(len==18){
-				$.get("qzdj_1.do",{code:"xb",sfzhm:$(this).val()},function(data){$("#xb").html(data);});
-				$.get("qzdj_1.do",{code:"nl",sfzhm:$(this).val()},function(data){$("#nl").val(data);});
-				$.get("qzdj_1.do",{code:"panduan",s:$(this).val()},function(data){
-					if(data==1){
-						var s=$("#sfzhm").val();
-						window.open('qzdj_3.do?sfzhm='+s+'','_self');
-					}				
-				})
-			}else{
-				$("#xb").html("");
-				$("#nl").val("");
-			}			
-		})
-		$.get("qzdj_1.do",{code:"mz"},function(data){$("#mz").html(data);})
-		$.get("qzdj_1.do",{code:"zzmm"},function(data){$("#zzmm").html(data);})
-		$.get("qzdj_1.do",{code:"hyzk"},function(data){$("#hyzk").html(data);})
-		$.get("qzdj_1.do",{code:"hjxz"},function(data){$("#hjxz").html(data);})
-		$.get("qzdj_1.do",{code:"rylb"},function(data){$("#rylb").html(data);})
-		$.get("qzdj_1.do",{code:"jkzk"},function(data){$("#jkzk").html(data);})
-		$.get("qzdj_1.do",{code:"cjzk"},function(data){$("#cjzk").html(data);})
-		//省+市+区/街道 				
-		$.get("qzdj_1.do",{code:"dwszs"},function(data){$("#dwszs").html(data);})
-		$("#dwszs").change(function(){
-			$("#dwszq").empty();
-			$("#dwszj").empty();			
-			$.get("qzdj_1.do",
-				{code:"dwszq",
-				selectedId:$("#dwszs").val(),
-				region:"city"},
-				function(data){$("#dwszq").html(data);
-			})
+<script>		
+$(function(){
+	//$.get("qzdj_1.do",{code:"bip_id"},function(data){$("#bip_id").html(data);})
+	
+	
+	//1.加载民族下拉列表
+	$("#mz").load("../../nations/01");
+	//2.加载政治面貌
+	$("#zzmm").load("../../zzmm/13");
+	//3.加载婚姻状况
+	$("#hyzk").load("../../hyzk/1");
+	//4.加载人员类别
+	$("#rylb").load("../../rylb/20");
+	//5.健康状况
+	$("#jkzk").load("../../jkzk/1");
+	//6.残疾状况
+	$("#cjzk").load("../../cjzk/11");
+	//7.户籍性质
+	$("#hjxz").load("../../hjxz/10");
+	//省份
+	$("#dwszs").load("../../../province/110000000000/province");
+	//市区
+	$("#dwszs").change(function(){
+		var data=$("#dwszs").val();
+		$("#dwszq").load("../../../city/"+data+"/city");
+		$("#dwszj").val("");
+	
+	})
+	//街道
+	$("#dwszq").change(function(){
+		var data2=$("#dwszq").val();
+		$("#dwszj").load("../../../village/"+data2+"/village");
+	})
+	//8.文化程度
+	$("#whcd1").load("../../whcd/10");
+	
+	//10.语言
+	$("#init_jywy").load("../../language/01");
+	//11.计算机等级
+	$("#jsjdj").load("../../jsjdj/1");
+	
+	//13.熟练程度
+	$("#init_wyslcd").load("../../slcd/1");
+	$("#jsjslcd").load("../../slcd/1");
+	//技术等级
+	//单位行业
+	$("#dwhy").load("../../dwhy/1");
+	//单位性质
+	$("#dwxz").load("../../dwxz/1");
+	//经济类型
+	$("#dwjjlx").load("../../dwjjlx/1");
 			
+	//择业工种 
+	$(".qzgz1").click(function(){
+		var dx,dy;
+		var dx=(screen.height/2-105)+"";
+			var dy=(screen.width/2-200)+"";
+		var rValue,iTem;
+		rValue=window.showModalDialog("../../../common/choosegz_ModalDialog_qyc.jsp",null,"dialogTop="+dx+";dialogLeft="+dy+";dialogHeight=210px;dialogWidth=400px;help=no;fullscreen=1;status=no;center=yes");		
+		if(rValue != null){				
+			$(this).html(rValue);
+		}
+			return;			
+	})
+	//地区
+	$("#gzdq").click(function(){
+			var dx,dy;
+			var dx=(screen.height/2-105)+"";
+   			var dy=(screen.width/2-200)+"";
+			var rValue,iTem;
+			rValue=window.showModalDialog("../../../common/choosegzdq_ModalDialog_szd.jsp",null,"dialogTop="+dx+";dialogLeft="+dy+";dialogHeight=210px;dialogWidth=400px;help=no;fullscreen=1;status=no;center=yes");		
+			if(rValue != null){				
+				$(this).html(rValue);
+			}
+				return;			
 		})
-		$("#dwszq").change(function(){			
-			$.get("qzdj_1.do",
-				{code:"dwszj",
-				selectedId:$("#dwszq").val(),
-				region:"village"},
-				function(data){$("#dwszj").html(data);
-			})
-		})
-		//文化程度 
-		$.get("qzdj_1.do",{code:"whcd1"},function(data){$("#whcd1").html(data);})
-		
 		//职业技能 		
 		$("#init_zyjn").click(function(){
 			var dx,dy;
@@ -123,318 +96,96 @@
 			}
 				return;			
 		})
-		if($("#init_zyjn").val()!=""){
-			$.get("qzdj_1.do",{code:"init_jsdj"},function(data){$("#init_jsdj").html(data);});		
-		}
-		//添加职业技能 
-		$("#zyjntj").click(function(){
-			if($("#init_zyjn").val()=="" ||$("#init_jsdj").val()==""||$("#init_csnx").val()==""){
-				alert("该添加项必须填写完毕后，才能继续添加");
-				return;
-			}else{
-				var reg=/^[0-9]{1,2}$/;
-				
-				//$!reg.test($("#init_csnx").val())
-				if(!reg.test($("#init_csnx").val())){
-					alert("从事年限有误 ");
-					return;
-				}else{
-					var zyjn_text=$("#init_zyjn option:selected").text();
-					var zyjn_value=$("#init_zyjn option:selected").val();
-					
-					var jsdj_text=$("#init_jsdj option:selected").text();
-					var jsdj_value=$("#init_jsdj option:selected").val();
-					
-					var csnx_value=$("#init_csnx").val();
-					
-					var init_zyjn=$("<td width='13%' align='right'>职业技能 </td ><td width='19%'><input type='hidden' name='bip_s_zyjn' value='"+zyjn_value+"'><input type='text' name='init_zyjn' size='1' value='"+zyjn_text+"' readonly='readonly' style='WIDTH: 100%'></td >");			
-					var init_jsdj=$("<td width='11%' align='right'>技术等级 </td ><td width='18%'><input type='hidden' name='bip_s_jsdj' value='"+jsdj_value+"'><input type='text' name='init_jsdj' value='"+jsdj_text+"' size='1' readonly='readonly' style='WIDTH: 100%'></td >");
-					var init_csnx=$("<td width='11%' align='right'>从事年限 </td ><td width='15%'><INPUT type='text' name='bip_s_years' value='"+csnx_value+"' readonly='readonly' style='WIDTH: 100%'></td >");
-					var csnx=$("<td width='7%' align='center'><INPUT type='hidden' value='"+csnx_value+" style='WIDTH: 100%'></td >");
-					var jnsc=$("<td width='8%' align='center'><input name='jnsc' type='button'  value='删除' class='BUTTON2' onClick='delRows(jywyTable)'></td >");
-					var tr=$("<tr class='line2' align='center' ></tr >");
-					var tab=$("<table id='jywyTable' width='100%'  align='center' border='0' cellpadding='0' cellspacing='1'  style='word-break:break-all;width:fixed'></table>");
-					var div=$("<div></div>");
-					tr.append(init_zyjn);
-					tr.append(init_jsdj);
-					tr.append(init_csnx);
-					tr.append(csnx);
-					tr.append(jnsc);			
-					tab.append(tr);
-					div.append(tab);			
-					$("#panel_1").prepend(div);
-					//一行div中的删除 
-					jnsc.click(function(){
-						$(this).parent().parent().parent().remove();
-					})
-					//清空选项 
-					$("#init_zyjn").empty();					
-					if($("#init_zyjn").val()!=""){
-						$.get("qzdj_1.do",{code:"init_jsdj"},function(data){$("#init_jsdj").html(data);});		
-					}else{
-						$("#init_jsdj").empty();
+			//根据身份证号码判断性别和年龄 		
+			$("#sfzhm").blur(function(){
+				var len=$("#sfzhm").val().length;	
+				if(len==18){
+					var UserCard=$("#sfzhm").val();
+					if (parseInt(UserCard.substr(16, 1)) % 2 == 1) { 
+							$("#xb").load("../../sex/1");
+						} else { 
+							$("#xb").load("../../sex/2");
+						} 
 					}
-					$("#init_csnx").val("");
-				}
-			}	
-		})
-		//清空职业技能列表 
-		$("#zyjnqc").click(function(){
-			if($("#panel_1").html()==""){
-				alert("未找到清除对象 ");
-				return;
-			}else{
-				if(confirm("确认清空列表吗 ")){
-					$("#panel_1").empty();	
-				}
-				return;
-			}
-			
-		})
-		
-		
-		//外语 
-		$.get("qzdj_1.do",{code:"init_jywy"},function(data){$("#init_jywy").html(data);})
-		$("#init_jywy").change(function(){			
-			$.get("qzdj_1.do",{code:"init_wyslcd"},function(data){$("#init_wyslcd").html(data);})
-			$("#init_wysm").val("");
-		})
-		
-		$("#wytj").click(function(){			
-			//alert($(this).parent().parent().next());
-			if($("#init_jywy").val()=="" || $("#init_wyslcd").val()=="" || $("#init_wysm").val()==""){
-				alert("该添加项必须填写完毕后，才能继续添加");
-				return;
-			}			
-			var ijwy_text=$("#init_jywy option:selected").text();
-			var ijwy_value=$("#init_jywy option:selected").val();
-			
-			var init_wyslcd_text=$("#init_wyslcd option:selected").text();
-			var init_wyslcd_value=$("#init_wyslcd option:selected").val();
-			
-			var init_wysm_value=$("#init_wysm").val();
-			
-			var init_jywy=$("<td width='13%' align='right'>具有外语 </td ><td width='19%'><input type='hidden' name='bip_fl_jywy' value='"+ijwy_value+"'><input type='text' name='init_jywy' size='1' value='"+ijwy_text+"' readonly='readonly' style='WIDTH: 100%'></td >");			
-			var init_wyslcd=$("<td width='11%' align='right'>熟练程度 </td ><td width='18%'><input type='hidden' name='bip_fl_years' value='"+init_wyslcd_value+"'><input type='text' name='init_wyslcd' value='"+init_wyslcd_text+"' size='1' readonly='readonly' style='WIDTH: 100%'></td >");
-			var init_wysm=$("<td width='11%' align='right'>外语说明 </td ><td width='15%'><INPUT type='text' name='init_wysm' value='"+init_wysm_value+"' readonly='readonly' style='WIDTH: 100%'></td >");
-			var wytj=$("<td align='center'><INPUT type='hidden' value='"+init_wysm_value+" style='WIDTH: 100%'></td >");
-			var wysc=$("<td width='8%' align='center'><input name='wysc' type='button'  value='删除' class='BUTTON2' onClick='delRows(jywyTable)'></td >");
-			var tr=$("<tr class='line2' align='center' ></tr >");
-			var tab=$("<table id='jywyTable' width='100%'  align='center' border='0' cellpadding='0' cellspacing='1'  style='word-break:break-all;width:fixed'></table>");
-			var div=$("<div></div>");
-			tr.append(init_jywy);
-			tr.append(init_wyslcd);
-			tr.append(init_wysm);
-			tr.append(wytj);
-			tr.append(wysc);			
-			tab.append(tr);
-			div.append(tab);			
-			$("#panel_2").prepend(div);
-			//一行div中的删除 
-			wysc.click(function(){
-				$(this).parent().parent().parent().remove();
+				
+				
+				var myDate = new Date(); 
+				var age = myDate.getFullYear()-UserCard.substring(6, 10); 
+				$("#nl").val(age);
+								
 			})
-			$.get("qzdj_1.do",{code:"init_jywy"},function(data){$("#init_jywy").html(data);})						
-			$("#init_jywy").change();
-			$("#init_wysm").val("");
 			
-		})
-		//外语-清空按钮 
-		$("#wyqc").click(function(){
-			if($("#panel_2").html()==""){
-				alert("未找到清除对象 ");
-				return;
-			}else{
-				if(confirm("确认清空列表吗 ")){
-					$("#panel_2").empty();	
-				}
-				return;
-			}
+
 			
-		})
-				
-		//计算机等级+熟练程度
-		$.get("qzdj_1.do",{code:"jsjdj"},function(data){$("#jsjdj").html(data);})		
-		$("#jsjdj").change(function(){			
-			$.get("qzdj_1.do",{code:"jsjslcd"},function(data){$("#jsjslcd").html(data);})
-		})
-		
-		//择业信息 
-		$.get("qzdj_1.do",{code:"dwxz"},function(data){$("#dwxz").html(data);})
-		$.get("qzdj_1.do",{code:"dwhy"},function(data){$("#dwhy").html(data);})
-		$.get("qzdj_1.do",{code:"dwjjlx"},function(data){$("#dwjjlx").html(data);})
-		$.get("qzdj_1.do",{code:"gzdq"},function(data){$("#gzdq").html(data);})
-		$("#gzdq").click(function(){
-			var dx,dy;
-			var dx=(screen.height/2-105)+"";
-   			var dy=(screen.width/2-200)+"";
-			var rValue,iTem;
-			rValue=window.showModalDialog("../../../common/choosegzdq_ModalDialog_szd.jsp",null,"dialogTop="+dx+";dialogLeft="+dy+";dialogHeight=210px;dialogWidth=400px;help=no;fullscreen=1;status=no;center=yes");		
-			if(rValue != null){				
-				$(this).html(rValue);
-			}
-				return;			
-		})
-		//择业工种 
-		$(".qzgz1").click(function(){
-			var dx,dy;
-			var dx=(screen.height/2-105)+"";
-   			var dy=(screen.width/2-200)+"";
-			var rValue,iTem;
-			rValue=window.showModalDialog("../../../common/choosegz_ModalDialog_qyc.jsp",null,"dialogTop="+dx+";dialogLeft="+dy+";dialogHeight=210px;dialogWidth=400px;help=no;fullscreen=1;status=no;center=yes");		
-			if(rValue != null){				
-				$(this).html(rValue);
-			}
-				return;			
-		})
-		
-		$.get("qzdj_1.do",{code:"ygxs1"},function(data){$("#ygxs1").html(data);})		
-		$("#gztj").click(function(){
-			if($("#qzgz1").val()=="" ||$("#ygxs1").val()==""||$("#zdyx1").val()==""||$("#zdyx2").val()==""){
-				alert("该添加项必须填写完毕后，才能继续添加");
-				return;
-			}else{
-				var reg=/^[0-9]*$/;
-				var zdyx1_value=$("#zdyx1").val();
-				var zgyx2_value=$("#zgyx2").val();				
-				if(!reg.test(zdyx1_value)||!reg.test(zgyx2_value)||zdyx1_value>zgyx2_value){
-					alert("薪水超出范围 ");
-					return;
-					
-				}else{
-					var qzgz1_text=$("#qzgz1 option:selected").text();
-					var qzgz1_value=$("#qzgz1 option:selected").val();
-					
-					var ygxs1_text=$("#ygxs1 option:selected").text();
-					var ygxs1_value=$("#ygxs1 option:selected").val();
-					
-									
-					var qzgz1=$("<td width='40' align='right'>工种 </td ><td width='110'><input type='hidden' name='GZ' value='"+qzgz1_value+"'><input type='text' size='1' value='"+qzgz1_text+"' readonly='readonly' style='WIDTH: 100%'></td >");			
-					var ygxs1=$("<td width='50' align='right'>用工形式 </td ><td width='80'><input type='hidden' name='YGXS' value='"+ygxs1_value+"'><input type='text' value='"+ygxs1_text+"' size='1' readonly='readonly' style='WIDTH: 100%'></td >");
-					var zdyx=$("<td width='40' align='right'>月薪  </td ><td width='140'><INPUT type='text' name='ZDYX' value='"+zdyx1_value+"' readonly='readonly' style='WIDTH: 40px'>&nbsp;至&nbsp;<INPUT type='text' name='ZGYX' value='"+zgyx2_value+"' readonly='readonly' style='WIDTH: 40px'></td >");
-					var gztj=$("<td width='40' align='right'><INPUT type='hidden'style='WIDTH: 100%'></td >");
-					var gzsc=$("<td width='40' align='right'><input name='gzsc' type='button'  value='删除' class='BUTTON2'></td >");
-					var tr=$("<tr class='line2' align='center' ></tr >");
-					var tab=$("<table width='100%'  align='center' border='0' cellpadding='0' cellspacing='1'  style='word-break:break-all;width:fixed'></table>");
-					var div=$("<div></div>");
-					tr.append(qzgz1);
-					tr.append(ygxs1);
-					tr.append(zdyx);
-					tr.append(gztj);
-					tr.append(gzsc);			
-					tab.append(tr);
-					div.append(tab);			
-					$("#panel_3").prepend(div);
-					//一行div中的删除 
-					gzsc.click(function(){
-						$(this).parent().parent().parent().remove();
-					})
-					//清空选项 
-					$("#qzgz1").empty();					
-					if($("#qzgz1").val()!=""){
-						$.get("qzdj_1.do",{code:"ygxs1"},function(data){$("#ygxs1").html(data);});		
-					}else{
-						$("#ygxs1").empty();
-					}
-					$("#zdyx1").val("");
-					$("#zgyx2").val("");
-				}
-			}
-			//清空列表 
-			$("#gzqc").click(function(){
-				if($("#panel_3").html()==""){
-					alert("未找到清除对象 ");
-					return;
-				}else{
-					if(confirm("确认清空列表吗 ")){
-						$("#panel_3").empty();	
-					}
-					return;
-				}
-			
-			})	
-		})
-		
-		$("#baocun").click(function(){
-			var sfzhmReg=/^([0-9]{17})([0-9]|X)$/;
-			if($("#sfzhm").val()==""){
-				alert("身份证号不得为空");
-				$("#sfzhm").focus();
-				return;
-			}else{
-				if(!sfzhmReg.test($("#sfzhm").val())){
-					alert("身份证号格式不对");
+			$("#baocun").click(function(){
+				var sfzhmReg=/^([0-9]{17})([0-9]|X)$/;
+				if($("#sfzhm").val()==""){
+					alert("身份证号不得为空");
 					$("#sfzhm").focus();
 					return;
+				}else{
+					if(!sfzhmReg.test($("#sfzhm").val())){
+						alert("身份证号格式不对");
+						$("#sfzhm").focus();
+						return;
+					}
 				}
-			}
-			if($("#xb").val()==""){
-				alert("性别为必添项，请选择一个！");
-				$("#xb").focus();
-				return;
-			}
-			if($("#xm").val()==""){
-				alert("姓名为必添项");
-				$("#xm").focus();
-				return;
-			}
-			if($("#mz").val()==""){
-				alert("民族为必添项，请选择一个！");
-				$("#mz").focus();
-				return;
-			}
-			if($("#hjxz").val()==""){
-				alert("户籍性质为必添项，请选择一个！");
-				$("#hjxz").focus();
-				return;
-			}
-			if($("#rylb").val()==""){
-				alert("人员类别为必添项，请选择一个！");
-				$("#rylb").focus();
-				return;
-			}
-			if($("#dwszs").val()==""&&$("#dwszq").val()==""){
-				alert("户口所在地为必添项，请选择！");
-				$("#dwszs").focus();
-				return;
-			}
-			if($("#whcd1").val()==""){
-				alert("文化程度为必添项，请选择一个！");
-				$("#whcd1").focus();
-				return;
-			}
-			if($("#lxdh").val()==""||$("#sj").val()==""){
-				alert("固话手机必添项其一，请填写！");
-				$("#lxdh").focus();
-				return;
-			}
-			if($("#panel_1").html()==""){
-				alert("职业技能为必添项");
-				$("#init_zyjn").focus();
-				return;
-			}
-			if($("#panel_3").html()==""){
-				alert("择业工种为必添项");
-				$("#qzgz1").focus();
-				return;
-			}
-	
+				if($("#xb").val()==""){
+					alert("性别为必添项，请选择一个！");
+					$("#xb").focus();
+					return;
+				}
+				if($("#xm").val()==""){
+					alert("姓名为必添项");
+					$("#xm").focus();
+					return;
+				}
+				if($("#mz").val()==""){
+					alert("民族为必添项，请选择一个！");
+					$("#mz").focus();
+					return;
+				}
+				if($("#hjxz").val()==""){
+					alert("户籍性质为必添项，请选择一个！");
+					$("#hjxz").focus();
+					return;
+				}
+				if($("#rylb").val()==""){
+					alert("人员类别为必添项，请选择一个！");
+					$("#rylb").focus();
+					return;
+				}
+				if($("#dwszs").val()==""&&$("#dwszq").val()==""){
+					alert("户口所在地为必添项，请选择！");
+					$("#dwszs").focus();
+					return;
+				}
+				if($("#whcd1").val()==""){
+					alert("文化程度为必添项，请选择一个！");
+					$("#whcd1").focus();
+					return;
+				}
+				if($("#lxdh").val()==""||$("#sj").val()==""){
+					alert("固话手机必添项其一，请填写！");
+					$("#lxdh").focus();
+					return;
+				}
 			
-			$("form").submit();
-		});
-		$("#cz").click(function(){
-			if(confirm("确认清空列表吗 ")){
-				$("#panel_3").empty();	
-			}
-					return;		
+				
+				$("#form1").submit();
+			});
+			$("#cz").click(function(){
+				if(confirm("确认清空列表吗 ")){
+					$("#panel_3").empty();	
+				}
+						return;		
+			})
 		})
-	})
-
 
 </script>
 </head>
 <body>
-<form name="form1" action="qzdj_2.do" method="post">
+<form id="form1" action="../../saveqzb.do" method="post">
 <table width="98%"  border="0" align="center" cellpadding="0" cellspacing="0">
 	<tr>
 		<td height="20" valign="bottom">
@@ -494,9 +245,9 @@
           <td width="13%" align="right"><span class="redtxt">*</span>身份证号码</td >
           <td width="20%"><INPUT  id="sfzhm" name="sfzhm" style="WIDTH: 100%"  value="" /></td >
           <td width="13%" align="right" ><span class="redtxt">*</span>性　　别</td >
-           <td ><select id="xb" name="xb" size="1"  style="WIDTH: 100%" ></select></td >
+          <td width="20%"><select name="xb" id="xb" size="1"  style="WIDTH: 100%" ></select></td >
           <td width="13%" align="right">年　　龄</td >
-          <td width="20%"><INPUT id="nl"  name="nl"   style="WIDTH: 100%" value="${Age} " disabled></td >
+          <td width="20%"><INPUT id="nl"  name="nl"   style="WIDTH: 100%" ></td >
         </tr>
         <tr class="line2">
           <td align="right"><span class="redtxt">*</span>姓　　名</td >
@@ -667,7 +418,7 @@
                 <td width="11%" align="right">技术等级</td >
                 <td width="18%"><select id="init_jsdj" name="init_jsdj" size="1"  style="WIDTH: 100%" ></select></td >
                 <td width="11%" align="right">从事年限</td >
-                <td width="15%"> <INPUT  id="init_csnx" name="init_csnx"  style="WIDTH: 100%" maxlength="2"> </td>
+                <td width="15%"> <INPUT  id="init_zyjn" name="init_csnx"  style="WIDTH: 100%" maxlength="2"> </td>
                 <td width="7%" align="center" > 
                   <input id="zyjntj" name="zyjntj" type="button"  value="添加" class="BUTTON2"></td >
                 <td width="8%" align="center"> 
@@ -783,7 +534,7 @@
 					<table><tr><td>
 					<input id="zdyx1" name="zdyx1" type="text" style="width:40px" maxlength="6">
                   	至
-					<input id="zgyx2" name="zgyx2" type="text" style="width:40px" maxlength="6" >
+					<input id="zgyx2" name="zdyx1" type="text" style="width:40px" maxlength="6" >
 					元</td></tr></table>
 					</div>
 				</td >

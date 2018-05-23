@@ -34,7 +34,7 @@ function check(myform){
 }
 </script>
 
-<script type="text/javascript">
+<%-- <script type="text/javascript">
 	function huitian1(){
 		
 	var p=document.getElementById("bip_citizenid").value;
@@ -52,17 +52,17 @@ function check(myform){
 			}
 			}
 			xhr.send(null);
-}
+} --%>
 </script>
 <script>
 	function dosubmit(){
-		if(form1.bip_citizenid.value==""&form1.bip_name.value==""){
+		<%-- if(form1.bip_citizenid.value==""&form1.bip_name.value==""){
 			alert("请填写至少一项信息！");
 			return;
 		}
 		form1.button.disabled = "true";
 		form1.button2.disabled = "true";
-		form1.action="<%=request.getContextPath()%>/service/zj/grqz/grdj_dj.do?flag=selectGrByPid";
+		form1.action="<%=request.getContextPath()%>/service/zj/grqz/grdj_dj.do?flag=selectGrByPid"; --%>
 		form1.submit();
 	}
 	
@@ -71,7 +71,7 @@ function check(myform){
 
 </head>
 <body>
-<form method="post" action="" name="form1">
+<form method="post" action="../../jd1.do" name="form1">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td>
@@ -121,7 +121,7 @@ function check(myform){
 <table width="98%" border="0" align="center">
   <TR align="center"  class="line2"> 
     <TD>
-      <INPUT name="button" type="button" class="BUTTONs3" value="确 定" onClick="dosubmit()">
+      <INPUT name="button" type="submit" class="BUTTONs3" value="确 定" >
    
       &nbsp;&nbsp; <INPUT class="BUTTONs3" type="reset" value="取 消" name="button2">
     </TD>

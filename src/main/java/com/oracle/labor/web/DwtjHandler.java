@@ -20,6 +20,10 @@ public class DwtjHandler {
 	@Autowired
 	DwService dwService;
 	
+	@RequestMapping("/service/saveqzb.do")
+	public void save() {
+		System.out.println("haha");
+	}
 	@RequestMapping("/service/getDwxx/{page}")
 	public String getDwxx(@PathVariable("page") int page,HttpServletRequest request,Map<String,Object> map){
 		

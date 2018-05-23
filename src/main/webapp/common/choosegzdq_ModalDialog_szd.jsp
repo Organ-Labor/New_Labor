@@ -8,7 +8,24 @@
 <script src="<%=request.getContextPath() %>/js/jquery-1.11.1.js"></script>
 <script>
 	$(function(){
-		$.get("../service/zj/grqz/qzdj_1.do",{code:"gzdq_dwszs"},function(data){$("#gzdq_dwszs").html(data);})
+		
+	//	$("#gzdq_dwszs").load("province/110000000000/province");
+		//市区
+		$("#gzdq_dwszs").change(function(){
+			var data=$("#gzdq_dwszs").val();
+			$("#gzdq_dwszq").load("../city/"+data+"/city");
+			$("#gzdq_dwszj").val("");
+		
+		})
+		//街道
+		$("#gzdq_dwszq").change(function(){
+			var data2=$("#gzdq_dwszq").val();
+			$("#gzdq_dwszj").load("../village/"+data2+"/village");
+			
+			
+		})
+	})	
+		/* $.get("../../zj/grqz/qzdj_1.do",{code:"gzdq_dwszs"},function(data){$("#gzdq_dwszs").html(data);})
 		$("#gzdq_dwszq").val("");
 		$("#gzdq_dwszj").val("");
 		$("#gzdq_dwszs").change(function(){			
@@ -37,9 +54,9 @@
 				$("#dqmc").val($("#gzdq_dwszj option:selected").text());	
 			}	
 				
-		})
+		}) */
 		
-		var gzdq=window.dialogArguments;
+		/* var gzdq=window.dialogArguments;
 		
 		if(gzdq!=null){
 			$.get("../service/zj/grqz/qzdj_1.do",{code:"dwszs_2",dq:gzdq},function(data){$("#gzdq_dwszs").html(data);})
@@ -72,7 +89,7 @@
 		
 		
 	})
-
+ */
 </script>
 </head>
 <body leftmargin="0" topmargin="0" onkeypress="escQuit();">
@@ -87,7 +104,9 @@
 	<tr class ="line1"> 
 	  <td align="right" >省&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	  <td id="gzdq_dwszstd">
-		<select id="gzdq_dwszs" name="gzdq_dwszs"  style="width:120px"  onchange="initGz1()"></select>
+		<select id="gzdq_dwszs" name="gzdq_dwszs"  style="width:120px"  onchange="initGz1()">
+			<%=RegioncodeOperation.getProvince() %>
+		</select>
 	  </td>
 	  <td  align="right" >市&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	  <td width="40%" id="gzdq_dwszqtd">
