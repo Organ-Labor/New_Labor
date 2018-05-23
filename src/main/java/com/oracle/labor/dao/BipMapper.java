@@ -31,7 +31,10 @@ public interface BipMapper {
     int updateByPrimaryKey(Bip record);
     
     //获得求职者
-    List<Map<String,Object>> getQzz(@Param("gz") String gz,@Param("bipSex") String bipSex,@Param("bipHyzk") String bipHyzk,@Param("bipWhcd") String bipWhcd,@Param("bipHjxz") String bipHjxz,@Param("bipRylb") String bipRylb,@Param("bipJkzk") String bipJkzk,@Param("bipTNewgraduate") String bipTNewgraduate,@Param("gzdq") String gzdq,@Param("minAge") String minAge,@Param("maxAge") String maxAge,@Param("minLong") String bioLong,@Param("maxLong") String maxLong);
+    List<Map<String,Object>> getQzz(@Param("gz") String gz,@Param("bipSex") String bipSex,@Param("bipHyzk") String bipHyzk,@Param("bipWhcd") String bipWhcd,@Param("bipHjxz") String bipHjxz,@Param("bipRylb") String bipRylb,@Param("bipJkzk") String bipJkzk,@Param("bipTNewgraduate") String bipTNewgraduate,@Param("gzdq") String gzdq,@Param("minAge") String minAge,@Param("maxAge") String maxAge);
+    
+    //根据身份证查询个人姓名和性别
+    Bip getGrbasicinfo(@Param("bipSfz")String bipSfz);
     
     //获得求职者详情
     List<Map<String,Object>> getQzzxq(@Param("bipId") String bipId);

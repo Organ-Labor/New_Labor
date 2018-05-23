@@ -1,12 +1,14 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/common/import.jsp" %>
+<%@ include file="/common/import.jsp"%>
 <html>
 <head>
 <title>单位推荐条件选择</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="<%=request.getContextPath()%>/styles/css/common.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/j.js"></script>
+<link href="<%=request.getContextPath()%>/styles/css/common.css"
+	rel="stylesheet" type="text/css">
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/js/j.js"></script>
 
 <!-- 
 <script>
@@ -75,13 +77,13 @@
 </script>
 
  -->
- 
- <script type="text/javascript">
+
+<script type="text/javascript">
      $(function(){
     	 var id=$("#ID").val();
-    	 alert(id);
+    	 //alert(id);
     	 var url="<%=request.getContextPath()%>/service/getZpgz/"+id;
-    	 alert(url);
+    	 //alert(url);
     	 //求职工种
     	 $("#qzgz").load("<%=request.getContextPath()%>/service/getZpgz/"+id);
     	/*  $("#qzgz").click(function(){
@@ -92,31 +94,62 @@
     		 })
     	 })  */
     	 
-    	 //加载下拉列表
-    	<%--  //1.求职工种
-    	 $("#qzgz").load("<%=request.getContextPath()%>/service/getQzgz/1000000"); --%>
-    	 //2.性别
-    	 $("#xb").load("<%=request.getContextPath()%>/service/getSex/1");
-    	 <%-- var url1="<%=request.getContextPath()%>/service/getSex/1";
-    	 $.post(url1,function(data){
-    		 alert(data);
-    	 }) --%>
-    	 //3.加载婚姻状况
- 		 $("#hyzk").load("<%=request.getContextPath()%>/service/hyzk/1");
- 		 //4.文化程度
- 		 $("#whcd").load("<%=request.getContextPath()%>/service/whcd/10");
- 		 //5.户籍性质
- 		 $("#hjxz").load("<%=request.getContextPath()%>/service/hjxz/10");
- 		 //6.加载人员类别
- 		 $("#rylb").load("<%=request.getContextPath()%>/service/rylb/20");
- 		 //7.健康状况
- 		 $("#jkzk").load("<%=request.getContextPath()%>/service/jkzk/1");
- 		 //8.工作地区
- 		 $("#gzdq").load("<%=request.getContextPath()%>/service/getGzdq");
-    	 
- 	
-
- 		 
+    	 //给求职工种框加失去焦点事件
+    	 $("#qzgz").blur(function(){
+    		 var q=$(this).val();
+    		 var id=$("#ID").val();
+    		 //alert(q);
+    		 //alert(id);
+    		 <%-- alert("<%=request.getContextPath()%>/service/selectTozptj/"+id+"/"+q); --%>
+    		 //load其他信息
+    		 $.get("<%=request.getContextPath()%>/service/selectTozptj/"+id+"/"+q,function(data){
+    			//alert("进入get的function");
+    			//alert(data);
+    			var dataObj=eval("("+data+")"); 
+    			for(var i=0;i<dataObj.length;i++){
+    				//alert("性别编码："+dataObj[i].bipSex);
+    				var xbcode=dataObj[i].bipSex;
+    				var hyzkcode=dataObj[i].hyzk;
+    				var whcdcode=dataObj[i].whcd;
+    				var hjxzcode=dataObj[i].hjxz;
+    				var rylbcode=dataObj[i].rylb;
+    				var jkzkcode=dataObj[i].jkzk;
+    				//alert("xbcode:"+xbcode);
+    				var yjbyscode=dataObj[i].yjbys;
+    				 $("#sfyj option[value='"+yjbyscode+"']").attr("selected", true);
+    				var minAge=dataObj[i].minAge;
+    				var maxAge=dataObj[i].maxAge;
+    				$("#n1").val(minAge);
+    				$("#n2").val(maxAge);
+    				
+    			}
+    			
+    			 //加载下拉列表
+           	 //获得招聘工种对应的招聘条件编码
+           	 //alert("性别编码："+xbcode);
+           	 <%-- //1.求职工种
+           	 $("#qzgz").load("<%=request.getContextPath()%>/service/getQzgz/1000000"); --%>
+           	 //2.性别
+           	 $("#xb").load("<%=request.getContextPath()%>/service/getSex/"+xbcode);
+           	<%--  var url1="<%=request.getContextPath()%>/service/getSex/1";
+           	 $.post(url1,function(data){
+           		 alert(data);
+           	 }) --%>
+           	 //3.加载婚姻状况
+        		 $("#hyzk").load("<%=request.getContextPath()%>/service/hyzk/"+hyzkcode);
+        		 //4.文化程度
+        		 $("#whcd").load("<%=request.getContextPath()%>/service/whcd/"+whcdcode);
+        		 //5.户籍性质
+        		 $("#hjxz").load("<%=request.getContextPath()%>/service/hjxz/"+hjxzcode);
+        		 //6.加载人员类别
+        		 $("#rylb").load("<%=request.getContextPath()%>/service/rylb/"+rylbcode);
+        		 //7.健康状况
+        		 $("#jkzk").load("<%=request.getContextPath()%>/service/jkzk/"+jkzkcode);
+        		 //8.工作地区
+        		 $("#gzdq").load("<%=request.getContextPath()%>/service/getGzdq");
+    		 })
+    		
+    	 })	 
  		 //对表单进行处理
  		$("#qd").click(function(){
  			form1.action = "<%=request.getContextPath()%>/service/getQzz/1";
@@ -154,137 +187,164 @@
  </script>
 </head>
 <body>
-<input type="hidden" id="ID" name="bioId" value="${sessionScope.bioInfomation[0].bioId} ">
-<form name="form1" action="" method="post">
-<%-- <c:set var="bio" value="${sessionScope.b}"/> --%>
-<table width="98%" align="center" border="0" align="center" cellpadding="0" cellspacing="0">
-	<tr>
-	  <td height="20" valign="bottom"><img src="<%=request.getContextPath()%>/styles/images/right/now.gif" width="11" height="12">当前位置：职业介绍
-	    &gt; 推荐服务 &gt; 单位推荐服务</td>
-	</tr>
-	<tr>
-	  <td valign="bottom" background="<%=request.getContextPath()%>/styles/images/right/dsline.gif" height="8"><img src="<%=request.getContextPath()%>/styles/images/index/spacer.gif"></td>
-	</tr>
-</table>
-<table width="98%" align="center" border="0" cellpadding="0" cellspacing="0"   class="title">
-  <tr>
-    <td width="30">
-	<table border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td ><img src="<%=request.getContextPath()%>/styles/css/bb_d.gif"></td>
-      </tr>
-    </table></td>
-    <td><input type="hidden" name="bio_id" value="<bean:write name='bio_id' scope='request'/>"></td>
-    <td><input type="hidden" name="bio_bua_address" value="<bean:write name='bio_bua_address' scope='request'/>"></td>
-    <td><input type="hidden" name="lxdh" value="<bean:write name='lxdh' scope='request'/>"></td>
-    
-<%-- 			    <td  valign="bottom">单位名称:&nbsp;&nbsp;${bioInfo.bioName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单位地址:&nbsp;&nbsp;${bioInfo.bioBuaAddress}</td>
- --%>			     <td  valign="bottom">单位名称:&nbsp;&nbsp;${sessionScope.bioInfomation[0].bioName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单位地址:&nbsp;&nbsp;${sessionScope.bioInfomation[0].bioAddress}</td>
-			  </tr>
-</table>
-<%-- <input type="hidden" id="ID" value="${bioInfo.bioId }"> --%>
+	<!-- 隐藏域获得value -->
+	<input type="hidden" id="ID" name="bioId"
+		value="${sessionScope.bioInfomation[0].bioId} ">
+
+	<form name="form1" action="" method="post">
+		<%-- <c:set var="bio" value="${sessionScope.b}"/> --%>
+		<table width="98%" align="center" border="0" align="center"
+			cellpadding="0" cellspacing="0">
+			<tr>
+				<td height="20" valign="bottom"><img
+					src="<%=request.getContextPath()%>/styles/images/right/now.gif"
+					width="11" height="12">当前位置：职业介绍 &gt; 推荐服务 &gt; 单位推荐服务</td>
+			</tr>
+			<tr>
+				<td valign="bottom"
+					background="<%=request.getContextPath()%>/styles/images/right/dsline.gif"
+					height="8"><img
+					src="<%=request.getContextPath()%>/styles/images/index/spacer.gif"></td>
+			</tr>
+		</table>
+		<table width="98%" align="center" border="0" cellpadding="0"
+			cellspacing="0" class="title">
+			<tr>
+				<td width="30">
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td><img
+								src="<%=request.getContextPath()%>/styles/css/bb_d.gif"></td>
+						</tr>
+					</table>
+				</td>
+				<td><input type="hidden" name="bio_id"
+					value="<bean:write name='bio_id' scope='request'/>"></td>
+				<td><input type="hidden" name="bio_bua_address"
+					value="<bean:write name='bio_bua_address' scope='request'/>"></td>
+				<td><input type="hidden" name="lxdh"
+					value="<bean:write name='lxdh' scope='request'/>"></td>
+
+				<%-- 			    <td  valign="bottom">单位名称:&nbsp;&nbsp;${bioInfo.bioName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单位地址:&nbsp;&nbsp;${bioInfo.bioBuaAddress}</td>
+ --%>
+				<td valign="bottom">单位名称:&nbsp;&nbsp;${sessionScope.bioInfomation[0].bioName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单位地址:&nbsp;&nbsp;${sessionScope.bioInfomation[0].bioAddress}</td>
+			</tr>
+		</table>
+		<%-- <input type="hidden" id="ID" value="${bioInfo.bioId }"> --%>
 
 
-<table width="98%" align="center" border="0" cellpadding="0" cellspacing="1" bordercolor="#FFFFFF" class="tablebody">
-    <tr>
-      <td class="line4">请选择招聘条件:</td>
-    </tr>
-</table>
-<table width="98%" align="center" border="0" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF" class="tablebody">
-    <tr>
-      <td width="112" align="right" class="line1">查找个人求职工种为</td>
-      <td class="line1">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            
-						<td width="11%">
-						<table border="0" cellspacing="2" cellpadding="0">
-                        <tr>
-                          <td>
-                          
-                          <select name="gz" style="width:120px;" id="qzgz">
-                                <option value="" selected>--请选择--</option>  
-                                <%--<c:if test="${not empty CompInfoList && CompInfoList.size() > 0 }">  
+		<table width="98%" align="center" border="0" cellpadding="0"
+			cellspacing="1" bordercolor="#FFFFFF" class="tablebody">
+			<tr>
+				<td class="line4">请选择招聘条件:</td>
+			</tr>
+		</table>
+		<table width="98%" align="center" border="0" cellpadding="0"
+			cellspacing="0" bordercolor="#FFFFFF" class="tablebody">
+			<tr>
+				<td width="112" align="right" class="line1">查找个人求职工种为</td>
+				<td class="line1">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+
+							<td width="11%">
+								<table border="0" cellspacing="2" cellpadding="0">
+									<tr>
+										<td><select name="gz" style="width: 120px;" id="qzgz">
+												<option value="" selected>--请选择--</option>
+												<%--<c:if test="${not empty CompInfoList && CompInfoList.size() > 0 }">  
                                     <c:forEach var="item" items="${CompInfoList }">  
                                         <option value="${item.id }">${item.name }</option>  
                                     </c:forEach>  
                                     <option value="1">--全部--</option>  
                                 </c:if>   --%>
-                          </select>
-                          
-                          
-                          </td>
-                  		  <td class="line2"></td>
-                		</tr>
-              			</table>
-              			</td>
-		  </tr>
-        </table>
-      </td>
-    </tr>
-</table>
-<table width="98%" align="center" border="0" cellpadding="0" cellspacing="1" bordercolor="#9DCBEC" class="tablebody">
-  <tbody>
-    <tr>
-      <td width="16%" align="right" class="line2">性　　别</td>
-      <td width="20%" align="center" class="line2"> <select id="xb" name="bipSex" style="WIDTH: 100%">
-        
-        </select></td>
-      <td width="12%" align="right" class="line2">婚姻状况</td>
-      <td width="20%" align="center" class="line2"> <select id="hyzk" name="bipHyzk" style="WIDTH: 100%">
-        
-        </select></td>
-      <td width="11%"  align="right" class="line2">文化程度</td>
-      <td width="20%" align="center" class="line2"> <select id="whcd" name="bipWhcd" style="WIDTH: 100%">
-					
-        </select></td>
-    </tr>
-    <tr>
-      <td align="right" class="line1">户籍性质</td>
-      <td align="center" class="line1"><select id="hjxz" name="bipHjxz" style="WIDTH: 100%">
-        
-        </select></td>
-	  <td align="right" class="line2">人员类别</td>
-      <td align="center" class="line2"><select id="rylb" name="bipRylb" style="WIDTH: 100%">
-          
-        </select></td>
-     <td align="right" class="line1">健康状况</td>
-      <td align="center" class="line1"><select id="jkzk" name="bipJkzk" style="WIDTH:100%">
-        
-        </select></td>
-    </tr>    
-    <tr>
-      <td align="right" class="line2">应届毕业生</td>
-      <td align="center" class="line2"><select id="s7" name="bipTNewgraduate" style="WIDTH: 100%">
-        <option value="y">是</option>
-        <option value="n">否</option>
-        <option value="k">无要求</option>
-        </select></td>
-      <td align="right" class="line1">工作地区</td>
-      <td align="center" class="line1"> <select id="gzdq" name="gzdq" style="WIDTH: 100%"></select></td>
-    </tr>
-  <tr>
-      <td align="right" class="line1">年　　龄</td>
-	  <td align="left" class="line1"><input id="n1" name="minAge" style="WIDTH:42%" maxlength="2">至<input id="n2" name="maxAge" style="WIDTH:42%" maxlength="2"></td>
-	  <td align="right" class="line1">身　　高</td>
-	  <td align="left" class="line1"><input id="sg1" name="minLong" style="WIDTH:42%" maxlength="3">至<input id="sg2" name="maxLong" style="WIDTH:42%" maxlength="3"></td>
-	  <td align="right" class="line1">视　　力</td>
-	  <td align="left"  class="line1"><input id="zuo" name="leftsl" style="WIDTH:46%" maxlength="3">-<input id="you" name="rightsl" style="WIDTH:46%" maxlength="3">
-	  </td>
-  </tr>
-</table>
-<br>
-<table width="98%" border="0" align="center" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="line2" align="center">
-	      <input id="qd" name="qd" type="button"class=BUTTONs3 value="确 定" >&nbsp;&nbsp;
-	      <input name="qx" type="reset" class=BUTTONs3 value="取 消" >&nbsp;&nbsp;
-	     <!--  <input name="back" type="button"class=BUTTONs3 onClick="onclick()" value="返 回"> -->
-	     
-	     <input type="button" class="btn"  value="返回" onclick="javascript:history.go(-1);"/>
-	  </td>
-    </tr>
-</table>
-</form>
+										</select></td>
+										<td class="line2"></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<table width="98%" align="center" border="0" cellpadding="0"
+			cellspacing="1" bordercolor="#9DCBEC" class="tablebody">
+			<tbody>
+				<tr>
+					<td width="16%" align="right" class="line2">性 别</td>
+					<td width="20%" align="center" class="line2"><select id="xb"
+						name="bipSex" style="WIDTH: 100%">
+
+					</select></td>
+					<td width="12%" align="right" class="line2">婚姻状况</td>
+					<td width="20%" align="center" class="line2"><select id="hyzk"
+						name="bipHyzk" style="WIDTH: 100%">
+
+					</select></td>
+					<td width="11%" align="right" class="line2">文化程度</td>
+					<td width="20%" align="center" class="line2"><select id="whcd"
+						name="bipWhcd" style="WIDTH: 100%">
+
+					</select></td>
+				</tr>
+				<tr>
+					<td align="right" class="line1">户籍性质</td>
+					<td align="center" class="line1"><select id="hjxz"
+						name="bipHjxz" style="WIDTH: 100%">
+
+					</select></td>
+					<td align="right" class="line2">人员类别</td>
+					<td align="center" class="line2"><select id="rylb"
+						name="bipRylb" style="WIDTH: 100%">
+
+					</select></td>
+					<td align="right" class="line1">健康状况</td>
+					<td align="center" class="line1"><select id="jkzk"
+						name="bipJkzk" style="WIDTH: 100%">
+
+					</select></td>
+				</tr>
+				<tr>
+					<td align="right" class="line2">应届毕业生</td>
+					<td align="center" class="line2"><select id="sfyj"
+						name="bipTNewgraduate" style="WIDTH: 100%">
+							<option value="y">是</option>
+							<option value="n">否</option>
+							<option value="k">无要求</option>
+					</select></td>
+					<td align="right" class="line1">工作地区</td>
+					<td align="center" class="line1"><select id="gzdq" name="gzdq"
+						style="WIDTH: 100%"></select></td>
+				</tr>
+				<tr>
+					<td align="right" class="line1">年 龄</td>
+					<td align="left" class="line1"><input id="n1" name="minAge"
+						style="WIDTH: 42%" maxlength="2">至<input id="n2"
+						name="maxAge" style="WIDTH: 42%" maxlength="2"></td>
+					<td align="right" class="line1">身 高</td>
+					<td align="left" class="line1"><input id="sg1" name="minLong"
+						style="WIDTH: 42%" maxlength="3">至<input id="sg2"
+						name="maxLong" style="WIDTH: 42%" maxlength="3"></td>
+					<td align="right" class="line1">视 力</td>
+					<td align="left" class="line1"><input id="zuo" name="leftsl"
+						style="WIDTH: 46%" maxlength="3">-<input id="you"
+						name="rightsl" style="WIDTH: 46%" maxlength="3"></td>
+				</tr>
+		</table>
+		<br>
+		<table width="98%" border="0" align="center" cellspacing="0"
+			cellpadding="0">
+			<tr>
+				<td class="line2" align="center"><input id="qd" name="qd"
+					type="button" class=BUTTONs3 value="确 定">&nbsp;&nbsp; <input
+					name="qx" type="reset" class=BUTTONs3 value="取 消">&nbsp;&nbsp;
+					<!--  <input name="back" type="button"class=BUTTONs3 onClick="onclick()" value="返 回"> -->
+
+					<input type="button" class="btn" value="返回"
+					onclick="javascript:history.go(-1);" /></td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>

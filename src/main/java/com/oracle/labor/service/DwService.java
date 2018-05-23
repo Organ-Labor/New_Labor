@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.oracle.labor.dao.BipMapper;
 import com.oracle.labor.dao.ZjDwzpdjbMapper;
+import com.oracle.labor.dao.ZjDwzpgzbMapper;
 
 @Service
 public class DwService {
@@ -18,6 +19,9 @@ public class DwService {
 	
 	@Autowired
 	BipMapper bipDao;
+	
+	@Autowired
+	ZjDwzpgzbMapper dwgzDao;
 	
 	//查询符合条件的单位
 	public List<Map<String,Object>> getDw(String bioNo,String bioName){
@@ -49,5 +53,10 @@ public class DwService {
     //推荐查询
     public List<Map<String,Object>> getSearch(String bipSex,String hjxz,String minAge,String maxAge,String rylb,String gz,String whcd1,String whcd2,String orgtype,String gwlb,String djsj1,String djsj2,String tjsj1,String tjsj2,String hzzt){
     	return dwDao.getSearch(bipSex, hjxz, minAge, maxAge, rylb, gz, whcd1, whcd2, orgtype, gwlb, djsj1, djsj2, tjsj1, tjsj2, hzzt);
+    }
+    
+    //单位推荐-查询招聘条件
+    public List<Map<String,Object>> selectTozptj(String bioId,String qzgz){
+    	return dwgzDao.selectTozptj(bioId, qzgz);
     }
 }

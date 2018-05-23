@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.oracle.labor.common.codetable.RegioncodeOperation;
@@ -31,7 +33,7 @@ import com.oracle.labor.service.DwService;
 import com.oracle.labor.service.TjxService;
 
 @Controller
-@SessionAttributes({"bioInfomation","xinxi"})
+@SessionAttributes({"bioInfomation","xinxi","bipBasicinfo"})
 public class DwtjHandler {
 
 	@Autowired
@@ -130,10 +132,10 @@ public class DwtjHandler {
 	
 	//单位推荐--根据条件查询推荐的求职者
 	@RequestMapping("/service/getQzz/{value}")
-	public String getQzz(@PathVariable("value") int value,String gz,String bipSex,String bipHyzk,String bipWhcd,String bipHjxz,String bipRylb,String bipJkzk,String bipTNewgraduate,String gzdq,String minAge,String maxAge,String minLong,String maxLong,Map<String,Object> map){
+	public String getQzz(@PathVariable("value") int value,String gz,String bipSex,String bipHyzk,String bipWhcd,String bipHjxz,String bipRylb,String bipJkzk,String bipTNewgraduate,String gzdq,String minAge,String maxAge,Map<String,Object> map){
 		//添加分页
 		PageHelper.startPage(value, 10);
-		PageInfo<Map<String,Object>> info=new PageInfo<Map<String,Object>>(bipService.getQzz(gz, bipSex, bipHyzk, bipWhcd, bipHjxz, bipRylb, bipJkzk, bipTNewgraduate, gzdq, minAge, maxAge, minLong,maxLong));
+		PageInfo<Map<String,Object>> info=new PageInfo<Map<String,Object>>(bipService.getQzz(gz, bipSex, bipHyzk, bipWhcd, bipHjxz, bipRylb, bipJkzk, bipTNewgraduate, gzdq, minAge, maxAge));
 		map.put("info", info);
 		return "/service/zj/tjhz/dwtjfw_4";
 	}
@@ -254,5 +256,32 @@ public class DwtjHandler {
 		System.out.println("selectToGr中list的内容："+bipService.selectToGr(bipSfz, bipName, bipSex, minAge, maxAge, whcd1, whcd2, hyzk, jkzk, djsj1, djsj2, zzmm, qzgw, rylb, hjxz, cxfw));
 		map.put("info", info);
 		return "/service/zj/grqz/xxcx_2";
+	}
+	
+	//根据身份证查询个人姓名和性别
+	@RequestMapping("/service/getGrbasicinfo/{bipSfz}")
+	public String getGrbasicinfo(@PathVariable("bipSfz") String bipSfz,Map<String,Object> map){
+		map.put("bipBasicinfo", bipService.getGrbasicinfo(bipSfz));
+		System.out.println(bipService.getGrbasicinfo(bipSfz).getBipName()+" "+bipService.getGrbasicinfo(bipSfz).getBipSex());
+		return "/service/zj/grqz/xxcx_1";
+	}
+	
+	//单位推荐--回显招聘条件
+	@ResponseBody
+	@RequestMapping(value="/service/selectTozptj/{bioId}/{qzgz}")
+	public String selectTozptj(@PathVariable("bioId") String bioId,@PathVariable("qzgz") String qzgz){
+		List<Map<String,Object>> list=dwService.selectTozptj(bioId, qzgz);
+		System.out.println("list内容："+dwService.selectTozptj(bioId, qzgz).get(0));
+		//list转化json格式字符串
+		ObjectMapper mapper=new ObjectMapper();
+		String json = null;
+		try {
+			json = mapper.writeValueAsString(list);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("json串："+json);
+		return json;
 	}
 }

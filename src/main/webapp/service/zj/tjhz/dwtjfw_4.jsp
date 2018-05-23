@@ -10,7 +10,7 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/j.js"></script>
 <script>
 	$(function(){
-		alert("function");
+		//alert("function");
 		
 	    //alert(check_val);
 		$("#qd").click(function(){
@@ -23,11 +23,11 @@
 		        if(obj[k].checked)
 		            check_val.push("'"+obj[k].value+"'");
 		    }
-			alert(check_val);
+			//alert(check_val);
 			form1.action = "<%=request.getContextPath()%>/service/getXxByID/"+check_val;
-			alert("<%=request.getContextPath()%>/service/getXxByID/"+check_val);
+			<%-- alert("<%=request.getContextPath()%>/service/getXxByID/"+check_val); --%>
 			form1.submit();
-			alert("提交成功!");
+			//alert("提交成功!");
 			
 		})
 	})

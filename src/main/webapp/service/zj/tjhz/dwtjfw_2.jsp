@@ -65,7 +65,7 @@
 <table width="98%" border="0" align="center" cellspacing="0" cellpadding="0">
   <tr> 
      <td class="line2" align="center">
-		<input name="button2" type="button"class=BUTTONs3  value="返 回" onClick="toBack()">
+		<input name="button2" type="button" class=BUTTONs3  value="返 回" onClick="toBack()">
 	 </td>
   </tr>
 </table>

@@ -365,6 +365,16 @@
       </if>
     </trim>
   </insert>
+  
+ <!--  单位推荐根据单位编号和招聘工种编号查询招聘条件信息以回显 -->
+  <select id="selectTozptj" resultType="map" parameterType="String">
+  SELECT IF(COUNT(dwzpgzb.ZPRSN-dwzpgzb.CGRSN)>0,1,IF(COUNT(dwzpgzb.ZPRSNV-dwzpgzb.CGRSNV)>0,2,0)) bipSex,dwzpgzb.hyzk hyzk,dwzpgzb.whcd whcd,dwzpgzb.hjxz hjxz,dwzpgzb.rylb rylb,dwzpgzb.jkzk jkzk,dwzpgzb.sfbys yjbys,dwzpgzb.GZDD gzdq,dwzpgzb.ZXNL minAge,dwzpgzb.ZDNL maxAge FROM zj_dwzpgzb dwzpgzb
+LEFT JOIN zj_dwzpdjb dwzpdjb ON dwzpdjb.ZPBH=dwzpgzb.ZPBH
+LEFT JOIN bio ON dwzpdjb.DWBH=bio.bio_id
+WHERE bio.bio_id=#{bioId} AND dwzpgzb.ZPGZ=#{qzgz}
+  
+  </select>
+  
   <select id="countByExample" parameterType="com.oracle.labor.po.ZjDwzpgzbExample" resultType="java.lang.Long">
     select count(*) from zj_dwzpgzb
     <if test="_parameter != null">

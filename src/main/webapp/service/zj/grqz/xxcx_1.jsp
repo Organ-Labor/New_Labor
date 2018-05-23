@@ -2,6 +2,23 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/j.js"></script>
+<script>
+
+$(function(){
+	$("#sfz").blur(function(){
+		var bipSfz=$("#sfz").val();
+		//alert(bipSfz);
+		$.get("<%=request.getContextPath()%>/service/getGrbasicinfo/"+bipSfz,function(){
+		    alert($("#Name").val()+" "+$("#Sex").val());
+			$("#bipName").val($("#Name").val());
+			$("#bipSex").val($("#Sex").val());
+			
+		})
+	})
+})
+
+</script>
 <script>
 	function AS(){
 		var sfzhm=form1.bipSfz.value;
@@ -35,7 +52,8 @@
 <link href="<%=request.getContextPath()%>/styles/css/common.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
+<input type="hidden" id="Name" value="${sessionScope.bipBasicinfo.bipName}"/>
+<input type="hidden" id="Sex" value="${sessionScope.bipBasicinfo.bipSex}">
 <form  method="post" name="form1">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -73,13 +91,13 @@
 			border="0" cellPadding="0" cellSpacing="1" bordercolor="#FFFFFF" class="tablebody">
         <tr class="line2"> 
 			<td width="85" align="right" class="line2">身份证号码</td>
-			<td colspan="3" align="center" class="line2"><input type="text" name="bipSfz" style="WIDTH: 100%" maxlength="18" ></td>
+			<td colspan="3" align="center" class="line2"><input type="text" name="bipSfz" id="sfz" style="WIDTH: 100%" maxlength="18" ></td>
         </tr>
         <tr class="line1">
         	<td align="right" >姓　　名</td>
-			<td align="center" ><input type="text" name="bipName"  style="WIDTH: 100%" ></td>
+			<td align="center" ><input type="text" name="bipName" id="bipName" style="WIDTH: 100%" value=""></td>
 			<td width="55" align="right" >性　　别</td>
-			<td align="center" ><select name="bipSex"  style="WIDTH: 100%">
+			<td align="center" ><select name="bipSex"  style="WIDTH: 100%" id="bipSex">
 				<%=SexOperation.getOption()%>
 			  </select></td>
         </tr>
@@ -146,9 +164,9 @@
 			<td align="right" class="line2">查询范围</td>
 			<td align="center" class="line2"><select name="cxfw" style="WIDTH: 100%">
 				<option value="0"> </option>
-				<option value="1">当前</option>
-				<option value="2">归档</option>
-				<option value="3">全部</option>
+				<option value="dq">当前</option>
+				<option value="gd">归档</option>
+				<option value="qb">全部</option>
 			</select></td>
 			<td align="right" class="line2">&nbsp;</td>
 			<td align="center" class="line2">&nbsp;</td>

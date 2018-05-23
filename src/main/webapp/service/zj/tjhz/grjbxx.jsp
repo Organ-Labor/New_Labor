@@ -5,10 +5,27 @@
 <title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<%=request.getContextPath()%>/styles/css/common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/j.js"></script>
+<script type="text/javascript">
+     $(function(){
+    	 //alert("我要加载城市了！");
+    	 var code=$("#hkszd").val();
+  	     //alert(code);
+  	     $("#province").load("<%=request.getContextPath()%>/service/getRegions",{code:code,region:"province"});
+  	     $("#city").load("<%=request.getContextPath()%>/service/getRegions",{code:code,region:"city"});
+  	     $("#village").load("<%=request.getContextPath()%>/service/getRegions",{code:code,region:"village"});
+  	     //alert("城市加载完了！");
+     })
+</script>
+
 </head>
 <body  >
 <form method="post" action="" name="form1" >
 <c:forEach items="${bip}"  var="b">
+
+<!-- 设置户口所在地隐藏域 -->
+<input type="hidden" id="hkszd" value="${b.bipHkszd }">
+
 <table width="98%"  border="0" align="center" cellpadding="0" cellspacing="0">
 	<tr>
 		<td height="20" valign="bottom"><img src="<%=request.getContextPath()%>/styles/images/right/now.gif" width="11" height="12"> 
@@ -98,16 +115,16 @@
       <table width="100%" border="0" cellpadding="0" cellspacing="1">
         <tr class="line2">
          <td width="13%" align="right">户口所在</td >
-          <td ><select name="bip_hkszss" size="1" style="WIDTH: 100%" >
+          <td ><select name="bip_hkszss" size="1" id="province" style="WIDTH: 100%" >
           </select></td >
         <td width="45" align="right">省(市)</td >
-          <td ><select name="bip_hkszsq" size="1"  style="WIDTH: 100%" >
+          <td ><select name="bip_hkszsq"  size="1" id="city" style="WIDTH: 100%" >
           </select></td >
         <td width="45" align="right" >市(区) </td >
-          <td ><select name="bip_hkszzj" size="1"  style="WIDTH: 100%" >
+          <td ><select name="bip_hkszzj"  size="1" id="village" style="WIDTH: 100%" >
           </select></td >
         <td width="45" align="right">镇(街)</td >
-          <td ><select name="bip_hkszjc" size="1"  style="WIDTH: 100%" >
+          <td ><select name="bip_hkszjc" size="1"   style="WIDTH: 100%" >
           </select></td >
         <td width="42" align="right" >居(村)</td >
         </tr >
@@ -431,11 +448,35 @@
 		  <table width="100%" border="0" cellpadding="0" cellspacing="1">
 		    <tr class="line2">
 		      <td width="14%" align="right">是否接收短信</td >
-		      <td width="17%"><input name="sfjsdx" type="checkbox" value="1"  class="radio" onClick="toShowDiv()"></td >
+		      <c:choose>
+              <c:when test="${b.Sfjsdx eq 'y'}">
+              <td width="17%"><input name="sfjsdx" type="checkbox" value="y"  class="radio" onClick="toShowDiv()" checked></td >
+              </c:when>
+              <c:otherwise>
+              <td width="17%"><input name="sfjsdx" type="checkbox" value="n"  class="radio"></td >
+              </c:otherwise>
+              </c:choose>
+		      
 		      <td width="14%" align="right">是否参加培训</td >
-		      <td width="14%"><input name="sfcjpx" type="checkbox" value="1"  class="radio"></td >
+		      <c:choose>
+              <c:when test="${b.Sfcjpx eq 'y'}">
+              <td width="14%"><input name="sfcjpx" type="checkbox" value="y"  class="radio" checked></td >
+              </c:when>
+              <c:otherwise>
+              <td width="17%"><input name="sfcjpx" type="checkbox" value="n"  class="radio"></td >
+              </c:otherwise>
+              </c:choose>
+		      
 		      <td width="18%" align="right">是否接受职业指导</td >
-		      <td width="23%"><input name="sfjszyzd" type="checkbox" value="1"  class="radio"></td >
+		       <c:choose>
+              <c:when test="${b.Sfjszyzd eq 'y'}">
+              <td width="23%"><input name="sfjszyzd" type="checkbox" value="y"  class="radio" checked></td >
+              </c:when>
+              <c:otherwise>
+              <td width="17%"><input name="sfjszyzd" type="checkbox" value="n"  class="radio"></td >
+              </c:otherwise>
+              </c:choose>
+		      
 		    </tr>
 		</table>
 			<div id="dxsj" style="display:none">
@@ -473,7 +514,7 @@
 			  <tr class="line1" align="center">
 			    <td width="40"><span class="redtxt">*</span>工种</td>
 				<td width="110"><select name="qzgz1" size="1"  style="WIDTH: 100%"  >
-						<option value=""></select></td >
+						<option value="${b.gzbh }">${b.gz }</option></select></td >
 			    <td width="50">用工形式</td>
 				<td width="60"><select name="ygxs1" size="1"  style="WIDTH: 100%" onchange="changyxrx()">
 						
@@ -481,17 +522,17 @@
 			    <td width="50" align="right"><input name="xs" type="text" size="6" value="月薪"  class='inputline' readonly></td>
 				<td width="140">
 					<div id="yx" style="display:">
-					<table><tr><td><input name="zdyx1" type="text" style="width:40px" onblur="checkJe(this);">
+					<table><tr><td><input name="zdyx1" type="text" style="width:40px" value="${b.zdyx }" onblur="checkJe(this);">
                   至
 
                   <input name="zgyx1" type="text" style="width:40px" onblur="checkJe(this);">
 					元</td></tr></table>
 					</div>
 					<div id="rx" style="display:none">
-					<table><tr><td><br><input name="zdrx1" type="text" style="width:40px" onblur="checkJe(this);">
+					<table><tr><td><br><input name="zdrx1" type="text" value="${b.zgyx }" style="width:40px" onblur="checkJe(this);">
                   至
 
-                  <input name="zgrx1" type="text" style="width:40px" onblur="checkJe(this);">
+                  <input name="zgrx1" type="text" style="width:40px"  onblur="checkJe(this);">
 					元<br><br></td></tr></table>
 					</div>
 				</td >

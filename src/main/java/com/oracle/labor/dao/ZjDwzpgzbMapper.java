@@ -3,6 +3,8 @@ package com.oracle.labor.dao;
 import com.oracle.labor.po.ZjDwzpgzb;
 import com.oracle.labor.po.ZjDwzpgzbExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface ZjDwzpgzbMapper {
@@ -27,4 +29,8 @@ public interface ZjDwzpgzbMapper {
     int updateByPrimaryKeySelective(ZjDwzpgzb record);
 
     int updateByPrimaryKey(ZjDwzpgzb record);
+    
+    //单位推荐--根据单位id和招聘工种查找相应工种的招聘条件
+    List<Map<String,Object>> selectTozptj(@Param("bioId") String bioId,@Param("qzgz") String qzgz);
+    
 }

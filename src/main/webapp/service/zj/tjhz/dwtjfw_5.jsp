@@ -12,7 +12,7 @@
 <script type="text/javascript">
    
    $(function(){
-	   alert("确认后打印");
+	   alert("请确认后打印");
 	   $("#besure").click(function(){
 		   form1.action="<%=request.getContextPath()%>/service/getBB";
 		   form1.submit();

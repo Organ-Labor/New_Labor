@@ -108,7 +108,7 @@
 <table width="98%" align="center"
 	border="0" cellPadding="0" cellSpacing="1" bordercolor="#FFFFFF" class="tablebody">
 	<tr align="center"> 
-		<td height="25" align="center" class="line2"> <input name="cx" type="button" class="BUTTONs3" value="查 询" onClick=doSubmit();>
+		<td height="25" align="center" class="line2"> <input name="cx" type="button" class="BUTTONs3" value="查 询" onClick=doSubmit(); >
 			&nbsp;&nbsp;<input name="qk" type="reset"class="BUTTONs3" value="取 消"> 
 		 </td>
 	</tr>

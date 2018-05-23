@@ -146,8 +146,9 @@ LEFT JOIN cdg_educationallevel ON cdg_educationallevel.cd_id=bip_whcd
 LEFT JOIN cdl_personneltype ON cdl_personneltype.cd_id=bip_rylb
 LEFT JOIN cdg_healthstate ON cdg_healthstate.cd_id=bip_jkzk
 LEFT JOIN cdg_regioncode ON cdg_regioncode.cd_id=bip.bip_hkszd
+LEFT JOIN zj_tjxxhzb ON zj_tjxxhzb.QZGZBH=gzb.QZGZBH
  WHERE gzb.GZ=#{gz} AND bip_sex=#{bipSex} AND bip_hyzk=#{bipHyzk} AND bip_whcd=#{bipWhcd} AND bip_hjxz=#{bipHjxz} AND bip_rylb=#{bipRylb} AND bip_jkzk=#{bipJkzk} AND bip_t_newgraduate=#{bipTNewgraduate} AND
-djb.gzdq=#{gzdq}  AND djb.SFDJ="n" AND bip_age>#{minAge} AND #{maxAge}>bip_age AND bip_long>#{minLong} AND #{maxLong}>bip_long
+djb.gzdq=#{gzdq}  AND djb.SFDJ="n" AND bip_age>#{minAge} AND #{maxAge}>bip_age AND zj_tjxxhzb.SFHZ='0'
     
   </select> 
   
@@ -162,7 +163,7 @@ bip_res_address bipJaddress,bip_qtsm bipQtsm,bip_t_lowersecurity bipLow,bip_t_cr
 bip_t_czjyyhz bipCzjyyhz,bip_t_rhfl bipRhfl,bip_t_newgraduate bipNewgraduate,
 cdx_computergrade.cd_name bipPc,cdl_orgtype.cd_name Dwxz,cdg_industry.cd_name Dwhy,
 cdg_regtype.cd_name Jjlx,djb.SFJSDX Sfjsdx,djb.SFCJPX Sfcjpx,djb.SFJSZYZD Sfjszyzd,
-cdl_specialty.cd_name gz,bip.bip_hkszd address,djb.DJSJ createDate,gzb.GZ gzbh  FROM bip 
+cdl_specialty.cd_name gz,bip.bip_hkszd address,djb.DJSJ createDate,gzb.GZ gzbh,gzb.ZDYX zdyx,gzb.ZGYX zgyx  FROM bip 
 LEFT JOIN zj_grqzdjb djb ON djb.bip_id=bip.bip_id
 LEFT JOIN zj_grqzgzb gzb ON djb.qzbh=gzb.QZBH
 LEFT JOIN cdl_specialty ON cdl_specialty.cd_id=gzb.GZ
@@ -193,6 +194,13 @@ AND #{whcd1}>=bip.bip_whcd AND bip.bip_whcd>=#{whcd2} AND bip.bip_hyzk=#{hyzk} A
 AND STR_TO_DATE(#{djsj2},"%Y-%m-%d")>=STR_TO_DATE(grqzdjb.DJSJ,"%Y-%m-%d") AND bip.bip_zzmm=#{zzmm} AND grqzgzb.GZ=#{qzgw} AND bip.bip_rylb=#{rylb} AND bip.bip_hjxz=#{hjxz}
 AND IF(#{cxfw}='qb',1,IF(#{cxfw}='gd',grqzdjb.GDSJ!='',grqzdjb.GDSJ=''))
  
+</select>
+
+<!-- 根据身份证号码查询个人姓名和性别 -->
+<select id="getGrbasicinfo" resultType="bip" parameterType="String">
+SELECT bip.bip_id bipId,bip.bip_name bipName,sex.cd_name bipSex FROM bip
+LEFT JOIN cdg_sex sex ON sex.cd_id=bip.bip_sex
+WHERE bip.bip_citizenid=#{bipSfz}
 </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">

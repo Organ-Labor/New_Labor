@@ -22,10 +22,9 @@ public class BipService {
 
 	// 查询出符合条件的求职者
 	public List<Map<String, Object>> getQzz(String gz, String bipSex, String bipHyzk, String bipWhcd, String bipHjxz,
-			String bipRylb, String bipJkzk, String bipTNewgraduate, String gzdq, String minAge, String maxAge,
-			String minLong,String maxLong) {
+			String bipRylb, String bipJkzk, String bipTNewgraduate, String gzdq, String minAge, String maxAge) {
 		return bipDao.getQzz(gz, bipSex, bipHyzk, bipWhcd, bipHjxz, bipRylb, bipJkzk, bipTNewgraduate, gzdq, minAge,
-				maxAge, minLong,maxLong);
+				maxAge);
 	}
 	
 	//查看求职者详细信息
@@ -38,4 +37,8 @@ public class BipService {
 		return bipDao.selectToGr(bipSfz, bipName, bipSex, minAge, maxAge, whcd1, whcd2, hyzk, jkzk, djsj1, djsj2, zzmm, qzgw, rylb, hjxz, cxfw);
 	}
 
+	//根据身份证查询个人姓名和性别
+	public Bip getGrbasicinfo(String bipSfz){
+		return bipDao.getGrbasicinfo(bipSfz);
+	}
 }

@@ -38,7 +38,7 @@ public class SexOperation implements IAppConfig{
 		return getOption("");
 	}
 	public static String getOption(String code){
-		StringBuffer rt = new StringBuffer("<option></option>");
+		StringBuffer rt = new StringBuffer("<option value='0'></option>");
 		String name = "";
 		Set<String> set = map.keySet();
 		for(String id:set){
