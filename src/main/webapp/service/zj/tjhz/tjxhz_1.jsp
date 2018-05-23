@@ -37,11 +37,34 @@
 		var s = a + b + c + d + e + f + g;
 		form1.cx.disabled = true;
 		form1.qk.disabled = true;
-		form1.action="<%=request.getContextPath()%>/service/zj/tjhz/seltjx.do";
+		form1.action="<%=request.getContextPath()%>/grtj/hzcx";
 		form1.submit();
 	}
+	
+	
 </script>
 
+
+<script type="text/javascript">
+$(function(){
+	//根据身份证号回显姓名
+	$("#sfz").blur(function (){
+		$.post(
+				"<%=request.getContextPath()%>/grtj/commons/name/"+$("#sfz").val(), 
+					function(data){
+	 		 		$("#xm").val(data);
+					});
+	})
+	//意向匹配中根据单位法人码回显对应单位名称
+		$("#frm").blur(function (){
+		$.post(
+				"<%=request.getContextPath()%>/grtj/commons/dw_name/"+$("#frm").val(), 
+   				function(data){
+     		  		$("#mc").val(data);
+   				});
+		})
+})
+</script>
 </head>
 <body>
 <form name="form1" action="" method="post">
@@ -96,9 +119,9 @@
 		<td width="" align="left" class="line1">
 		<SELECT id="lx" NAME="tjxType" style="WIDTH: 200px">
 		<option value="">
-		<option value="1">个人推荐信
+		<option value="g">个人推荐信
 
-		<option value="0">单位推荐信
+		<option value="d">单位推荐信
 
 		</SELECT>
 		</td>

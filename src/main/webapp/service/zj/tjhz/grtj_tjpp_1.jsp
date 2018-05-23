@@ -6,18 +6,19 @@
 <title>条件匹配人员列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<%=request.getContextPath()%>/styles/css/common.css" rel="stylesheet" type="text/css">
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	function name (){
 		var id_name = document.getElementById("like").value;
 		if(id_name=="[]"){
-		
-			alert("该人员有未回执推荐信 或以冻结");
+			alert("该人员有未回执推荐信或已冻结");
 		}
-		
 	}
-</script>
+</script> -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.1.js"></script>
+
 </head>
-<body onload="name()">
+<!-- onload="name()" -->
+<body >
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr> 
     <td><table width="98%"  border="0" align="center" cellpadding="0" cellspacing="0">
@@ -54,26 +55,26 @@
               <TD align="center" class="line4">居住地址</TD>
               <TD align="center" class="line4">联系电话</TD>
               <TD align="center" class="line4">登记日期 </TD>
-              <input id="like" type="hidden" value="${list}">
+             <%--  <input id="like" type="hidden" value="${list}"> --%>
             </TR>  
            
-             <c:forEach items="${list}" var="m">
+             <c:forEach items="${person}" var="p">
             <TR> 
-              <TD align="center" class="line4"><a href="<%=request.getContextPath()%>/service/zj/GrTjGZ.do?bip_id=${m.bip_id}&bip_citizenid=${m.bip_citizenid}&bip_name=${m.bip_name}">推荐</a></TD>
-              <TD align="center" class="line4">${m.bip_name}</TD>
-              <TD align="center" class="line4">${m.bip_sex.cd_name}</TD>
-              <TD align="center" class="line4">${m.bip_age}</TD>
-              <TD align="center" class="line4">${m.bip_res_address }</TD>
-              <TD align="center" class="line4">${m.bip_con_telephone}</TD>
-              <TD align="center" class="line4">${m.djsj}</TD>
+              <TD align="center" class="line4"><a href="<%=request.getContextPath()%>/grtj/recommend?id=${p.id}">推荐</a></TD>
+              <TD align="center" class="line4">${p.name}</TD>
+              <TD align="center" class="line4">${p.sex}</TD>
+              <TD align="center" class="line4">${p.age}</TD>
+              <TD align="center" class="line4">${p.adr}</TD>
+              <TD align="center" class="line4">${p.phone}</TD>
+              <TD align="center" class="line4">${p.time}</TD>
             </TR>  
             </c:forEach>
-</table>
+</table> 
 <br>
 <table align="center" width="98%"  border="0" cellspacing="0" cellpadding="0">
   <tr> 
     	<td class="line2" align="center">
-			<input name="button2" type="button"class=BUTTONs3  value="返 回" onClick="toBack();">
+			<input id="back_btn" name="button2" type="button"class=BUTTONs3  value="返 回" onclick="window.history.go(-1)">
 		</td>
     </tr>
 </table>

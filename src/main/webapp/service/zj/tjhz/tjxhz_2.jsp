@@ -9,7 +9,8 @@
 <script>
     function doSubmit(){
     	var a ;
-   		a = $("input:checked").val()
+   		a = $("input:checked").val();
+   		alert(a);
 		form1.button22.disabled = true;
 		form1.button23.disabled = true;
 		form1.action="<%=request.getContextPath()%>/service/zj/tjhz/tjxhz_3.jsp?a=" + a;
@@ -46,21 +47,22 @@ border=1 align="center" cellPadding=0 cellSpacing=0 bordercolor="#FFFFFF" class=
       <TD align="center" class="line4" >序号</TD>
       <TD align="center" class="line4">选择</TD>
       <TD align="center" class="line4" >姓名</TD>
-      <TD align="center" class="line4" > 性别</TD>
-      <TD align="center" class="line4" >单位名称</TD>
+      <TD align="center" class="line4" >性别</TD>
+      <TD align="center" class="line4" >单位名
+      </TD>
       <TD align="center" class="line4" >招聘工种</TD>
       <TD align="center" class="line4" >推荐日期</TD>
 	  
     </TR>
-     <c:forEach var="Tjhz" items="${xxx}" varStatus="ci">
+     <c:forEach var="h" items="${hz}" varStatus="ci">
     <TR> 
       <TD align="center" class="line2" >${ci.count}</TD>
-      <TD align="center" class="line2"  ><input name="aaa" class="xzz" type="radio" value="${ci.count - 1}"></TD>
-      <TD align="center" class="line2"  >${Tjhz[0]}</TD>
-      <TD align="center" class="line2" >${Tjhz[1]}</TD>
-      <TD align="center" class="line2"  >${Tjhz[2]}</TD>
-      <TD align="center" class="line2"  >${Tjhz[3]}</TD>
-      <TD align="center" class="line2"  >${Tjhz[4]}</TD>
+      <TD align="center" class="line2"  ><input name="aaa" class="xzz" type="radio" value="${h.hzid}"></TD>
+      <TD align="center" class="line2"  ><a href="<%=request.getContextPath()%>/grtj/details/${h.bipId}">${h.bipName}</a></TD>
+      <TD align="center" class="line2" >${h.bipSex}</TD>
+      <TD align="center" class="line2"  ><a href="<%=request.getContextPath()%>/grtj/dw?id=${h.bioId}">${h.bioName}</a></TD>
+      <TD align="center" class="line2"  >${h.zpgz}</TD>
+      <TD align="center" class="line2"  >${h.tjrq}</TD>
 	  
     </TR>
      </c:forEach>

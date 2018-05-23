@@ -23,7 +23,7 @@
 </head>
 
 <body onload="namees()">
-<form action="<%=request.getContextPath()%>/service/zj/grqz/InsertGrTjXX.do" method="post">
+<form action="<%=request.getContextPath()%>/grtj/tjx" method="post">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td><table width="98%"  border="0" align="center" cellpadding="0" cellspacing="0">
@@ -49,7 +49,7 @@
         </table></td>
 		
 
-        <td  valign="bottom">单位名称：&nbsp;&nbsp;&nbsp;单位地址：</td>
+        <td  valign="bottom">单位名称：${d.name}&nbsp;&nbsp;&nbsp;单位地址：${dw.adr}</td>
 
 		<td  valign="bottom">请选择相应的岗位&nbsp;&nbsp;&nbsp;提示:[<font color='red'>不可选单位为该岗位服务次数已满单位,不能进行推荐匹配</font>]</td>
 
@@ -76,22 +76,22 @@
 
             </TR>
           
-            <c:forEach  items="${zjdw}" var="d">
+            <%-- <c:forEach  items="${dw}" var="d"> --%>
 			<TR>
               <TD align="center" class="line4" width="4%"><input  id="zj.zpgzbm"  name="d.zpgzbm" value="${d.zpgzbm}" type="radio"/></TD>
-			  <TD align="center" class="line4" width="24%"><a>${d.bio_name}</TD>
-              <TD align="center" class="line4" width="20%">${d.zpgzbm}</TD>
-              <TD align="center" class="line4" width="4%">${d.zrs}</TD>
-              <TD align="center" class="line4" width="4%">${d.zprsn}</TD>
-              <TD align="center" class="line4" width="4%">${d.zprsnv}</TD>
-			  <TD align="center" class="line4" width="4%">${d.xbbx}</TD>
-              <TD align="center" class="line4" width="4%">${d.num}</TD>
-              <TD align="center" class="line4" width="4%">${d.whz}</TD>
-              <TD align="center" class="line4" width="4%">${d.numHz }</TD>
-              <TD align="center" class="line4" width="12%">${d.djsj}</TD>
+			  <TD align="center" class="line4" width="24%"><a href="<%=request.getContextPath()%>/grtj/dw?id=${dw.dwId}">${dw.name}</a></TD>
+              <TD align="center" class="line4" width="20%">${dw.gwmc}</TD>
+              <TD align="center" class="line4" width="4%">${dw.zrs}</TD>
+              <TD align="center" class="line4" width="4%">${dw.zrsn}</TD>
+              <TD align="center" class="line4" width="4%">${dw.zrsnv}</TD>
+			  <TD align="center" class="line4" width="4%">${dw.xbbx}</TD>
+              <TD align="center" class="line4" width="4%">${dw.pprs}</TD>
+              <TD align="center" class="line4" width="4%">${dw.hzrs}</TD>
+              <TD align="center" class="line4" width="4%">${dw.cgrs}</TD>
+              <TD align="center" class="line4" width="12%">${dw.time}</TD>
 
             </TR>
-			</c:forEach>
+			<%-- </c:forEach> --%>
           </TBODY>
         </TABLE>
       </td>
@@ -102,7 +102,7 @@
   <tr>
     <td align="center"  class="line2"> 
     <input name="button2322" type="submit" class=BUTTONs3 value="确 定" >&nbsp;&nbsp;
-     <input name="button232" type="button"class=BUTTONs3 onClick="toBack()" value="返 回"></td>
+     <input name="button232" type="button"class=BUTTONs3 onClick="window.history.go(-1)" value="返 回"></td>
     </tr>
 </table>
 </form>
