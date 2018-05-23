@@ -96,6 +96,11 @@
     where ZPBH = #{zpbh,jdbcType=VARCHAR}
   </select>
   
+  <!-- 获取全部的未归档的单位招聘信息 -->
+  <select id="getAll_wgd" resultType="list">
+  select * from zj_dwzpdjb dj where dj.GDSJ=""
+  </select>
+  
   <!-- 根据单位法人码和单位名称查找匹配单位 -->
   <select id="getDw" resultType="map" parameterType="String">
       SELECT bio_id bioId,bio_name bioName,bio_bua_address bioAddress,LXRSJ tel,DJSJ date FROM bio LEFT JOIN zj_dwzpdjb
@@ -129,6 +134,35 @@ ON bio_id=DWBH WHERE bio_name=#{bioName} AND bio.bio_id=#{bioNo}
     where b.bio_id=#{bio_id}
   
    </select>
+ 
+ 
+   <!-- 根据条件查询单位信息 -->
+  <select id="getDw_gd" resultType="map" parameterType="String">
+  select dj.ZPBH,b.bio_name,b.bio_bua_address,dj.DJSJ,dj.LXRSJ
+  from bio b LEFT JOIN zj_dwzpdjb dj on b.bio_id=dj.DWBH where 
+     <if test="bio_no != '' ">
+      b.bio_no=#{bio_no} and
+     </if>
+     
+     <if test="bio_name != ''">
+      b.bio_name LIKE '%${bio_name}%' and
+     </if>
+     
+     <if test="DJSJ !=''">
+      STR_TO_DATE(dj.DJSJ,'%Y-%m-%d')>STR_TO_DATE(#{DJSJ} ,'%Y-%m-%d') and
+     </if>
+     
+     <if test="DJSJZ != ''">
+      STR_TO_DATE(dj.DJSJ,'%Y-%m-%d')<![CDATA[<]]>STR_TO_DATE(#{DJSJZ} ,'%Y-%m-%d') and
+     </if>
+     
+     <if test="SFDJ != ''">
+      dj.SFDJ=#{SFDJ} and
+     </if>
+     true
+     ORDER BY STR_TO_DATE(dj.DJSJ,'%Y-%m-%d')
+     
+  </select>
  
  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -216,6 +250,15 @@ ON bio_id=DWBH WHERE bio_name=#{bioName} AND bio.bio_id=#{bioNo}
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  
+  <!-- 批量归档 -->
+  <update id="updatedw_gd" parameterType="String">
+			update zj_dwzpdjb d set d.GDSJ=#{gdsj} 
+			where d.DWBH in  (${id})
+  </update>  
+  
+  
+  
   <update id="updateByExampleSelective" parameterType="map">
     update zj_dwzpdjb
     <set>

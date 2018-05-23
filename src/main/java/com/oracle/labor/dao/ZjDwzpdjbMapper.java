@@ -39,4 +39,10 @@ public interface ZjDwzpdjbMapper {
     public List<Map<String,Object>> getDw_djbyBioId(@Param("bio_id") String bio_id);
     
     public void dwzp_jxdj(@Param("id") String id, @Param("reason") String reason);
+    
+    public List<Map<String,Object>> getDw_gd(@Param("bio_no") String bio_no,@Param("bio_name") String bio_name,@Param("DJSJ") String DJSJ,@Param("DJSJZ") String DJSJZ,@Param("SFDJ") String SFDJ);
+    
+    public void updatedw_gd(@Param("id") String id,@Param("gdsj") String gdsj);
+    
+    public List<ZjDwzpdjb> getAll_wgd();
 }

@@ -54,8 +54,6 @@
 
 
 
-
-
 	<!-- needed for ContextLoaderListener -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>

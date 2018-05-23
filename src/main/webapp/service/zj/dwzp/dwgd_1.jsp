@@ -1,11 +1,21 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
 
 <script>
+	 $(function(){
+		 
+		 $("#bt_bc").click(function(){
+			
+			 $("#form1").attr('action','../../getdw_gd/1').submit();
+		 });
+	 });
+	
+
      function chaxun(){
          var sfzhm=form1.dwfrm.value;
          var xm=form1.dwqc.value;
@@ -60,105 +70,131 @@
 </script>
 <title>手动归档查询条件页面</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="<%=request.getContextPath()%>/styles/css/common.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/styles/css/common.css"
+	rel="stylesheet" type="text/css">
 </head>
 <body>
-<form name="form1" method="post" action="">
-<table width="98%"  border="0" align="center" cellpadding="0" cellspacing="0">
-    <tr>
-      <td height="20" valign="bottom"><img src="<%=request.getContextPath()%>/styles/images/right/now.gif" width="11" height="12">
-      当前位置：职业介绍 &gt; 单位招聘 &gt; 手动归档</td>
-    </tr>
-    <tr>
-      <td valign="bottom" background="<%=request.getContextPath()%>/styles/images/right/dsline.gif" height="8"><img src="<%=request.getContextPath()%>/styles/images/index/spacer.gif"></td>
-    </tr>
-</table>
-<table width="98%" align="center" border="0" cellpadding="0" cellspacing="0"   class="title">
-  <tr>
-    <td width="30">
-		<table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td ><img src="<%=request.getContextPath()%>/styles/css/bb_d.gif"></td>
-          </tr>
-        </table>
-    </td>
-    <td valign="bottom">查询条件&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-</table>
-      <TABLE width="98%" align="center"
-        border=1 cellPadding=0 cellSpacing=0 bordercolor="#FFFFFF" class=tablebody>
-            <TR>
-			  <TD align="center" class="line2"> <table width="297" border="0" cellspacing="0" cellpadding="0">
-                <tr> 
-                  <td width="90" align="right">单位法人码</td>
-				  <td width="23"  align="right"></td>
-                  <td width="160"><input name="dwfrm" type="text" maxlength="18" style='width:100%'></td>
-				  <td width="24"  align="right"></td>
+	<form name="form1" id="form1" method="post" action="">
+		<table width="98%" border="0" align="center" cellpadding="0"
+			cellspacing="0">
+			<tr>
+				<td height="20" valign="bottom"><img
+					src="<%=request.getContextPath()%>/styles/images/right/now.gif"
+					width="11" height="12"> 当前位置：职业介绍 &gt; 单位招聘 &gt; 手动归档</td>
+			</tr>
+			<tr>
+				<td valign="bottom"
+					background="<%=request.getContextPath()%>/styles/images/right/dsline.gif"
+					height="8"><img
+					src="<%=request.getContextPath()%>/styles/images/index/spacer.gif"></td>
+			</tr>
+		</table>
+		<table width="98%" align="center" border="0" cellpadding="0"
+			cellspacing="0" class="title">
+			<tr>
+				<td width="30">
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td><img
+								src="<%=request.getContextPath()%>/styles/css/bb_d.gif"></td>
+						</tr>
+					</table>
+				</td>
+				<td valign="bottom">查询条件&nbsp;&nbsp;&nbsp;</td>
+			</tr>
+		</table>
+		<TABLE width="98%" align="center" border=1 cellPadding=0 cellSpacing=0
+			bordercolor="#FFFFFF" class=tablebody>
+			<TR>
+				<TD align="center" class="line2">
+					<table width="297" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="90" align="right">单位法人码</td>
+							<td width="23" align="right"></td>
+							<td width="160"><input name="bio_no" type="text"
+								maxlength="18" style='width: 100%'></td>
+							<td width="24" align="right"></td>
 
-                </tr>
-              </table></TD>
-          </TR>
-          <tr>
-		    <TD align="center" class="line1"> <table width="297" border="0" cellspacing="0" cellpadding="0">
-                <tr> 
-                  <td width="90"  align="right">单位名称</td>
-				  <td width="23"  align="right"></td>
-                  <td width="160"><input name="dwqc" type="text" maxlength="64" style='width:100%'></td>
-				  <td width="24"  align="right"></td>
+						</tr>
+					</table>
+				</TD>
+			</TR>
+			<tr>
+				<TD align="center" class="line1">
+					<table width="297" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="90" align="right">单位名称</td>
+							<td width="23" align="right"></td>
+							<td width="160"><input name="bio_name" type="text"
+								maxlength="64" style='width: 100%'></td>
+							<td width="24" align="right"></td>
 
-                </tr>
-              </table></TD>
-           </tr>
-           <tr>
-		    <TD align="center" class="line2"> <table width="297" border="0" cellspacing="0" cellpadding="0">
-                <tr> 
-                  <td width="90"  align="right">登记时间起</td>
-				  <td width="23"  align="right"></td>
-                  <td width="160"><textarea name="djrqq" style='width:100%' class='mask'  htcurl="url(<%=request.getContextPath() %>/common/htc/format.htc)"  rows="1" cols="10" mask='date' maxlength='10' ></textarea></td>
-		  <td width="24"  align="right"></td>
-        </tr>
-      </table></TD>
-  </TR>
-  <tr>
-    <TD align="center" class="line1"> <table width="297" border="0" cellspacing="0" cellpadding="0">
-        <tr> 
-          <td width="90"  align="right">登记时间止</td>
-		  <td width="23"  align="right"></td>
-          <td width="160"><textarea name="djrqz" style='width:100%' class='mask'  htcurl="url(<%=request.getContextPath() %>/common/htc/format.htc)"  rows="1" cols="10" mask='date' maxlength='10' ></textarea></td>
-				  <td width="24"  align="right"></td>
-                </tr>
-              </table></TD>
-          </TR>
-          <tr>
-		   
-          </TR>
-          <tr>
-		    <TD align="center" class="line1"> <table width="297" border="0" cellspacing="0" cellpadding="0">
-                <tr> 
-                  <td width="90"  align="right">是否冻结</td>
-				  <td width="23"  align="right"></td>
-                  <td width="160"><select name="sfdj" style="width:100%">
-										<option value="">请选择</option>
-										<option value="1">冻结</option>
-										<option value="0">正常</option>
-                    </select></td>
-				  <td width="24"  align="right"><br><br></td>
+						</tr>
+					</table>
+				</TD>
+			</tr>
+			<tr>
+				<TD align="center" class="line2">
+					<table width="297" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="90" align="right">登记时间起</td>
+							<td width="23" align="right"></td>
+							<td width="160"><textarea name="DJSJ" style='width: 100%'
+									class='mask'
+									htcurl="url(<%=request.getContextPath() %>/common/htc/format.htc)"
+									rows="1" cols="10" mask='date' maxlength='10'></textarea></td>
+							<td width="24" align="right"></td>
+						</tr>
+					</table>
+				</TD>
+			</TR>
+			<tr>
+				<TD align="center" class="line1">
+					<table width="297" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="90" align="right">登记时间止</td>
+							<td width="23" align="right"></td>
+							<td width="160"><textarea name="DJSJZ" style='width: 100%'
+									class='mask'
+									htcurl="url(<%=request.getContextPath() %>/common/htc/format.htc)"
+									rows="1" cols="10" mask='date' maxlength='10'></textarea></td>
+							<td width="24" align="right"></td>
+						</tr>
+					</table>
+				</TD>
+			</TR>
+			<tr>
 
-                </tr>
-              </table></TD>
-          </TR>
-      </TABLE>
-<br>
-<TABLE width="98%"  align="center"
-        border=0 cellPadding=0 cellSpacing=1 class="tablebody">
-  <TR align="center"> 
-    <TD height=25 class="line2"> <input name="bc" type="button" class="BUTTONs3" value="确 定" onClick="chaxun()">
-      &nbsp;&nbsp; 
-      <INPUT name="qx" type="reset" class="BUTTONs3" value="取 消" onclick="donothing()"> 
-      &nbsp;&nbsp; 
-    </TD>
-  </TR>
-</TABLE>
-</form>
+			</TR>
+			<tr>
+				<TD align="center" class="line1">
+					<table width="297" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="90" align="right">是否冻结</td>
+							<td width="23" align="right"></td>
+							<td width="160"><select name="SFDJ" style="width: 100%">
+									<option value="">请选择</option>
+									<option value="y">冻结</option>
+									<option value="n">正常</option>
+							</select></td>
+							<td width="24" align="right"><br>
+							<br></td>
+
+						</tr>
+					</table>
+				</TD>
+			</TR>
+		</TABLE>
+		<br>
+		<TABLE width="98%" align="center" border=0 cellPadding=0 cellSpacing=1
+			class="tablebody">
+			<TR align="center">
+				<TD height=25 class="line2"><input name="bt_bc" id="bt_bc"
+					type="button" class="BUTTONs3" value="确 定"> &nbsp;&nbsp; <INPUT
+					name="qx" type="reset" class="BUTTONs3" value="取 消"
+					onclick="donothing()"> &nbsp;&nbsp;</TD>
+			</TR>
+		</TABLE>
+	</form>
 </body>
 </html>

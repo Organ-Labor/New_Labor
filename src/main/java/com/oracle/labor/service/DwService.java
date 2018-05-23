@@ -3,6 +3,7 @@ package com.oracle.labor.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,24 @@ public class DwService {
 	ZjDwzpgzbMapper dwgzDao;
 	@Autowired
 	ZjDwdjjdbMapper dwdjDao;
+	
+	
+	//获取所有未归档的招聘信息
+	public List<ZjDwzpdjb> get_list(){
+		return dwDao.getAll_wgd();
+	}
+	
+	//归档
+	@Transactional
+	public void update_gd(@Param("id") String id,@Param("gdsj") String gdsj){
+		dwDao.updatedw_gd(id, gdsj);
+	}
+
+	
+	//根据条件获取单位信息
+	public List<Map<String,Object>> getDw_gd(@Param("bio_no") String bio_no,@Param("bio_name") String bio_name,@Param("DJSJ") String DJSJ,@Param("DJSJZ") String DJSJZ,@Param("SFDJ") String SFDJ){
+		return dwDao.getDw_gd(bio_no, bio_name, DJSJ, DJSJZ, SFDJ);
+	}
 	
 	//根据id获取登记信息
 	public ZjDwzpdjb getByid(String id){

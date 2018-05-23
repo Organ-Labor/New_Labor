@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
-
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +39,7 @@ import com.oracle.labor.service.BioService;
 import com.oracle.labor.service.DwService;
 
 @Controller
-@SessionAttributes({"info","company"})
+@SessionAttributes({"info","company","dwgd"})
 public class DwzpHandler {
 	
 	@Autowired
@@ -47,6 +47,31 @@ public class DwzpHandler {
 	
 	@Autowired
 	DwService dwservice;
+	
+	
+	//单位归档
+	@RequestMapping(value="/service/update_gd/{id}",produces="text/html;charset=utf-8")
+	@ResponseBody
+	public String updatedw_gd(@PathVariable("id") String id){
+		//获取时间
+		SimpleDateFormat date=new SimpleDateFormat("yyyy-MM-dd");
+	    String now=date.format(new Date());
+	    dwservice.update_gd(id, now);
+	    return "归档成功";
+	}
+	
+	//根据条件获取单位信息
+	@RequestMapping(value="/service/getdw_gd/{page}",produces="text/html;charset=utf-8")
+	public ModelAndView getDw_gd(@PathVariable("page") Integer page,@Param("bio_no") String bio_no,@Param("bio_name") String bio_name,@Param("DJSJ") String DJSJ,@Param("DJSJZ") String DJSJZ,@Param("SFDJ") String SFDJ){
+		PageInfo<Map<String,Object>> info=null;
+		PageHelper.startPage(page,5);
+		info=new PageInfo<Map<String,Object>>(dwservice.getDw_gd(bio_no, bio_name, DJSJ, DJSJZ, SFDJ));
+		
+		return new ModelAndView("redirect:/service/zj/dwzp/dwgd_2.jsp","dwgd",info);
+	}
+	
+	
+	
 	
 	//进行冻结|解冻
 	@RequestMapping(value="/service/dwzp_jxdj/{value}/{reason}",produces="text/html;charset=utf-8")
