@@ -20,9 +20,10 @@
  					    if(obj[i].checked) str+="'"+obj[i].value+"',";  //如果选中，将value添加到变量s中    
  					  }    
  					var id=str.substring(0,str.length-1);
- 					url="../../updatedw_gd/"+id;
+ 					url="../../update_gd/"+id;
  					$.post(url,function(data){
  						alert(data);
+ 						
  					});
  				}
 			}

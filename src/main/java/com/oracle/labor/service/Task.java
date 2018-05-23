@@ -17,6 +17,11 @@ public class Task{
 			System.out.println("这是20秒钟一次的定时任务测试:"+new Date());
 		}
 		
+		
+		
+		
+		
+		
 		//@Scheduled(cron="0 0 1 * * ?")//每天凌晨1点执行一次
 		public void print(){
 			System.out.println("这是每天凌晨1点进行的操作的:"+new Date());
