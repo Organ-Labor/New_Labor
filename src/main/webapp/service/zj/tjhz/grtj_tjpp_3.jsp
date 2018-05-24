@@ -13,7 +13,7 @@
 </style>
 <script>
 	function doSubmit(){
-		form1.action = "<%=request.getContextPath()%>/service/zj/grqz/GrTjPkDwGw.do";
+		form1.action = "<%=request.getContextPath()%>/grtj/dwDetails";
 		form1.submit();
 		var radio = form1.radio;
 		var flag = false;
@@ -75,13 +75,13 @@
               <TD align="center" class="line4">联系电话</TD>
               <TD align="center" class="line4">登记时间</TD>
             </TR>
-            <c:forEach items="${zjdwxx}" var="d">
+            <c:forEach items="${dw1}" var="d">
             <TR> 
-              <TD align="center" class=line2><input  id="bio_id" value="${d.bio_no}:${d.bio_name}" name="bio_id" type="radio" class="radio" value="<bean:write name='grtjForm' property='bio_id' />" ></TD>
-              <TD align="center" class=line1>${d.bio_name}<a href="javascript:void(null)" style="cursor:hand" onclick="window.open('<%=request.getContextPath()%>/ldlsc/tjhz/dwtj.do?method=queryDwByID&bio_id=','dwjbxx','left=100 top=100 width=820,height=469 scrollbars')" ></a></TD>
-              <TD align="center" class=line2>${d.bio_bua_address }</TD>
-              <TD align="center" class=line2>${d.lxrsj }</TD>
-              <TD align="center" class=line1>${d.djsj }</TD>
+              <TD align="center" class=line2><input id="bio_id" value="${d.id}" name="dwgzid" type="radio" class="radio" <%-- value="<bean:write name='grtjForm' property='bio_id' --%> /></TD>
+              <TD align="center" class=line1>${d.name}<a href="javascript:void(null)" style="cursor:hand" onclick="window.open('<%=request.getContextPath()%>/ldlsc/tjhz/dwtj.do?method=queryDwByID&bio_id=','dwjbxx','left=100 top=100 width=820,height=469 scrollbars')" ></a></TD>
+              <TD align="center" class=line2>${d.adr}</TD>
+              <TD align="center" class=line2>${d.tel}</TD>
+              <TD align="center" class=line1>${d.time}</TD>
             </TR>
             </c:forEach>
            </TBODY>
@@ -93,7 +93,7 @@
       <table border="0" cellspacing="5" cellpadding="0">
         <tr> 
           <td> <input name="button2" type="button"class=BUTTONs3  value=确定 onClick="doSubmit()"></td>
-          <td> <input name="button232" type="button"class=BUTTONs3 onClick="toBack()" value="返 回"></td>
+          <td> <input name="button232" type="button"class=BUTTONs3 onclick="window.history.go(-1)" value="返 回"></td>
         </tr>
     </table></td>
   </tr>

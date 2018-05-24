@@ -48,23 +48,26 @@ border=1 align="center" cellPadding=0 cellSpacing=0 bordercolor="#FFFFFF" class=
       <TD align="center" class="line4" >序号</TD>
       <TD align="center" class="line4">选择</TD>
       <TD align="center" class="line4" >姓名</TD>
-      <TD align="center" class="line4" > 性别</TD>
-      <TD align="center" class="line4" >单位名称</TD>
+      <TD align="center" class="line4" >性别</TD>
+      <TD align="center" class="line4" >单位名
+      </TD>
       <TD align="center" class="line4" >招聘工种</TD>
       <TD align="center" class="line4" >推荐日期</TD>
 	  
     </TR>
-     <c:forEach var="t" items="${info.list}" varStatus="ci">
+
+     <c:forEach var="h" items="${hz}" varStatus="ci">
+
     <TR> 
       <TD align="center" class="line2" >${ci.count}</TD>
-      <TD align="center" class="line2"  ><input name="aaa" class="xzz" type="radio" value="${ci.count - 1}"></TD>
-      <TD align="center" class="line2"  >
-      <a href="<%=request.getContextPath()%>/service/getQzzxx/${t.bipId}">${t.bipName}</a></TD>
-      <TD align="center" class="line2" >${t.bipSex}</TD>
-      <TD align="center" class="line2"  >
-      <a href="<%=request.getContextPath()%>/service/getDwxq/${t.bioId}">${t.bioName}</a></TD>
-      <TD align="center" class="line2"  >${t.zpgz}</TD>
-      <TD align="center" class="line2"  >${t.tjrq}</TD>
+
+      <TD align="center" class="line2"  ><input name="aaa" class="xzz" type="radio" value="${h.hzid}"></TD>
+      <TD align="center" class="line2"  ><a href="<%=request.getContextPath()%>/grtj/details/${h.bipId}">${h.bipName}</a></TD>
+      <TD align="center" class="line2" >${h.bipSex}</TD>
+      <TD align="center" class="line2"  ><a href="<%=request.getContextPath()%>/grtj/dw?id=${h.bioId}">${h.bioName}</a></TD>
+      <TD align="center" class="line2"  >${h.zpgz}</TD>
+      <TD align="center" class="line2"  >${h.tjrq}</TD>
+
 	  
     </TR>
      </c:forEach>

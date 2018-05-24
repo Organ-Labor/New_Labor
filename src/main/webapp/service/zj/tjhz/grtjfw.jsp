@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%
 	String flag = (String)request.getAttribute("flag");
 	if(flag == "0"){
@@ -8,7 +8,7 @@
 <html>
 <head>
 <title>条件匹配</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <link href="<%=request.getContextPath()%>/styles/css/common.css" rel="stylesheet" type="text/css">
 <script>
 	function changetotj(obj){
@@ -31,9 +31,9 @@
 		form1.button.disabled = true;
 		form1.button2.disabled = true;
 		if(form1.flag.value=="tj"){
-			form1.action = "<%=request.getContextPath()%>/service/zj/GrTj.do";
+			form1.action = "<%=request.getContextPath()%>/grtj/showPerson";
 		}else{
-			form1.action = "<%=request.getContextPath()%>/service/zj/grqz/GrTjYxPp.do";
+			form1.action = "<%=request.getContextPath()%>/service/zj/tjhz/grtj_yxpp_1.jsp";
 		}
 		form1.submit();
 	}
@@ -48,8 +48,7 @@
 		//条件匹配中根据身份证号回显对应姓名
 		$("#citizenid").blur(function (){
 		$.post(
-				"<%=request.getContextPath()%>/service/zj/grqz/GrTjName.do", 
-				{ bip_citizenid:$("#citizenid").val()+":0"},
+				"<%=request.getContextPath()%>/grtj/commons/name/"+$("#citizenid").val(), 
    				function(data){
      		 		$("#name").val(data);
    				});
@@ -57,17 +56,15 @@
 		//意向匹配中根据身份证号回显对应姓名
 		$("#dwbip_citizenid").blur(function (){
 		$.post(
-				"<%=request.getContextPath()%>/service/zj/grqz/GrTjName.do", 
-				{ bip_citizenid :$("#dwbip_citizenid").val()+":0"},
+				"<%=request.getContextPath()%>/grtj/commons/name/"+$("#dwbip_citizenid").val(), 
    				function(data){
-     		  		$("#dwbip_name").val(data);
+     		 		$("#dwbip_name").val(data);
    				});
 		})
 		//意向匹配中根据单位法人码回显对应单位名称
 		$("#bio_no").blur(function (){
 		$.post(
-				"<%=request.getContextPath()%>/service/zj/grqz/GrTjName.do", 
-				{ bip_citizenid :$("#bio_no").val()+":1"},
+				"<%=request.getContextPath()%>/grtj/commons/dw_name/"+$("#bio_no").val(), 
    				function(data){
      		  		$("#bio_name").val(data);
    				});
@@ -132,15 +129,15 @@
             <TR > 
               <TD align="center"> 
         	  <tr><td align="center">
-        	  <form name="form1" action="" method="post">
+        	  <!-- <form name="form1" action="" method="post"> -->
               <table id="tjpp" width="273" border="0" cellspacing="0" cellpadding="0" height="84">
                   <tr> 
                     <td width="103">身份证号码</td>
-                    <td width="194"> <input  id="citizenid" name="bip_citizenid" type="text" maxlength="18"></td>
+                    <td width="194"> <input  id="citizenid" name="Idcard" type="text" maxlength="18"></td>
                   </tr>
                   <tr> 
                     <td width="103">姓　　　名</td>
-                    <td width="194"> <input id="name" name="bip_name" type="text" maxlength="32"></td>
+                    <td width="194"> <input id="name" name="name" type="text" maxlength="32"></td>
                   </tr>
                 </table>
                 </TD>
@@ -151,7 +148,7 @@
               <table id="yxpp" width="250" border="0" cellspacing="0" cellpadding="0" style="display:none">
                   <tr> 
                     <td width="103">身份证号码</td>
-                    <td width="194"> <input id="dwbip_citizenid" name="dwbip_citizenid" type="text" maxlength="18"></td>
+                    <td width="194"> <input id="dwbip_citizenid" name="Idcard2" type="text" maxlength="18"></td>
                   </tr>
                   <tr> 
                     <td width="103">姓　　　名</td>

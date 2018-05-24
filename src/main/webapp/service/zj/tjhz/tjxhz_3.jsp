@@ -2,12 +2,12 @@
 <html>
 <head>
 <title>推荐信回执</title>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<%=request.getContextPath()%>/styles/css/common.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/j.js"></script>
 <script>
 	function change() {
-		if (document.form1.sfcg.value == 0) {
+		if (document.form1.sfcg.value == 'n') {
 			document.all.cc.style.display = "";
 			document.all.aa.style.display = "none";
 			form1.yx.value = "";
@@ -19,8 +19,12 @@
 	}
 	$(function(){
 		$("#qd").click( function () {
-		$("#ff").attr("action","<%=request.getContextPath()%>/service/zj/tjhz/select_hz.do");
-		$("#ff").submit();
+			if(confirm("确认回执?")){
+				window.open("<%=request.getContextPath()%>/grtj/hz?id=<%=request.getParameter("a")%>&sfcg="+$("#sfcg").val()+"&cgyx="+$("#yx").val()+"&bcg="+$("#bcg").val(),"_self")
+			}
+			
+		<%-- $("#ff").attr("action","<%=request.getContextPath()%>/grtj/hz?id=hzno&sfcg="+$("#sfcg").val()+"&cgyx="+$("#yx").val()+"&bcg="+$("#bcg").text());
+		$("#ff").submit(); --%>
 	});
 });
 </script>
@@ -66,14 +70,14 @@
 				<td width="55%" height="25" align="left" class="line2"><font
 					size="2"> <select id="sfcg" name="sfcg" style="width:160px"
 						onchange="change()">
-							<option value=0 selected>不成功</option>
-							<option value=1>成功</option>
+							<option value='n' selected>不成功</option>
+							<option value='y'>成功</option>
 					</select> </font></td>
 			</tr>
 			<tr id="aa" style="display:none">
 				<td align="right" class="line1">月 薪</td>
 				<td height="25" align="left" class="line1"><input id="yx" name="yx"
-					type="text" size="15">
+					type="text" size="15" >
 				</td>
 			</tr>
 			<tr id="cc">
@@ -88,7 +92,7 @@
 			<tr>
 				<td align="center" class="line2">
 					<input type="hidden" name="xzz" value="<%=request.getParameter("a")%>">
-					<input type="button"class="BUTTONs3" id="qd" name="baoc" value="回 执">&nbsp;&nbsp;
+					<input type="button" class="BUTTONs3" id="qd" name="baoc" value="回 执">&nbsp;&nbsp;
 					<input name="button22" type="button" class=BUTTONs3 value="返 回" onclick="toBack()">
 				</td>
 			</tr>

@@ -133,6 +133,7 @@
     from bip
     where bip_id = #{bipId,jdbcType=VARCHAR}
   </select>
+
   
   <!-- 个人求职登记表、个人求职工种表、个人基本信息表以及各种内存表联查，查询出符合条件的求职者-->
   <select id="getQzz" resultType="map" parameterType="String">
@@ -203,6 +204,8 @@ LEFT JOIN cdg_sex sex ON sex.cd_id=bip.bip_sex
 WHERE bip.bip_citizenid=#{bipSfz}
 </select>
 
+ 
+<!--  -->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from bip
     where bip_id = #{bipId,jdbcType=VARCHAR}
@@ -880,4 +883,226 @@ WHERE bip.bip_citizenid=#{bipSfz}
       bip_qtsm = #{bipQtsm,jdbcType=VARCHAR}
     where bip_id = #{bipId,jdbcType=VARCHAR}
   </update>
+
+  <select id="searchByName" resultType="map">
+  	select 
+  		zg.qzbh as id,
+		b.bip_name as name,s.cd_name as sex,b.bip_age as age,b.bip_con_telephone as phone,
+		cr.cd_name adr,zg.DJSJ as time
+	from bip as b
+	RIGHT JOIN zj_grqzdjb as zg ON  b.bip_id=zg.bip_id
+	LEFT JOIN cdg_regioncode as cr ON b.bip_res_address=cr.cd_id
+	LEFT JOIN cdg_sex AS s ON b.bip_sex=s.cd_id
+	where b.bip_name=#{name}
+	ORDER BY zg.qzbh
+  </select>
+  <select id="searchById" resultType="map">
+  	select 
+  		zg.qzbh as id,
+		b.bip_name as name,s.cd_name as sex,b.bip_age as age,b.bip_con_telephone as phone,
+		cr.cd_name adr,zg.DJSJ as time
+	from bip as b
+	RIGHT JOIN zj_grqzdjb as zg ON  b.bip_id=zg.bip_id
+	LEFT JOIN cdg_regioncode as cr ON b.bip_res_address=cr.cd_id
+	LEFT JOIN cdg_sex AS s ON b.bip_sex=s.cd_id
+	where b.bip_citizenid=#{id}
+  </select>
+	
+	<select id="getName" resultType="String">
+		SELECT bip.bip_name FROM bip WHERE bip.bip_citizenid=#{id}
+	</select>
+	
+	<select id="getDwName" resultType="String">
+		SELECT bio_name AS name from bio WHERE bio_no=#{id}
+	</select>
+	
+	<select id="recommend" resultType="map">
+	SELECT 
+		b.bip_id AS bipid,
+		b.bip_name AS name,
+		s.cd_name AS sex,
+		b.bip_t_newgraduate AS yjbys,
+		b.bip_whcd AS whcd_v,
+		cel.cd_name AS whcd,
+		b.bip_res_address AS adr_v,
+		cr.cd_name AS adr,
+		zq.dwxx AS dwxz_v,
+		co.cd_name AS dwxz,
+		zq.dwhy AS dwhy_v,
+		ci.cd_name AS dwhy,
+		zq.dwjjlx AS dwjjlx_v,
+		crt.cd_name AS dwjjlx
+	FROM zj_grqzdjb AS zq
+	LEFT JOIN bip AS b ON zq.bip_id=b.bip_id
+	LEFT JOIN cdg_regioncode AS cr ON b.bip_res_address=cr.cd_id
+	LEFT JOIN cdg_educationallevel AS cel ON b.bip_whcd=cel.cd_id
+	LEFT JOIN cdl_orgtype AS co ON zq.dwxx=co.cd_id
+	LEFT JOIN cdg_regtype AS crt ON zq.dwjjlx=crt.cd_id
+	LEFT JOIN cdg_industry AS ci ON zq.dwhy=ci.cd_id
+	LEFT JOIN cdg_sex AS s ON s.cd_id=b.bip_sex
+	WHERE zq.qzbh=#{id}
+	</select>
+	<select id="showPersonDetails" resultType="map">
+	select 
+		b.bip_citizenid AS idcard,
+		s.cd_name AS sex,
+		b.bip_age AS age,
+		b.bip_name AS name,
+		cn.cd_name AS minzu,
+		cp.cd_name AS zzmm,
+		cm.cd_name AS hyzk,
+		cr.cd_name AS hjxz,
+		cpt.cd_name AS rylb,
+		chs.cd_name AS jkzk,
+		cdm.cd_name AS cjqk,
+		b.bip_eyesightleft AS lefteye,
+		b.bip_eyesightright AS righteye,
+		b.bip_long AS hight,
+		b.bip_weight AS weight,
+		cel.cd_name AS whcd,
+		b.bip_subject AS sub,
+		b.bip_graduateschool AS school,
+		b.bip_bysj AS bysj,
+		b.bip_con_postcode AS yb,
+		b.bip_con_telephone AS tel,
+		b.bip_con_mobile AS mobile,
+		b.bip_con_email AS email,
+		b.bip_con_contact AS cname,
+		b.bip_con_contacttel AS ctel,
+		crc.cd_name AS adr,
+		b.bip_educationallevel2 AS edu2,
+		b.bip_resume AS resume,
+		b.bip_qtsm AS qtsm
+	FROM bip AS b
+	LEFT JOIN cdg_nation AS cn ON b.bip_minzu=cn.cd_id
+	LEFT JOIN cdg_politicsaspect as cp ON b.bip_zzmm=cp.cd_id
+	LEFT JOIN cdg_marriage AS cm ON b.bip_hyzk=cm.cd_id
+	LEFT JOIN cdl_rprtype AS cr ON b.bip_hjxz=cr.cd_id
+	LEFT JOIN cdl_personneltype AS cpt ON b.bip_rylb=cpt.cd_id
+	LEFT JOIN cdg_healthstate AS chs ON b.bip_jkzk=chs.cd_id
+	LEFT JOIN cdg_deformity AS cdm ON b.bip_cjqk=cdm.cd_id
+	LEFT JOIN cdg_educationallevel AS cel ON b.bip_whcd=cel.cd_id
+	LEFT JOIN cdg_regioncode AS crc ON b.bip_res_address=crc.cd_id
+	LEFT JOIN cdg_sex AS s ON s.cd_id=b.bip_sex
+	where b.bip_id=#{id}
+	</select>
+	<select id="getGz" resultType="map">
+	SELECT
+		zg.QZGZBH as ggz,
+		zg.GZ AS gz_v, 
+		cs.cd_name AS gz
+		FROM zj_grqzgzb AS zg
+		LEFT JOIN cdl_specialty AS cs ON zg.GZ=cs.cd_id
+	WHERE zg.qzbh=#{id}
+	</select>
+	<select id="dwList" resultType="map">
+	SELECT 
+		dwgz.ZPGZBH AS id,
+		bio.bio_name AS name,
+		bio.bio_bua_address AS adr,
+		dwdj.LXRSJ AS tel,
+		dwgz.DJSJ AS time
+	from zj_dwzpgzb AS dwgz
+	LEFT JOIN zj_dwzpdjb AS dwdj ON dwgz.ZPBH=dwdj.ZPBH
+	LEFT JOIN bio AS bio ON dwdj.DWBH=bio.bio_id
+	WHERE bio.bio_orgtype=#{dwxz}
+		AND bio.bio_industry=#{dwhy}
+		AND	bio.cdg_regtype=#{dwjjlx}
+		AND dwgz.ZPGZ=#{gzppfw}
+		AND if(#{xb}='n',dwgz.ZPRSN+dwgz.XBBX,dwgz.ZPRSNV+dwgz.XBBX)>0
+		AND dwgz.whcd &gt;=#{whcd}
+	</select>
+	<select id="dwDetails" resultType="map">
+	SELECT 
+		dwgz.ZPGZBH AS id,
+		bio_id AS dwId,
+		bio.bio_name AS name,
+		bio.bio_bua_address AS adr,
+		dwgz.ZPGZBM AS gwmc,
+		dwgz.ZRS AS zrs,
+		dwgz.ZPRSN AS zrsn,
+		dwgz.ZPRSNV AS zrsnv,
+		dwgz.XBBX AS xbbx,
+		dwgz.CGRSN+dwgz.CGRSNV AS cgrs,
+		a.pprs AS pprs,
+		b.cgrs AS cgrs,
+	  	c.hzrs AS hzrs,
+	  	dwgz.DJSJ AS time,
+	  	dwdj.DWLXR AS lname,
+		dwdj.LXRSJ AS ltel
+	from zj_dwzpgzb AS dwgz
+	LEFT JOIN zj_dwzpdjb AS dwdj ON dwgz.ZPBH=dwdj.ZPBH
+	LEFT JOIN bio AS bio ON dwdj.DWBH=bio.bio_id
+	LEFT JOIN (SELECT count(TJXID) AS pprs,ZPGZBH FROM zj_tjxxhzb AS tjx WHERE tjx.ZPGZBH=#{id}) a ON a.ZPGZBH=dwgz.ZPGZBH
+	LEFT JOIN (SELECT count(TJXID) AS cgrs,ZPGZBH FROM zj_tjxxhzb AS tjx WHERE tjx.ZPGZBH=#{id} AND tjx.SFCG='y') b ON b.ZPGZBH=dwgz.ZPGZBH
+	LEFT JOIN (SELECT count(TJXID) AS hzrs,ZPGZBH FROM zj_tjxxhzb AS tjx WHERE tjx.ZPGZBH=#{id} AND tjx.SFHZ='n') c ON c.ZPGZBH=dwgz.ZPGZBH
+	WHERE dwgz.ZPGZBH=#{id}
+	</select>
+	<select id="hzcx" resultType="map">
+	SELECT 
+	zt.TJXID AS hzid,
+	bip.bip_id bipId,
+	bio.bio_id bioId,
+	bip.bip_name bipName,
+	sex.cd_name bipSex,
+	bio.bio_name bioName,
+	specialty.cd_name zpgz,
+	zt.TJSJ tjrq
+FROM zj_tjxxhzb AS zt
+LEFT JOIN zj_dwzpgzb dgz ON dgz.ZPGZBH=zt.ZPGZBH
+LEFT JOIN zj_dwzpdjb ddj ON dgz.ZPBH=ddj.ZPBH
+LEFT JOIN bio ON bio.bio_id=ddj.DWBH
+LEFT JOIN zj_grqzgzb ggz ON ggz.QZGZBH=zt.QZGZBH
+LEFT JOIN zj_grqzdjb gdj ON gdj.qzbh=ggz.QZBH
+LEFT JOIN bip ON bip.bip_id=gdj.bip_id
+LEFT JOIN cdl_specialty specialty ON specialty.cd_id=dgz.ZPGZ
+LEFT JOIN cdg_sex sex ON sex.cd_id=bip.bip_sex
+WHERE bip.bip_citizenid=#{id}
+AND bio.bio_no=#{bio_no}
+AND STR_TO_DATE(zt.TJSJ,"%Y-%m-%d")>=STR_TO_DATE(#{date_f},"%Y-%m-%d") 
+AND STR_TO_DATE(#{date_l},"%Y-%m-%d")>=STR_TO_DATE(zt.TJSJ,"%Y-%m-%d")
+AND if(zt.TJXLX="",'1'='1',zt.TJXLX=#{lx})
+AND zt.SFHZ='n'
+	</select>
+	<update id="updateHz">
+	UPDATE zj_tjxxhzb zt SET 
+		zt.SFHZ='y',
+		zt.SFCG=#{sfcg},
+		zt.JYYX=#{cgyx},
+		zt.BCGYY=#{bcg},
+		zt.HZSJ=DATE_FORMAT(NOW(),'%Y-%m-%d')
+	WHERE zt.TJXID=#{hzno}
+	</update>
+	
+	<select id="selectDw" resultType="map">
+	SELECT 
+		bio_id bioId,
+		bio_no bioNo, 
+		bio_name bioName,
+		bio_shortname bioShortname,
+		orgtype.cd_name orgtypeName,
+		regtype.cd_name regtypeName,
+		industry.cd_name industryName,
+		bio_bua_address bioAddress,
+		bio_bua_postcode bioBuaPostcode,
+		bio_con_fax bioConFax,
+		bio_con_mail bioConMail,
+		LXRSJ tel,DJSJ date,
+		bio_rga_regioncode bioRgaRegioncode 
+	FROM bio 
+	LEFT JOIN cdl_orgtype orgtype ON bio_orgtype=orgtype.cd_id
+	LEFT JOIN cdg_regtype regtype ON cdg_regtype=regtype.cd_id 
+	LEFT JOIN cdg_industry industry ON bio_industry=industry.cd_id
+	LEFT JOIN zj_dwzpdjb ON bio_id=DWBH 
+	WHERE bio_id=#{id}
+	</select>
+	<insert id="insertTjx">
+	INSERT INTO zj_tjxxb(TJXID,TJXLX,QZGZBH,ZPGZBH,TJSJ) 
+	VALUES('5','d','1','2',DATE_FORMAT(NOW(),'%Y-%m-%d'))
+	</insert>
+	<insert id="insertHz">
+	INSERT INTO zj_tjxxhzb(TJXID,TJXLX,QZGZBH,ZPGZBH,TJSJ,SFHZ) 
+	VALUES('5','d','1','2',DATE_FORMAT(NOW(),'%Y-%m-%d'),'n')
+	</insert>
+
 </mapper>

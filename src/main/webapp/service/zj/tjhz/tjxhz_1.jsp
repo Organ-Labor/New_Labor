@@ -36,12 +36,37 @@
 		}
 		var s = a + b + c + d + e + f + g;
 		form1.cx.disabled = true;
-		form1.qk.disabled = true; */
-		form1.action="<%=request.getContextPath()%>/service/getHzlist/1";
+
+		form1.qk.disabled = true;
+		form1.action="<%=request.getContextPath()%>/grtj/hzcx";
+
 		form1.submit();
 	}
+	
+	
 </script>
 
+
+<script type="text/javascript">
+$(function(){
+	//根据身份证号回显姓名
+	$("#sfz").blur(function (){
+		$.post(
+				"<%=request.getContextPath()%>/grtj/commons/name/"+$("#sfz").val(), 
+					function(data){
+	 		 		$("#xm").val(data);
+					});
+	})
+	//意向匹配中根据单位法人码回显对应单位名称
+		$("#frm").blur(function (){
+		$.post(
+				"<%=request.getContextPath()%>/grtj/commons/dw_name/"+$("#frm").val(), 
+   				function(data){
+     		  		$("#mc").val(data);
+   				});
+		})
+})
+</script>
 </head>
 <body>
 <form name="form1" action="" method="post">
@@ -94,8 +119,10 @@
 	<tr class="line1"> 
 		<td width="" align="right" class="line1">推荐信类型</td>
 		<td width="" align="left" class="line1">
-		<SELECT id="tjxlx" name="tjxlx" style="WIDTH: 200px">
-		<option value="">请选择
+
+		<SELECT id="lx" NAME="tjxType" style="WIDTH: 200px">
+		<option value="">
+
 		<option value="g">个人推荐信
 
 		<option value="d">单位推荐信

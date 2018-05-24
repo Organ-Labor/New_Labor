@@ -5,6 +5,23 @@
 <title>个人推荐信</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<%=request.getContextPath()%>/styles/css/common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/j.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		$("#dytjb").click(function(){
+			
+			$.get(
+				"<%=request.getContextPath()%>/grtj/gxtj",
+				{zpgzbh=${dw.id},qzgzbh=${p.id}}
+				function(){
+					alert("wahahaha");
+				}
+			);
+			window.print();
+		})
+	});
+</script>
 </head>
 <body>
 <form name="form1" method="post" action="">
@@ -14,7 +31,7 @@
 <table width="98%" id="heade" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr> 
           <td height="20" valign="bottom"><img src="<%=request.getContextPath()%>/styles/images/right/now.gif" width="11" height="12">当前位置：职业介绍 
-            &gt; 推荐服务 &gt; 个人推荐服务</td>
+            &gt; 推荐服务 &gt; 个人推荐服务</td>4
         </tr>
         <tr> 
           <td valign="bottom" background="<%=request.getContextPath()%>/styles/images/right/dsline.gif" height="8"><img src="<%=request.getContextPath()%>/styles/images/index/spacer.gif"></td>
@@ -30,7 +47,7 @@
               <TD align="center" colspan="3" class="line1 pt16c">&nbsp;</TD>
             </TR>
             <TR>
-              <TD align="center" colspan="3" height="25" class="line1 pt16c">${zjgr.bip_name}求职人员推荐介绍信</TD>
+              <TD align="center" colspan="3" height="25" class="line1 pt16c">${p.name}求职人员推荐介绍信</TD>
             </TR>
             <TR> 
               <TD align="center"  colspan="3" height="25" class="line1">编号：001201212</TD>
@@ -46,16 +63,16 @@
 				</td>
 			  </tr >
 			  <tr class="line1"> 
-				<td colspan="3" height="25"><span class="pt11"> &nbsp;&nbsp;&nbsp;&nbsp;现介绍&nbsp;<u class="pt11">${zjgr.bip_name}</u>&nbsp;同志应聘&nbsp;<u class="pt11">${zpgzbm}</U>&nbsp;岗位，请予接洽。</span>
+				<td colspan="3" height="25"><span class="pt11"> &nbsp;&nbsp;&nbsp;&nbsp;现介绍&nbsp;<u class="pt11">${p.name}</u>&nbsp;同志应聘&nbsp;<u class="pt11">${dw.gwmc}</U>&nbsp;岗位，请予接洽。</span>
 			  <tr class="line1"> 
 				<td colspan="3" height="25"><span class="pt11">&nbsp;&nbsp;&nbsp;&nbsp;请用人单位在面试求职人员后，填写下列面试回执单，并交由求职人员带回本中心，以便下次继续为您服务。(提示：当前推荐信为您单位第xx封推荐信) </span></td>
 			 
 			  <tr class="line1">
-			    <td colspan="3" height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="pt11">招聘单位地址：<U>${zjdwxx.bio_bua_address }</U></span></td>
+			    <td colspan="3" height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="pt11">招聘单位地址：<U>${dw.adr}</U></span></td>
 		    </tr>
 			  <tr class="line1">
-                <td width="273" height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="pt11">招聘单位联系人：&nbsp;<U>${zjdwxx.dwlxr}</U></span></td>
-                <td width="269" height="25"><div id="lxdh"><span class="pt11">招聘单位联系电话：<U>${zjdwxx.lxrsj}</U></span></div></td>
+                <td width="273" height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="pt11">招聘单位联系人：&nbsp;<U>${dw.lname}</U></span></td>
+                <td width="269" height="25"><div id="lxdh"><span class="pt11">招聘单位联系电话：<U>${dw.ltel}</U></span></div></td>
                 <td width="207" height="25">&nbsp;</td>
 		    </tr>
 			  <tr class="line1">
@@ -90,7 +107,7 @@
 				</td>
 			  </tr>
 			  <tr class="line1"> 
-				<td colspan="3" height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="pt11">你中心<U></U>年<U></U>月<U></U>日推荐来的 <U></U> 同志，经我单位面试考核，符合下列情况，现将结果反馈告知。（“√”）</span>
+				<td colspan="3" height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="pt11">你中心<U></U>年<U></U>月<U></U>日推荐来的 <U></U> ${p.name}同志，经我单位面试考核，符合下列情况，现将结果反馈告知。（“√”）</span>
 			<tr class="line1"> 
 				<td colspan="3" height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="pt11">□ 我单位有意录用（单位招工、劳务派遣企业、社区公益性就业组织、其他。应聘月薪____________元）。</span></td>
 			 
@@ -98,12 +115,12 @@
 			    <td colspan="3" height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="pt11">□ 我单位无意录用。原因： _______________________________</span></td>
 		    </tr>
 			  <tr class="line1">
-                <td height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="pt11">用人单位名称：<U>${zjdwxx.bio_name }</U>　　</span></td>
+                <td height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="pt11">用人单位名称：<U>${dw.name}</U>　　</span></td>
                 <td width="163" height="25"><div id="lxdh"><span class="pt11">&nbsp;</span></div></td>
                 <td width="155" height="25">&nbsp;</td>
 		    </tr>
 			  <tr class="line1">
-                <td height="25" colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;<span class="pt11">用人单位联系电话：<U>${zjdwxx.lxrsj}</U> </span></td>
+                <td height="25" colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;<span class="pt11">用人单位联系电话：<U>${dw.tel}</U> </span></td>
 		    </tr>
 			  <tr class="line1">
                 <td height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="pt11">联系人：<U>${zjdwxx.dwlxr}</U></span></td>
@@ -149,7 +166,7 @@
 <br>
 <table id="but" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
 <tr class="line2" align="center"> 
-  <td> <input name="dy" type="button"class=BUTTONs3  value="打 印" onClick="window.print()">&nbsp;&nbsp;<input name="button5" type="button" class="BUTTONs3"  value="返 回" onClick="backPage()"></td>
+  <td> <input id="dytjb" name="dy" type="button" class=BUTTONs3  value="打 印" >&nbsp;&nbsp;<input name="button5" type="button" class="BUTTONs3"  value="返 回" onClick="window.history.go(-1)"></td>
 </tr>
 </table>
  </form>

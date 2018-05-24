@@ -4,15 +4,15 @@
 <html>
 <head>
 <title>匹配条件选择</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <link href="<%=request.getContextPath()%>/styles/css/common.css" rel="stylesheet" type="text/css">
 <script>
 	function doSubmit(){
 		
-		var dwhy =  document.getElementById("dwhy");
+		var dwhy =  document.getElementById("dwhy"); 
 		
 		if(dwhy.value.length!=0){
-			form1.action = "<%=request.getContextPath()%>/service/zj/grqz/GrTjPkDw.do";
+			form1.action = "<%=request.getContextPath()%>/grtj/dwList";
 			form1.submit();
 		}else{
 			alert("请选择岗位");
@@ -89,9 +89,10 @@
 			<TBODY>
             <TR>
               <TD width="98%" align="left" class="line2">
-              	&nbsp;姓名:<a href="javascript:void(null)" style="cursor:hand" onclick="window.open('<%=request.getContextPath() %>/','grjbxx','left=100 top=100 width=820,height=469 scrollbars')" ></a> &nbsp;&nbsp;&nbsp;&nbsp;
-              	性别： &nbsp;&nbsp;&nbsp;&nbsp;             
-              	居住地址：
+              	<%-- &nbsp;姓名:<a href="javascript:void(null)" style="cursor:hand" onclick="window.open('<%=request.getContextPath()%>/grtj/details/${id}','grjbxx','left=100 top=100 width=820,height=469 scrollbars')" >${m.name}</a> &nbsp;&nbsp;&nbsp;&nbsp; --%>
+              	&nbsp;姓名:<a href="<%=request.getContextPath()%>/grtj/details/${m.bipid}" >${m.name}</a> &nbsp;&nbsp;&nbsp;&nbsp;
+              	性别：${m.sex} &nbsp;&nbsp;&nbsp;&nbsp;             
+              	居住地址：${m.adr}
               </TD>
             </TR>
         </TABLE>
@@ -138,46 +139,54 @@
               <TD width="13%" align="right" class="line1">单位性质</TD>
               <TD width="20%" align="center" class="line1">
                 <select id="dwxz"  name="dwxz" size="1"  style="WIDTH: 100%" onChange="sfxsjjlx()">
-      			
+      				<option value="${m.dwxz_v}">${m.dwxz}</option>
                 </select></TD>
               <TD width="13%" align="right" class="line1">单位行业</TD>
               <TD width="20%" align="center" class="line1">
              
 				<select  id="dwhy"  name="dwhy" size="1"  style="WIDTH: 100%">
-
-			
-				
+					<option value="${m.dwhy_v}">${m.dwhy}</option>
                 </select></TD>
                 <TD  width="13%" align="right" class="line2">经济类型</TD>
               <TD  width="20%" align="center" class="line2">
 			  <select id = "dwjjlx" name="dwjjlx" size="1"  style="WIDTH: 100%">
-				
+				<option value="${m.dwjjlx_v}">${m.dwjjlx}</option>
               </select></TD>
             </TR>
             <TR>
                 <TD align="right" class="line1">性别</TD>
               <TD align="center" class="line1">
 			  <select name="xb" size="1"  style="WIDTH: 100%">
-				${map.bip_sex }
+				<option value='
+								<c:if test="${m.sex=='男'}">1</c:if>
+								<c:if test="${m.sex=='女'}">2</c:if>
+								'>${m.sex}</option>
               </select> </TD>
               <TD align="right" class="line1">应届毕业生</TD>
               <TD align="left" class="line1"> 
 			     <SELECT  NAME="ppfw" style="WIDTH: 100%">
-			     	${map.bip_t_newgraduate }
+			     	<c:if test="${m.yjbys=='y'}" var='a'>
+			     		<option value='y'>是</option>
+			     	</c:if>
+			     	<c:if test="${not a}">
+			     		<option value='n'>否</option>
+			     	</c:if>
 				</SELECT>
               </TD>
              
               <TD align="right" class="line2">文化程度</TD>
               <TD align="center" class="line2">
 			  <select name="whcd" size="1"  style="WIDTH: 100%">
-				${map.bip_whcd }
+				<option value="${m.whcd_v}">${m.whcd}</option>
                 </select></TD>
             </TR>
             <TR>
              <TD align="right" class="line2">工种匹配范围</TD>
               <TD align="center" class="line2">
 				<SELECT  id="ppfw"  NAME="gzppfw" style="WIDTH: 100%">
-				
+					<c:forEach items="${gz}" var="g">
+						<option value="${g.gz_v}">${g.gz}</option>
+					</c:forEach>
 				</SELECT>
 			  </TD>
             </TR>
@@ -185,7 +194,7 @@
 <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
 	<tr>
 		<td align="center"  class="line2"> <input name="button2" type="button"class=BUTTONs3  value="确 定" onClick="doSubmit()">
-	    &nbsp;&nbsp;<input name="button232" type="button"class=BUTTONs3 onClick="toBack()" value="返 回"></td>
+	    &nbsp;&nbsp;<input name="button232" class="BUTTONs3" type="button" onclick="window.history.go(-1)" value="返 回"></td>
 	</tr>
 </table>
 </body>
