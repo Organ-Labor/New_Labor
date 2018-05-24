@@ -27,7 +27,7 @@
 		window.location.href="<%=request.getContextPath()%>/service/zj/grqz/qzdjjd_1.jsp";
 	}
 	
-	function dosubmit(){
+/* 	function dosubmit(){
 					  
 		var cb = form1.cb;
 		
@@ -38,12 +38,12 @@
 	
 		form1.submit();	
 	
-	}
+	} */
 </script>
 	
 </head>
 <body>
-<form method="post" action="<%=request.getContextPath()%>/service/zj/grqz/grdj_dj.do?flag=DjJd" name="form1">
+<form method="post" action="../../jd2.do" name="form1">
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -87,14 +87,28 @@
             </TR>  
             <TR align="center" class="line4"> 
               <TD width="10%"><input type="checkbox" name="cb" value="1" onclick="either(this,form1.cb)"></TD>
-              <TD width="6%"><a href="javascript:void(null)" style="cursor:hand" onclick="window.open('<%=request.getContextPath()%>/','详细信息','left=100 top=100 width=820,height=469 scrollbars')" >${user.bip_name}</TD>
-              <TD width="6%">${user.sex}</TD>
-              <TD width="16%">${user.bip_birthday}</TD>
-              <TD width="20%">${user.bip_res_address}</TD>
-              <TD width="10%">${user.bip_con_mobile}</TD>
-              <TD width="13%">${user.djsj}</TD>
+              <TD width="6%"><a href="javascript:void(null)" style="cursor:hand" onclick="window.open('<%=request.getContextPath()%>/','详细信息','left=100 top=100 width=820,height=469 scrollbars')" >
+              <%=request.getAttribute("xm") %>>
+              </TD>
+              <TD width="6%">
+				<%=request.getAttribute("sex") %>>
+				</TD>
+              <TD width="16%">
+              	<%=request.getAttribute("birth") %>>
+              </TD>
+              <TD width="20%">
+              	<%=request.getAttribute("zzdz") %>>
+              </TD>
+              <TD width="10%">
+              	<%=request.getAttribute("lxdh") %>>
+              </TD>
+              <TD width="13%">
+              	<%=request.getAttribute("sj") %>>
+              </TD>
          
-              <TD width="6%">${user.s}</TD>
+              <TD width="6%">
+              	<%=request.getAttribute("zt") %>>
+              </TD>
             </TR>
           </TBODY>
       </TABLE>
@@ -119,7 +133,7 @@
 	<tr><td>&nbsp;</td></tr>
 	<tr  align="center" class="line2"> 
 		<td> 
-		<input name="button1" type="button" class="BUTTONs3"  value="确定" onclick="dosubmit()">&nbsp;&nbsp;
+		<input name="button1" type="submit" class="BUTTONs3"  value="确定" >&nbsp;&nbsp;
 		<input name="button2" type="reset" class="BUTTONs3"  value="取消">&nbsp;&nbsp;
 		<input name="button3" type="button" class="BUTTONs3"  value="返 回" onclick="toBack()">
 		</td>
