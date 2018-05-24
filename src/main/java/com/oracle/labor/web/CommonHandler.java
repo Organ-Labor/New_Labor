@@ -22,7 +22,6 @@ import com.oracle.labor.common.codetable.RegtypeOperation;
 import com.oracle.labor.common.codetable.RprtypeOperation;
 import com.oracle.labor.common.codetable.SexOperation;
 import com.oracle.labor.common.codetable.SpecialtyOperation;
-
 import com.oracle.labor.common.codetable.ZjdgwlbOperation;
 
 

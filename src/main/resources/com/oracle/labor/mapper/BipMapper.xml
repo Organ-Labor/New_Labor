@@ -164,7 +164,7 @@ bip_res_address bipJaddress,bip_qtsm bipQtsm,bip_t_lowersecurity bipLow,bip_t_cr
 bip_t_czjyyhz bipCzjyyhz,bip_t_rhfl bipRhfl,bip_t_newgraduate bipNewgraduate,
 cdx_computergrade.cd_name bipPc,cdl_orgtype.cd_name Dwxz,cdg_industry.cd_name Dwhy,
 cdg_regtype.cd_name Jjlx,djb.SFJSDX Sfjsdx,djb.SFCJPX Sfcjpx,djb.SFJSZYZD Sfjszyzd,
-cdl_specialty.cd_name gz,bip.bip_hkszd address,djb.DJSJ createDate,gzb.GZ gzbh,gzb.ZDYX zdyx,gzb.ZGYX zgyx  FROM bip 
+cdl_specialty.cd_name gz,bip.bip_hkszd address,djb.DJSJ createDate,gzb.GZ gzbh,gzb.ZDYX zdyx,gzb.ZGYX zgyx,djb.gzdq gzdq,cdl_employtype.cd_name ygxs,bip_foreignlanguage.bip_fl_jywy jywy,bip_foreignlanguage.bip_fl_wysm wysm,bip_foreignlanguage.bip_fl_years f_slcd,bip_skill.bip_s_zyjn zyjn,bip_skill.bip_s_jsdj sldj,bip_skill.bip_s_years csnx  FROM bip 
 LEFT JOIN zj_grqzdjb djb ON djb.bip_id=bip.bip_id
 LEFT JOIN zj_grqzgzb gzb ON djb.qzbh=gzb.QZBH
 LEFT JOIN cdl_specialty ON cdl_specialty.cd_id=gzb.GZ
@@ -181,6 +181,9 @@ LEFT JOIN cdx_computergrade ON cdx_computergrade.cd_id=bip_pc_dj
 LEFT JOIN cdl_orgtype ON cdl_orgtype.cd_id=djb.dwxx
 LEFT JOIN cdg_industry ON cdg_industry.cd_id=djb.dwhy
 LEFT JOIN cdg_regtype ON cdg_regtype.cd_id=djb.dwjjlx
+LEFT JOIN cdl_employtype ON cdl_employtype.cd_id=gzb.YGXS
+LEFT JOIN bip_foreignlanguage ON bip_foreignlanguage.bip_id=bip.bip_id
+LEFT JOIN bip_skill ON bip_skill.bip_id=bip.bip_id
  WHERE bip.bip_id in (${bipId}) AND djb.SFDJ="n"
   </select>
   
