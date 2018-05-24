@@ -15,6 +15,10 @@
   	     $("#city").load("<%=request.getContextPath()%>/service/getRegions",{code:code,region:"city"});
   	     $("#village").load("<%=request.getContextPath()%>/service/getRegions",{code:code,region:"village"});
   	     //alert("城市加载完了！");
+  	     var code2=$("#g_gzdq").val();
+  	     $("#g_province").load("<%=request.getContextPath()%>/service/getRegions",{code:code2,region:"province"});
+	     $("#g_city").load("<%=request.getContextPath()%>/service/getRegions",{code:code2,region:"city"});
+	     $("#g_village").load("<%=request.getContextPath()%>/service/getRegions",{code:code2,region:"village"});
      })
 </script>
 
@@ -25,6 +29,7 @@
 
 <!-- 设置户口所在地隐藏域 -->
 <input type="hidden" id="hkszd" value="${b.bipHkszd }">
+<input type="hidden" id="g_gzdq" value="${b.gzdq }">
 
 <table width="98%"  border="0" align="center" cellpadding="0" cellspacing="0">
 	<tr>
@@ -343,15 +348,15 @@
               <tr class="line1"> 
                 <td width="13%" align="right">职业技能</td >
 				<td width="19%"><select name="init_zyjn" size="1"  style="WIDTH: 100%"  onBlur="javascript:changeJNDJ();">
-				  <option value=""></option></select></td >
+				  <option value="">${b.zyjn }</option></select></td >
                 <td width="10%" align="right">技术等级</td >
                 <td width="18%">
 									<select name="init_jsdj" size="1"  style="WIDTH: 100%" >
-									<option value=""></option>
+									<option value="">${b.sldj }</option>
 									
 				    </select></td >
                 <td width="10%" align="right">从事年限</td >
-                <td width="15%"> <INPUT  name="init_csnx"    style="WIDTH: 100%" maxlength="2"> </td >
+                <td width="15%"> <INPUT  name="init_csnx"    style="WIDTH: 100%" maxlength="2" value="${b.csnx }"> </td >
 				<!-- 动态添加预留字段 -->
 				<INPUT TYPE="hidden"name="sczyjn">
 				<!--  -->
@@ -365,14 +370,14 @@
               <tr class="line2" align="center" > 
                 <td width="13%" align="right">具有外语 </td >
                 <td width="19%"><select name="init_jywy" size="1"  style="WIDTH: 100%">
-									<option value="">
+									<option value="">${b.jywy}</option>
                 </select></td >
                 <td width="10%" align="right">熟练程度 </td >
                 <td width="18%"><select name="init_wyslcd" size="1" style="WIDTH: 100%">
-								<option value="">
+								<option value="">${b.f_sldj }</option>
                 </select></td >
                 <td width="10%" align="right">外语说明 </td >
-                <td width="15%"><INPUT  name="init_wysm" style="WIDTH: 100%"></td >
+                <td width="15%"><INPUT  name="init_wysm" style="WIDTH: 100%" value="${b.wysm }"></td >
 								<!-- 动态添加预留字段 -->
 								<INPUT TYPE="hidden"name="scjywy">
 								<!--  -->
@@ -385,7 +390,7 @@
 			  <table  width="100%" border="0" cellpadding="0" align="center"  cellspacing="1">
               <tr class="line1" align="center" >
                 <td width="13%" align="right">计算机等级</td >
-                <td width="19%"><select name="jsjdj" size="1"  style="WIDTH: 100%" ><option value="${b.bipPc }">
+                <td width="19%"><select name="jsjdj" size="1"  style="WIDTH: 100%" ><option value="">${b.bipPc }</option>
                 </select></td >
                 <td width="10%" align="right">熟练程度</td >
                 <td width="18%"><select name="jsjslcd" size="1" style="WIDTH: 100%" ><option value=""></select></td >
@@ -429,19 +434,20 @@
         <tr class="line2">
           <td align="right">工作地区</td >
           <td >
-		     <select name="gzdq" size="1"  style="WIDTH: 100%">
-			 <option value="${b.gzdq }">${b.gzdq }
-             </select></td>
-          <td align="right">工作地区</td >
-          <td >
-		     <select name="gzdq1" size="1"  style="WIDTH: 100%">
+		     <select name="gzdq" id="g_province" size="1"  style="WIDTH: 100%">
 			 <option value="">
              </select></td>
-          <td align="right">工作地区</td >
+          <td align="right">省</td >
           <td >
-		     <select name="gzdq2" size="1"  style="WIDTH: 100%">
+		     <select name="gzdq1" id="g_city" size="1"  style="WIDTH: 100%">
 			 <option value="">
              </select></td>
+          <td align="right">市</td >
+          <td >
+		     <select name="gzdq2" id="g_village" size="1"  style="WIDTH: 100%">
+			 <option value="">
+             </select></td>
+          <td align="right">县</td >
 
         </tr>
       </table>
@@ -516,7 +522,7 @@
 				<td width="110"><select name="qzgz1" size="1"  style="WIDTH: 100%"  >
 						<option value="${b.gzbh }">${b.gz }</option></select></td >
 			    <td width="50">用工形式</td>
-				<td width="60"><select name="ygxs1" size="1"  style="WIDTH: 100%" onchange="changyxrx()">
+				<td width="60"><select name="ygxs1" size="1"  style="WIDTH: 100%" value="${b.ygxs}" onchange="changyxrx()">
 						
                   </select></td >
 			    <td width="50" align="right"><input name="xs" type="text" size="6" value="月薪"  class='inputline' readonly></td>
@@ -525,11 +531,11 @@
 					<table><tr><td><input name="zdyx1" type="text" style="width:40px" value="${b.zdyx }" onblur="checkJe(this);">
                   至
 
-                  <input name="zgyx1" type="text" style="width:40px" onblur="checkJe(this);">
+                  <input name="zgyx1" type="text" style="width:40px" value="${b.zgyx }" onblur="checkJe(this);">
 					元</td></tr></table>
 					</div>
 					<div id="rx" style="display:none">
-					<table><tr><td><br><input name="zdrx1" type="text" value="${b.zgyx }" style="width:40px" onblur="checkJe(this);">
+					<table><tr><td><br><input name="zdrx1" type="text" value="" style="width:40px" onblur="checkJe(this);">
                   至
 
                   <input name="zgrx1" type="text" style="width:40px"  onblur="checkJe(this);">

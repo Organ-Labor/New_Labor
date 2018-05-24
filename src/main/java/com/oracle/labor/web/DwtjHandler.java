@@ -27,10 +27,12 @@ import com.oracle.labor.common.codetable.SpecialtyOperation;
 import com.oracle.labor.common.codetable.ZjdgwlbOperation;
 import com.oracle.labor.common.util.GenerateID;
 import com.oracle.labor.po.ZjTjxxb;
+import com.oracle.labor.po.ZjTjxxhzb;
 import com.oracle.labor.service.BioService;
 import com.oracle.labor.service.BipService;
 import com.oracle.labor.service.DwService;
 import com.oracle.labor.service.TjxService;
+import com.oracle.labor.service.TjxhzService;
 
 @Controller
 @SessionAttributes({"bioInfomation","xinxi","bipBasicinfo"})
@@ -47,6 +49,9 @@ public class DwtjHandler {
 	
 	@Autowired
 	TjxService tjxService;
+	
+	@Autowired
+	TjxhzService tjxhzService;
 	
 //	@RequestMapping("/{path}")
 //	public String path(@PathVariable("path") String path){
@@ -210,8 +215,18 @@ public class DwtjHandler {
 		record.setZpgzbh(zpgzbh);
 		record.setQzgzbh(qzgzbh);
 		record.setTjsj(tjsj);
+		
+		//同时向推荐信息回执表插入记录
+		ZjTjxxhzb r=new ZjTjxxhzb();
+		r.setTjxid(tjxid);
+		r.setTjxlx(tjxlx);
+		r.setZpgzbh(zpgzbh);
+		r.setQzgzbh(qzgzbh);
+		r.setTjsj(tjsj);
+		
 		//4.向数据库中插入记录
 		tjxService.insert(record);
+		tjxhzService.insert(r);
 		System.out.println("record内容："+record.toString());
 		return "/service/zj/tjhz/dwtjfw_6";
 	}
