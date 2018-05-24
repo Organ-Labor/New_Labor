@@ -236,7 +236,7 @@ public class DwzpHandler {
 	 @RequestMapping("/service/getBioById/{value}")
 	    public ModelAndView getBioByid(@PathVariable("value") String value) {
 		   Bio bio;
-		   bio=bioservice.getBio(value);
+		   bio=bioservice.getBiobyPk(value);
 	       return new ModelAndView("redirect:/service/zj/dwzp/dwdj_3.jsp","company",bio);
 	    }
 		//根据参数得到省市区升级版

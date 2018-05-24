@@ -97,6 +97,42 @@
     from bio
     where bio_id = #{bioId,jdbcType=VARCHAR}
   </select>
+  
+  <!-- 根据条件查询单位详情 四表联查 -->
+  <select id="selectByBioId" parameterType="String" resultType="map">
+       SELECT bio_id bioId,bio_no bioNo, bio_name bioName,bio_shortname bioShortname,orgtype.cd_name orgtypeName,regtype.cd_name regtypeName,industry.cd_name industryName,bio_bua_address bioAddress,bio_bua_postcode bioBuaPostcode,bio_con_fax bioConFax,bio_con_mail bioConMail,LXRSJ tel,DJSJ date,bio_rga_regioncode bioRgaRegioncode FROM bio LEFT JOIN cdl_orgtype orgtype ON bio_orgtype=orgtype.cd_id
+LEFT JOIN cdg_regtype regtype ON cdg_regtype=regtype.cd_id 
+LEFT JOIN cdg_industry industry ON bio_industry=industry.cd_id
+LEFT JOIN zj_dwzpdjb ON bio_id=DWBH WHERE bio_id=#{bioId}
+  </select>
+  
+  <!-- 查询单位部分信息 -->
+  <select id="selectByBioId2" parameterType="String" resultType="map">
+  
+     SELECT bio.bio_id bioId,bio.bio_bua_address bioAddress,bio_name bioName,djb.LXRSJ contactTel FROM bio
+LEFT JOIN zj_dwzpdjb djb ON bio.bio_id=djb.DWBH WHERE bio.bio_id=#{bioId}
+  </select>
+  
+  <!-- 单位查询 -->
+<select id="selectToDw" resultType="map" parameterType="String">
+SELECT bio.bio_id bioId,bio.bio_name bioName,bio.bio_bua_address bioAddress,dwzpdjb.LXRSJ bioTel,dwzpdjb.DJSJ djsj,dwzpdjb.GDSJ gdsj FROM bio 
+LEFT JOIN zj_dwzpdjb dwzpdjb ON bio.bio_id=dwzpdjb.DWBH
+LEFT JOIN cdg_regtype regtype ON regtype.cd_id=bio.cdg_regtype
+LEFT JOIN cdl_orgtype orgtype ON orgtype.cd_id=bio.bio_orgtype
+LEFT JOIN zj_dwzpgzb dwzpgzb ON dwzpgzb.ZPBH=dwzpdjb.ZPBH 
+LEFT JOIN zj_tjxxb tjxxb ON tjxxb.ZPGZBH=dwzpgzb.ZPGZBH
+LEFT JOIN zj_grqzgzb grqzgzb ON grqzgzb.QZGZBH=tjxxb.QZGZBH
+LEFT JOIN zj_grqzdjb grqzdjb ON grqzdjb.qzbh=grqzgzb.QZBH
+LEFT JOIN bip ON bip.bip_id=grqzdjb.bip_id
+LEFT JOIN cdl_personneltype personneltype ON personneltype.cd_id=bip.bip_rylb
+LEFT JOIN  cdl_rprtype rprtype ON rprtype.cd_id=bip.bip_hjxz
+LEFT JOIN zj_d_gwlb gwlb ON gwlb.dmid=dwzpgzb.GWLB
+WHERE bio.bio_no=#{bioNo} AND bio.bio_name=#{bioName} AND STR_TO_DATE(dwzpdjb.DJSJ,"%Y-%m-%d")>=STR_TO_DATE(#{djsj1},"%Y-%m-%d")
+AND STR_TO_DATE(#{djsj2},"%Y-%m-%d")>=STR_TO_DATE(dwzpdjb.DJSJ,"%Y-%m-%d")
+AND bio.cdg_regtype=#{regType} AND bio.bio_orgtype=#{orgType} AND dwzpgzb.GWLB=#{gwlb} AND dwzpgzb.ZPGZ=#{zpgw}
+AND bip.bip_rylb=#{rylb} AND bip.bip_hjxz=#{hjxz} AND IF(#{cxfw}='qb',1,IF(#{cxfw}='gd',dwzpdjb.GDSJ!='',dwzpdjb.GDSJ=''))
+AND bio.bio_industry=#{industry}
+</select>  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from bio
     where bio_id = #{bioId,jdbcType=VARCHAR}

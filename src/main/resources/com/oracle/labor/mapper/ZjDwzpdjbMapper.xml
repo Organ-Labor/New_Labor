@@ -104,7 +104,65 @@
   <!-- 根据单位法人码和单位名称查找匹配单位 -->
   <select id="getDw" resultType="map" parameterType="String">
       SELECT bio_id bioId,bio_name bioName,bio_bua_address bioAddress,LXRSJ tel,DJSJ date FROM bio LEFT JOIN zj_dwzpdjb
-ON bio_id=DWBH WHERE bio_name=#{bioName} AND bio.bio_id=#{bioNo}
+ON bio_id=DWBH WHERE IF(#{bioNo}='',bio_name LIKE '%${bioName}%',bio.bio_no=#{bioNo})
+
+<!-- bio.bio_no=#{bioNo}  OR bio_name LIKE '%${bioName}%' -->
+  </select>
+  
+  <!-- 根据单位编号查找单位招聘工种 -->
+  <select id="getZpgz" resultType="map" parameterType="String">
+     SELECT specialty.cd_id gzbh,specialty.cd_name zpgz FROM zj_dwzpdjb dwzpdjb
+LEFT JOIN zj_dwzpgzb dwzpgzb ON dwzpdjb.ZPBH=dwzpgzb.ZPBH
+LEFT JOIN cdl_specialty specialty ON dwzpgzb.ZPGZ=specialty.cd_id
+WHERE dwzpdjb.DWBH=#{bioId}
+  </select>
+  
+  <!-- 根据单位编号、工种和求职者编号查询出求职工种编号和招聘工种编号 -->
+  <select id="getBB" resultType="map" parameterType="String">
+       SELECT gzb.ZPGZBH zpgzbh,grgzb.QZGZBH qzgzbh FROM zj_dwzpdjb djb 
+LEFT JOIN zj_dwzpgzb gzb ON djb.ZPBH=gzb.ZPBH
+LEFT JOIN zj_grqzgzb grgzb ON grgzb.GZ=gzb.ZPGZ
+LEFT JOIN zj_grqzdjb grdjb ON grdjb.bip_id=bip_id
+WHERE djb.DWBH=#{bioId} AND grdjb.bip_id=#{bipId} AND grgzb.GZ=#{gzbh}
+  </select>
+  
+  <!-- 推荐查询 多表联查 -->
+  <select id="getSearch" resultType="map" parameterType="String">
+  SELECT bip.bip_id bipId,bio.bio_id bioId,bip.bip_citizenid bipSfz,bip.bip_name bipName,bip.bip_sex bipSex,bip.bip_age bipAge,cdg_educationallevel.cd_name xueLi,cdl_specialty.cd_name zygw, 
+bio.bio_name bioName,bio.bio_no bioNo,(dwgzb.ZRS-dwgzb.CGRSN-dwgzb.CGRSNV) wcgrs,tjxxb.TJSJ tjsj,cdl_specialty.cd_name tjzy,
+(CASE tjxxb.TJXLX 
+when "d" THEN "单位推荐"
+when "g" THEN "个人推荐"
+END) AS tjxlb,
+bio.bio_bua_address bioAddress,
+dwdjb.LXRSJ bioTel
+
+FROM bip 
+LEFT JOIN zj_grqzdjb djb ON djb.bip_id=bip.bip_id
+LEFT JOIN zj_grqzgzb gzb ON djb.qzbh=gzb.QZBH
+LEFT JOIN zj_tjxxhzb hzb ON hzb.QZGZBH=gzb.QZGZBH
+LEFT JOIN zj_dwzpgzb dwgzb ON dwgzb.ZPGZBH=hzb.ZPGZBH
+LEFT JOIN zj_d_gwlb gwlb ON GWLB.dmid=dwgzb.GWLB
+LEFT JOIN cdg_educationallevel ON cdg_educationallevel.cd_id=bip.bip_whcd
+LEFT JOIN cdl_specialty ON cdl_specialty.cd_id=gzb.GZ
+LEFT JOIN zj_tjxxb tjxxb ON tjxxb.QZGZBH=gzb.QZGZBH
+LEFT JOIN zj_dwzpdjb dwzpb ON dwzpb.ZPBH=dwgzb.ZPBH
+LEFT JOIN zj_dwzpdjb dwdjb ON dwdjb.ZPBH=dwgzb.ZPBH
+LEFT JOIN bio ON bio.bio_id=dwdjb.DWBH
+
+WHERE bip.bip_sex=#{bipSex} 
+AND bip.bip_hjxz=#{hjxz} 
+AND bip_age>#{minAge} AND  #{maxAge}>=bip_age 
+AND bip.bip_rylb=#{rylb} 
+AND gzb.GZ=#{gz}
+AND bip_whcd >=#{whcd2} AND  "90">=#{whcd1} 
+AND bio.bio_orgtype=#{orgtype} 
+AND dwgzb.GWLB=#{gwlb}
+AND STR_TO_DATE(djb.DJSJ,"%Y-%m-%d")>=STR_TO_DATE(#{djsj1},"%Y-%m-%d") AND STR_TO_DATE(#{djsj2},"%Y-%m-%d")>=STR_TO_DATE(djb.DJSJ,"%Y-%m-%d")
+AND STR_TO_DATE(hzb.TJSJ,"%Y-%m-%d")>=STR_TO_DATE(#{tjsj1},"%Y-%m-%d") AND STR_TO_DATE(#{tjsj2},"%Y-%m-%d")>=STR_TO_DATE(hzb.TJSJ,"%Y-%m-%d")
+AND hzb.SFHZ=#{hzzt}
+
+GROUP BY bip.bip_id
   </select>
   
   

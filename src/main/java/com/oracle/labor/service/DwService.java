@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.oracle.labor.dao.BipMapper;
 import com.oracle.labor.dao.ZjDwdjjdbMapper;
 import com.oracle.labor.dao.ZjDwzpdjbMapper;
 import com.oracle.labor.dao.ZjDwzpgzbMapper;
@@ -15,6 +16,7 @@ import com.oracle.labor.po.ZjDwdjjdb;
 import com.oracle.labor.po.ZjDwzpdjb;
 import com.oracle.labor.po.ZjDwzpdjbExample;
 import com.oracle.labor.po.ZjDwzpgzb;
+
 
 @Service
 public class DwService {
@@ -65,11 +67,16 @@ public class DwService {
 		dwDao.updateByExampleSelective(aa,e);
 	}
 	
+	@Autowired
+	BipMapper bipDao;
+
+	
 	//查询符合条件的单位
 	public List<Map<String,Object>> getDw(String bioNo,String bioName){
 		//System.out.println(dwDao.getDw(bioNo,bioName).toString());
 		return dwDao.getDw(bioNo,bioName);
 	}
+
 	//登记单位的招聘信息
 	@Transactional
 	public void DwZp_save(ZjDwzpdjb b1,ZjDwzpgzb b2){
@@ -95,5 +102,36 @@ public class DwService {
 		
 		return dwDao.getDw_djbyBioId(value);
 	}
-
+	
+	//根据单位编号查询出单位招聘岗位
+	public String getZpgz(String bioId){
+		System.out.println("DwService里查找的招聘岗位："+dwDao.getZpgz(bioId));
+		
+		List<Map<String,Object>> list=dwDao.getZpgz(bioId);
+		StringBuilder sb=new StringBuilder();
+		
+		//拼接
+		for(Map<String,Object> m:list){
+			sb.append("<option value='"+m.get("gzbh")+"'>").append(m.get("zpgz")).append("</option>");
+		}
+		
+		System.out.println("在DwService中输出的结果："+sb.toString());
+		
+		return sb.toString();
+	}
+	
+    public List<Map<String,Object>> getBB(String bioId,String bipId,String gzbh){
+    	return dwDao.getBB(bioId, bipId, gzbh);
+    }
+    
+    //推荐查询
+    public List<Map<String,Object>> getSearch(String bipSex,String hjxz,String minAge,String maxAge,String rylb,String gz,String whcd1,String whcd2,String orgtype,String gwlb,String djsj1,String djsj2,String tjsj1,String tjsj2,String hzzt){
+    	return dwDao.getSearch(bipSex, hjxz, minAge, maxAge, rylb, gz, whcd1, whcd2, orgtype, gwlb, djsj1, djsj2, tjsj1, tjsj2, hzzt);
+    }
+    
+    //单位推荐-查询招聘条件
+    public List<Map<String,Object>> selectTozptj(String bioId,String qzgz){
+    	return dwgzDao.selectTozptj(bioId, qzgz);
+    }
 }
+

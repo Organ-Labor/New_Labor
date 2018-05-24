@@ -32,7 +32,7 @@
         <td><img src="<%=request.getContextPath()%>/styles/css/bb_d.gif"></td>
       </tr>
     </table></td>
-    <td  valign="bottom">查询结果&nbsp;&nbsp;&nbsp;提示：[共有xx条记录，点击姓名可查看详细信息，点击推荐可对该人员进行推荐]</td>
+    <td  valign="bottom">查询结果&nbsp;&nbsp;&nbsp;提示：[共有${info.total }条记录，点击姓名可查看详细信息，点击推荐可对该人员进行推荐]</td>
   </tr>
 </table>
 <table width="98%" align="center" border=1 cellpadding=0 cellspacing=0 bordercolor="#FFFFFF" class=tablebody>
@@ -46,15 +46,15 @@
     <td width="110" align="center" class="line4">登记职介</td>
     <td width="60" align="center" class="line4">归档日期</td>
   </tr>
-  <c:forEach var="b" varStatus="a" items="${list}">
+  <c:forEach var="b" varStatus="a" items="${info.list}">
   <tr align="center" class=line2>
     <td>${a.count}</td>
-    <td>${b.bip_name}<a href="javascript:void(null)" style="cursor:hand" onclick="window.open('<%=request.getContextPath()%>/service/zj/grqzgl/xxIndex.jsp?grbh=','','left=100 top=100 width=820,height=469 scrollbars')" ></a></td>
-    <td>${b.bip_sex}</td>
-    <td>${b.bip_age}</td>
-    <td>${b.bip_con_contacttel}</td>
+    <td><a href="<%=request.getContextPath()%>/service/getQzzxx/${b.bipId}">${b.bipName}</a><a href="javascript:void(null)" style="cursor:hand" onclick="window.open('<%=request.getContextPath()%>/service/zj/grqzgl/xxIndex.jsp?grbh=','','left=100 top=100 width=820,height=469 scrollbars')" ></a></td>
+    <td>${b.bipSex}</td>
+    <td>${b.bipAge}</td>
+    <td>${b.bipTel}</td>
     <td>${b.djsj}</td>
-    <td>无</td>
+    <td>略</td>
     <td>${b.gdsj}</td>
   </tr>
   </c:forEach>

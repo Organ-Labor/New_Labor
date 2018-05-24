@@ -5,7 +5,7 @@
     <script type="text/javascript" >
     	$(function(){
     	
-    		$.get("<%=request.getContextPath()%>/service/zj/tjhz/tjcx.do",{},function(data){
+    		<%-- $.get("<%=request.getContextPath()%>/service/zj/tjhz/tjcx.do",{},function(data){
     			$.getJSON("<%=request.getContextPath()%>/service/zj/tjhz/tjcx.do",{},function(d){
     		
     				$("#xb").html(d.sex);
@@ -18,7 +18,31 @@
     				$("#zgxl2").html(d.ed2);
     			}); 
     		
-    		});   		
+    		});   		 --%>
+    		 //求职工种
+    		<%--  var id=$("#ID").val();
+        	 alert(id);
+        	 var url="<%=request.getContextPath()%>/service/getZpgz/"+id;
+        	 alert(url); 
+        	 $("#zpgw").load("<%=request.getContextPath()%>/service/getQzgz/1");--%>
+        	$("#gzgz").load("<%=request.getContextPath()%>/service/getQzgz/1");
+    		
+    		//加载下拉列表
+    		//1.性别
+    		 $("#xb").load("<%=request.getContextPath()%>/service/getSex/1");
+    		//2.户籍性质
+             $("#hjxz").load("<%=request.getContextPath()%>/service/hjxz/10");
+            //3.人员类别
+    		 $("#rylb").load("<%=request.getContextPath()%>/service/rylb/20");
+            <%-- //4.求职岗位
+             $("#gzgz").load("<%=request.getContextPath()%>/service/getQzgz/1000000"); --%>
+            //5.学历
+             $("#zdxl1").load("<%=request.getContextPath()%>/service/whcd/10");
+             $("#zgxl2").load("<%=request.getContextPath()%>/service/whcd/10");
+             //6.单位类型
+             $("#dwlx").load("<%=request.getContextPath()%>/service/dwlx/10");
+             //7.岗位类别
+             $("#gwlb").load("<%=request.getContextPath()%>/service/gwlb/10");
     	});    
     </script>
     
@@ -83,7 +107,7 @@ else{
 <script language="javascript">
 
 function check(myform){
-
+	myform.submit();
 			if(!myform.djkssj.value==""||!myform.djjssj.value==""||!myform.tjkssj.value==""||!myform.tjjssj.value==""){
 	if(!myform.djkssj.value==""||!myform.djjssj.value==""){
 	if(CheckDate(myform.djkssj.value)){	
@@ -103,7 +127,7 @@ function check(myform){
 	}
 	}
 	}
-	myform.submit();
+	
 }
 </script>
   
@@ -113,7 +137,8 @@ function check(myform){
 
 </head>
 <body>
-<form name="form1" action="<%=request.getContextPath()%>/service/zj/tjhz/tjcx1.do">
+<input type="hidden" id="ID" name="bioId" value="${sessionScope.bioInfomation[0].bioId} ">
+<form name="form1" action="<%=request.getContextPath()%>/service/getSearch/1" method="post">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr> 
     <td><table width="98%"  border="0" align="center" cellpadding="0" cellspacing="0">
@@ -136,7 +161,7 @@ function check(myform){
       <table width="98%" border="0" cellspacing="1" cellpadding="0">
         <tr class="line2">
           <td width="13%" align="right">性　　别</td>
-          <td width="13%"><select id="xb" name="xb" style="width:100%">
+          <td width="13%"><select id="xb" name="bipSex" style="width:100%">
 				<option value=""/>
 				
           </select>          </td>
@@ -146,9 +171,9 @@ function check(myform){
 				
           </select>          </td>
           <td width="13%" align="right" >年　　龄</td>
-          <td width="13%"><input id="zxnl1" name="zxnl" style="WIDTH: 100%" maxlength="2"></td>
+          <td width="13%"><input id="zxnl1" name="minAge" style="WIDTH: 100%" maxlength="2"></td>
           <td width="5%" align="center">至</td>
-          <td width="13%"><input id="zdnl2" name="zdnl" style="WIDTH: 100%" maxlength="2"></td>
+          <td width="13%"><input id="zdnl2" name="maxAge" style="WIDTH: 100%" maxlength="2"></td>
         </tr>
         <tr class="line1">
           <td align="right">人员类别</td>
@@ -157,39 +182,39 @@ function check(myform){
 			
           </select>          </td>
           <td align="right">求职岗位</td>
-          <td><select id="gzgz" name="qzgz" style="width:100%">
+          <td><select id="gzgz" name="gz" style="width:100%">
 			<option value="">
           </select>          </td>
           <td align="right">学　　历</td>
-          <td><select id="zdxl1" name="zdxl" style="width:100%">
+          <td><select id="zdxl1" name="whcd1" style="width:100%">
 				 <option value="">
 				
           </select>          </td>
           <td align="center">至</td>
-          <td><select id="zgxl2" name="zgx2" style="width:100%">
+          <td><select id="zgxl2" name="whcd2" style="width:100%">
 				<option value="">
 				
           </select>          </td> 
         </tr>
         <tr class="line2">
           <td align="right">单位类型</td>
-          <td><select id="dwlx" name="dwlx" style="WIDTH: 100%">
+          <td><select id="dwlx" name="orgtype" style="WIDTH: 100%">
 						<option value="">请选择</option>
 						
             </select></td>
           <td align="right">岗位类别</td>
-          <td><select id="hwlb" name="gwlb" style="WIDTH: 100%">
+          <td><select id="gwlb" name="gwlb" style="WIDTH: 100%">
 						<option value="">请选择</option>
 						
 						</select></td>
           <td align="right">登记时间</td>
-          <td><textarea name="djkssj" style="width: 100%;" class="mask" htcurl="url(<%=request.getContextPath() %>/common/htc/format.htc)" rows="1" cols="10" mask="date" maxlength="10" ></textarea></td>
+          <td><textarea name="djsj1" style="width: 100%;" class="mask" htcurl="url(<%=request.getContextPath() %>/common/htc/format.htc)" rows="1" cols="10" mask="date" maxlength="10" ></textarea></td>
           <td align="center">至</td>
-          <td><textarea name="djjssj" style="width: 100%;" class="mask" htcurl="url(<%=request.getContextPath() %>/common/htc/format.htc)" rows="1" cols="10" mask="date" maxlength="10" ></textarea></td>
+          <td><textarea name="djsj2" style="width: 100%;" class="mask" htcurl="url(<%=request.getContextPath() %>/common/htc/format.htc)" rows="1" cols="10" mask="date" maxlength="10" ></textarea></td>
         </tr>
         <tr class="line1">
 		  <td align="right">回执状态</td>
-          <td><select name="sfcg" style="width: 100%;"> 
+          <td><select name="hzzt" style="width: 100%;"> 
 		  <option value=""> 
 		  <option value="1">成功 
 		  <option value="0">未成功 
@@ -200,9 +225,9 @@ function check(myform){
  
           </option></option></option></option></select>          </td>
           <td width="60" align="right">推荐时间</td>
-          <td width="100" align="center"><textarea name="tjkssj" style="width: 100%;" class="mask" htcurl="url(<%=request.getContextPath() %>/common/htc/format.htc)" rows="1" cols="10" mask="date" maxlength="10"></textarea></td>
+          <td width="100" align="center"><textarea name="tjsj1" style="width: 100%;" class="mask" htcurl="url(<%=request.getContextPath() %>/common/htc/format.htc)" rows="1" cols="10" mask="date" maxlength="10"></textarea></td>
           <td width="15" align="center">至</td>
-          <td width="100" align="center"><textarea name="tjjssj" style="width: 100%;" class="mask" htcurl="url(<%=request.getContextPath() %>/common/htc/format.htc)" rows="1" cols="10" mask="date" maxlength="10"></textarea></td>
+          <td width="100" align="center"><textarea name="tjsj2" style="width: 100%;" class="mask" htcurl="url(<%=request.getContextPath() %>/common/htc/format.htc)" rows="1" cols="10" mask="date" maxlength="10"></textarea></td>
         </tr>
       </table>
       <table width="98%%" border="0" cellspacing="0" cellpadding="0">

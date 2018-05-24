@@ -12,11 +12,15 @@ import com.oracle.labor.common.codetable.HealthstateOperation;
 import com.oracle.labor.common.codetable.LanguageOperation;
 import com.oracle.labor.common.codetable.MarriageOperation;
 import com.oracle.labor.common.codetable.NationOperation;
+import com.oracle.labor.common.codetable.OrgtypeOperation;
 import com.oracle.labor.common.codetable.PersonneltypeOperation;
 import com.oracle.labor.common.codetable.PoliticsaspectOperation;
 import com.oracle.labor.common.codetable.ProficiencyOperation;
 import com.oracle.labor.common.codetable.QualificationOperation;
 import com.oracle.labor.common.codetable.RprtypeOperation;
+import com.oracle.labor.common.codetable.SexOperation;
+import com.oracle.labor.common.codetable.SpecialtyOperation;
+import com.oracle.labor.common.codetable.ZjdgwlbOperation;
 
 @Controller
 public class CommonHandler {
@@ -85,12 +89,12 @@ public class CommonHandler {
 		return EducationallevelOperation.getOption(value);
 	}
 	
-//	//性别
-//	@ResponseBody
-//	@RequestMapping(value="/service/xb/{value}",produces="text/html;charset=UTF-8")
-//	public String getXb(@PathVariable("value") String value){
-//		return SexOperation.getOption(value);
-//	}
+	//性别
+	@ResponseBody
+	@RequestMapping(value="/service/xb/{value}",produces="text/html;charset=UTF-8")
+	public String getXb(@PathVariable("value") String value){
+		return SexOperation.getOption(value);
+	}
 	
 	//计算机等级
 	@ResponseBody
@@ -111,6 +115,27 @@ public class CommonHandler {
 	@RequestMapping(value="/service/slcd/{value}",produces="text/html;charset=UTF-8")
 	public String getSlcd(@PathVariable("value") String value){
 		return ProficiencyOperation.getOption(value);
+	}
+	
+	/*//求职岗位
+	@ResponseBody
+	@RequestMapping(value="/service/qzgw/{value}",produces="text/html;charset=UTF-8")
+	public String getQzgw(@PathVariable("value") String value){
+		return SpecialtyOperation.getSingleOption(value);
+	}*/
+	
+	//单位类型
+	@ResponseBody
+	@RequestMapping(value="/service/dwlx/{value}",produces="text/html;charset=UTF-8")
+	public String getDwlx(@PathVariable("value") String value){
+		return OrgtypeOperation.getOption(value);
+	}
+	
+	//岗位类别
+	@ResponseBody
+	@RequestMapping(value="/service/gwlb/{value}",produces="text/html;charset=UTF-8")
+	public String getGwlb(@PathVariable("value") String value){
+		return ZjdgwlbOperation.getOption(value);
 	}
 	
 	

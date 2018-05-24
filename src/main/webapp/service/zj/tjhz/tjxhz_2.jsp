@@ -8,8 +8,10 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/j.js"></script>
 <script>
     function doSubmit(){
+    	alert("doSubmit");
     	var a ;
-   		a = $("input:checked").val()
+   		a = $("input:checked").val();
+   		alert(a);
 		form1.button22.disabled = true;
 		form1.button23.disabled = true;
 		form1.action="<%=request.getContextPath()%>/service/zj/tjhz/tjxhz_3.jsp?a=" + a;
@@ -52,15 +54,17 @@ border=1 align="center" cellPadding=0 cellSpacing=0 bordercolor="#FFFFFF" class=
       <TD align="center" class="line4" >推荐日期</TD>
 	  
     </TR>
-     <c:forEach var="Tjhz" items="${xxx}" varStatus="ci">
+     <c:forEach var="t" items="${info.list}" varStatus="ci">
     <TR> 
       <TD align="center" class="line2" >${ci.count}</TD>
       <TD align="center" class="line2"  ><input name="aaa" class="xzz" type="radio" value="${ci.count - 1}"></TD>
-      <TD align="center" class="line2"  >${Tjhz[0]}</TD>
-      <TD align="center" class="line2" >${Tjhz[1]}</TD>
-      <TD align="center" class="line2"  >${Tjhz[2]}</TD>
-      <TD align="center" class="line2"  >${Tjhz[3]}</TD>
-      <TD align="center" class="line2"  >${Tjhz[4]}</TD>
+      <TD align="center" class="line2"  >
+      <a href="<%=request.getContextPath()%>/service/getQzzxx/${t.bipId}">${t.bipName}</a></TD>
+      <TD align="center" class="line2" >${t.bipSex}</TD>
+      <TD align="center" class="line2"  >
+      <a href="<%=request.getContextPath()%>/service/getDwxq/${t.bioId}">${t.bioName}</a></TD>
+      <TD align="center" class="line2"  >${t.zpgz}</TD>
+      <TD align="center" class="line2"  >${t.tjrq}</TD>
 	  
     </TR>
      </c:forEach>

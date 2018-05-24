@@ -44,7 +44,7 @@
 			form1.button.disabled = true;
 			form1.action = "<%=request.getContextPath()%>/service/getDwxx/1";
 			form1.submit();
-			alert("提交啦！");
+			//alert("提交啦！");
 		})
 		
 	   

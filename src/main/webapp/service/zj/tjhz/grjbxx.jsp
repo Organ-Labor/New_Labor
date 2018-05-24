@@ -1,12 +1,31 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<%=request.getContextPath()%>/styles/css/common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/j.js"></script>
+<script type="text/javascript">
+     $(function(){
+    	 //alert("我要加载城市了！");
+    	 var code=$("#hkszd").val();
+  	     //alert(code);
+  	     $("#province").load("<%=request.getContextPath()%>/service/getRegions",{code:code,region:"province"});
+  	     $("#city").load("<%=request.getContextPath()%>/service/getRegions",{code:code,region:"city"});
+  	     $("#village").load("<%=request.getContextPath()%>/service/getRegions",{code:code,region:"village"});
+  	     //alert("城市加载完了！");
+     })
+</script>
+
 </head>
 <body  >
 <form method="post" action="" name="form1" >
+<c:forEach items="${bip}"  var="b">
+
+<!-- 设置户口所在地隐藏域 -->
+<input type="hidden" id="hkszd" value="${b.bipHkszd }">
+
 <table width="98%"  border="0" align="center" cellpadding="0" cellspacing="0">
 	<tr>
 		<td height="20" valign="bottom"><img src="<%=request.getContextPath()%>/styles/images/right/now.gif" width="11" height="12"> 
@@ -28,40 +47,44 @@
 		</table></td >
 	</tr >
 </table>
+
 <table width="98%" border="0" cellspacing="0" cellpadding="0" style="display:block" id="c1" align="center">
+
   <tr >
     <td>
 	    <table width="100%" border="0" cellspacing="1" cellpadding="0"   >
+	    
         <tr class="line1">
+        
           <td width="14%" align="right">身份证号码</td >
-          <td width="22%"><INPUT  name="bip_citizenid" style="WIDTH: 100%" value=""/></td >
+          <td width="22%"><INPUT  name="bipSfz" style="WIDTH: 100%" value="${b.bipSfz }"/></td >
           <td width="12%" align="right" >性　　别</td >
-          <td width="16%"><INPUT  name="bip_citizenid" style="WIDTH: 100%" value=""/></td >
+          <td width="16%"><INPUT  name="bip_citizenid" style="WIDTH: 100%" value="${b.bipSex }"/></td >
           <td width="12%" align="right">年　　龄</td >
-          <td width="15%"><INPUT  name="bip_age" style="WIDTH: 100%" value="" readonly></td >
+          <td width="15%"><INPUT  name="bip_age" style="WIDTH: 100%" value="${b.bipAge }" readonly></td >
           <td width="9%" rowspan="5" align="center" class="line1" valign="top">
 
 			</td >
         </tr>
         <tr class="line2">
           <td align="right">姓　　名</td >
-          <td ><INPUT  name="bip_name" maxlength="32"  style="WIDTH: 100%" value=""></td >
+          <td ><INPUT  name="bip_name" maxlength="32"  style="WIDTH: 100%" value="${b.bipName }"></td >
           <td align="right">民　　族</td >
-          <td ><INPUT  name="bip_minzu" style="WIDTH: 100%" value="" readonly></td >
+          <td ><INPUT  name="bip_minzu" style="WIDTH: 100%" value="${b.bipMz }" readonly></td >
           <td align="right">政治面貌</td >
-          <td ><INPUT  name="bip_zzmm" style="WIDTH: 100%" value="" readonly></td >
+          <td ><INPUT  name="bip_zzmm" style="WIDTH: 100%" value="${b.bipZzmm }" readonly></td >
         </tr > 
         <tr class="line1">
           <td align="right">婚姻状况</td >
-          <td ><INPUT  name="hyzk" style="WIDTH: 100%" value="" readonly></td >
+          <td ><INPUT  name="hyzk" style="WIDTH: 100%" value="${b.bipHyzk}" readonly></td >
           <td align="right">户籍性质</td >
-          <td ><INPUT  name="hjxz" style="WIDTH: 100%" value="" readonly></td >            
+          <td ><INPUT  name="hjxz" style="WIDTH: 100%" value="${b.bipHjxz }" readonly></td >            
           <td align="right">人员类别</td >
-          <td ><INPUT  name="rylb" style="WIDTH: 100%" value="" readonly></td >
+          <td ><INPUT  name="rylb" style="WIDTH: 100%" value="${b.bipRylb }" readonly></td >
         </tr >
         <tr class="line2">
           <td align="right" >健康状况</td >
-          <td ><INPUT  name="jkzk" style="WIDTH: 100%" value="" readonly>
+          <td ><INPUT  name="jkzk" style="WIDTH: 100%" value="${b.bipJkzk }" readonly>
 		</td >
 					<td align="right">
 				     <table border="0" cellpadding="0" cellspacing="0">
@@ -72,36 +95,36 @@
 				 <td class="line2" colspan="3">
 			     <table border="0" cellpadding="0" cellspacing="0" width="100%" > 
              <tr id="id2"  >
-               <td ><INPUT  name="cjzk" style="WIDTH: 100%" value="" readonly></td >				
+               <td ><INPUT  name="cjzk" style="WIDTH: 100%" value="${b.bipCjqk }" readonly></td >				
              </tr >
 		      </table></td >
         </tr >
         <tr class="line1">
           <td align="right">视　　力</td >
-          <td >左<INPUT  name="leftsl" maxlength="3" style="WIDTH: 29%" value="">
+          <td >左<INPUT  name="leftsl" maxlength="3" style="WIDTH: 29%" value="${b.bipLeft }">
             右
 
-            <INPUT  name="rightsl"   maxlength="3"  style="WIDTH: 29%" value="">
+            <INPUT  name="rightsl"   maxlength="3"  style="WIDTH: 29%" value="${b.bipRight }">
             </td >
           <td align="right">身　　高</td >
-          <td ><INPUT  name="sg"   maxlength="3" style="WIDTH: 50%" value="">(厘米)</td >
+          <td ><INPUT  name="sg"   maxlength="3" style="WIDTH: 50%" value="${b.bipLong }">(厘米)</td >
           <td align="right">体　　重</td >
-          <td ><INPUT  name="tz"   maxlength="3"  style="WIDTH: 45%" value="">(公斤)</td >
+          <td ><INPUT  name="tz"   maxlength="3"  style="WIDTH: 45%" value="${b.bipWeight }">(公斤)</td >
         </tr >
       </table>
       <table width="100%" border="0" cellpadding="0" cellspacing="1">
         <tr class="line2">
          <td width="13%" align="right">户口所在</td >
-          <td ><select name="bip_hkszss" size="1" style="WIDTH: 100%" >
+          <td ><select name="bip_hkszss" size="1" id="province" style="WIDTH: 100%" >
           </select></td >
         <td width="45" align="right">省(市)</td >
-          <td ><select name="bip_hkszsq" size="1"  style="WIDTH: 100%" >
+          <td ><select name="bip_hkszsq"  size="1" id="city" style="WIDTH: 100%" >
           </select></td >
         <td width="45" align="right" >市(区) </td >
-          <td ><select name="bip_hkszzj" size="1"  style="WIDTH: 100%" >
+          <td ><select name="bip_hkszzj"  size="1" id="village" style="WIDTH: 100%" >
           </select></td >
         <td width="45" align="right">镇(街)</td >
-          <td ><select name="bip_hkszjc" size="1"  style="WIDTH: 100%" >
+          <td ><select name="bip_hkszjc" size="1"   style="WIDTH: 100%" >
           </select></td >
         <td width="42" align="right" >居(村)</td >
         </tr >
@@ -109,7 +132,7 @@
       <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center"  style="word-break:break-all;width:fixed">
         <tr class="line1"> 
           <td width="13%" align="right" >工作简历</td >
-					<td class="line1"><textarea name="gzjl" style="width:100%" ></textarea> 
+					<td class="line1"><textarea name="gzjl" style="width:100%" >${b.bipResume }</textarea> 
 	      <div align="left">
 			<%--input type="button" class="BUTTON2" name="tj" value="添加" onclick="showGzjl()"--%>
 		  </div></td >
@@ -119,48 +142,48 @@
 				<tr class="line2">
 					<!-- 文化程度连动 modify by ys -->
 					<td width="13%" align="right">文化程度</td >
-					<td width="21%"><INPUT  name="whcd1" style="WIDTH: 100%" value="" readonly>
+					<td width="21%"><INPUT  name="whcd1" style="WIDTH: 100%" value="${b.bipWhcd }" readonly>
 					</td >
 					<td width="33%" align="right" colspan="2"><INPUT  name="whcd2" style="WIDTH: 100%" value="" readonly>
 					</td >
 					<td width="20%" align="right">所学专业</td >
-					<td width="13%" ><input  name="sxzy" maxlength="32"   style="WIDTH: 100%" value=""></td >
+					<td width="13%" ><input  name="sxzy" maxlength="32"   style="WIDTH: 100%" value="${b.bipSubject }"></td >
 				</tr>
 				<tr class="line1">
 					<td align="right">毕业学校</td >
-					<td colspan="3"><input  name="byxx" maxlength="32"   style="WIDTH: 100%" value=""></td >
+					<td colspan="3"><input  name="byxx" maxlength="32"   style="WIDTH: 100%" value="${b.bipSchool }"></td >
 					<td width="20%" align="right">毕业时间(YYYY-MM)</td >
-					<td width="13%" ><input  name="bysj" maxlength="32"   style="WIDTH: 100%" value=""></td >
+					<td width="13%" ><input  name="bysj" maxlength="32"   style="WIDTH: 100%" value="${b.bipBysj }"></td >
 				</tr>
 				<tr class="line2">
 					<td align="right">第二学历</td >
-					<td colspan="5"><textarea name="qtxl" maxlength="15" style="width:100%" value=""></textarea></td >
+					<td colspan="5"><textarea name="qtxl" maxlength="15" style="width:100%" >${b.bipWhcd2 }</textarea></td >
 				</tr>
 				<tr class="line1">
 					<td align="right"><span class="redtxt">*</span>固定电话</td >
-					<td><INPUT  name="lxdh"    style="WIDTH: 100%" value="" maxlength="32"></td >
+					<td><INPUT  name="lxdh"    style="WIDTH: 100%" value="${b.bipTel }" maxlength="32"></td >
 					<td width="12%" align="right" ><span class="redtxt">*</span>手　机</td >
-					<td width="21%" ><INPUT  name="sj"   maxlength="11"  style="WIDTH: 100%" value="">
+					<td width="21%" ><INPUT  name="sj"   maxlength="11"  style="WIDTH: 100%" value="${b.bipMobile }">
 					</td>
 					<td align="right">E-mail</td >
-					<td><INPUT  name="email" maxlength="48"  style="WIDTH: 100%" value="">
+					<td><INPUT  name="email" maxlength="48"  style="WIDTH: 100%" value="${b.bipEmail }">
 					</td >
 				</tr>
 				<tr class="line2">
 					<td align="right">邮政编码</td >
-					<td ><INPUT  name="yzbm" maxlength="6"   style="WIDTH: 100%" value=""></td >
+					<td ><INPUT  name="yzbm" maxlength="6"   style="WIDTH: 100%" value="${b.bipPostcode }"></td >
 					<td align="right">联系人</td >
-					<td ><INPUT  name="lxr" maxlength="32"    style="WIDTH: 100%" value=""></td >
+					<td ><INPUT  name="lxr" maxlength="32"    style="WIDTH: 100%" value="${b.bipContact }"></td >
 					<td align="right" >联系人电话</td >
-					<td ><INPUT  name="lxrdh" maxlength="32"   style="WIDTH: 100%" value=""></td >
+					<td ><INPUT  name="lxrdh" maxlength="32"   style="WIDTH: 100%" value="${b.bipContacttel }"></td >
 				</tr>
 				<tr class="line1">
 				<td width="13%" align="right">居住地址</td >
-				 <td colspan="5"><INPUT  name="jzdz" maxlength="32"   style="WIDTH: 100%" value=""></td >
+				 <td colspan="5"><INPUT  name="jzdz" maxlength="32"   style="WIDTH: 100%" value="${b.bipJaddress }"></td >
 				</tr >
 				<tr class="line2">
 				<td width="13%" align="right">其他说明</td >
-				 <td colspan="5"><textarea name="qtsm" style="width:100%"></textarea></td >
+				 <td colspan="5"><textarea name="qtsm" style="width:100%" >${b.bipQtsm }</textarea></td >
 				</tr >
 			</table>
 		</td >
@@ -183,27 +206,119 @@
 	 
 <TABLE width="98%" border=0  align="center" cellPadding=0 cellSpacing=1  class="tablebody" style="display:block" id="c4">
   <tr class="line2">
-      <td width="12%" align="right"><input name="sfdb" type="checkbox"  class="radio" value=""></td >
+      <td width="12%" align="right">
+      <c:choose>
+      <c:when test="${b.bipLow eq 'y'}">
+      <input name="sfdb" type="checkbox"  class="radio" value="y" checked>
+      </c:when>
+      <c:otherwise>
+      <input name="sfdb" type="checkbox"  class="radio" value="n" >
+      </c:otherwise>
+      </c:choose>
+      </td >
       <td colspan="18%">          低保人员</td >
-      <td width="12%" align="right" ><input name="sftk" type="checkbox" class="radio" value="" ></td >
+      
+      
+      <td width="12%" align="right" >
+      <c:choose>
+      <c:when test="${b.bipDestitute eq 'y'}">
+      <input name="sftk" type="checkbox"  class="radio" value="y" checked>
+      </c:when>
+      <c:otherwise>
+      <input name="sftk" type="checkbox"  class="radio" value="n" >
+      </c:otherwise>
+      </c:choose>
+      </td >
       <td width="18%" >          特困人员</td >
-      <td width="12%" align="right" ><input type="checkbox" name="sfyjgxbys"  class="radio" value="" >  </td >
+      
+      
+      <td width="12%" align="right" >
+      <c:choose>
+      <c:when test="${b.bipNewgraduate eq 'y'}">
+      <input name="sfyjgxbys" type="checkbox"  class="radio" value="y" checked>
+      </c:when>
+      <c:otherwise>
+      <input name="sfyjgxbys" type="checkbox"  class="radio" value="n" >
+      </c:otherwise>
+      </c:choose>
+      </td>
       <td width="26%" > 应届高校毕业生 </td >
+      
+      
   </tr >
   <tr class="line1">
-      <td width="12%" align="right"><input name="sffytw" type="checkbox"  class="radio" value="" ></td >
+      <td width="12%" align="right">
+      <c:choose>
+      <c:when test="${b.bipVeteran eq 'y'}">
+      <input name="sffytw" type="checkbox"  class="radio" value="y" checked>
+      </c:when>
+      <c:otherwise>
+      <input name="sffytw" type="checkbox"  class="radio" value="n" >
+      </c:otherwise>
+      </c:choose>
+      </td >
       <td colspan="18%">          复员退伍</td >
-      <td width="12%" align="right" ><input type="checkbox" name="sfwfzr"  class="radio" value=""></td >
+      
+      <td width="12%" align="right" >
+      <c:choose>
+      <c:when test="${b.bipOthercities eq 'y'}">
+      <input name="sfwfzr" type="checkbox"  class="radio" value="y" checked>
+      </c:when>
+      <c:otherwise>
+      <input name="sfwfzr" type="checkbox"  class="radio" value="n" >
+      </c:otherwise>
+      </c:choose>
+      </td >
       <td width="18%" >          外埠转入</td >
-      <td width="12%" align="right" ><input type="checkbox" name="sfrhfl"  class="radio" value="">  </td >
+      
+      
+      <td width="12%" align="right" >
+      <c:choose>
+      <c:when test="${b.bipRhfl eq 'y'}">
+      <input name="sfrhfl" type="checkbox"  class="radio" value="y" checked>
+      </c:when>
+      <c:otherwise>
+      <input name="sfrhfl" type="checkbox"  class="radio" value="n" >
+      </c:otherwise>
+      </c:choose>
+      </td >
       <td width="26%" > 是否人户分离 </td >
   </tr >
   <tr class="line2">
-      <td width="12%" align="right"><input name="sfnzf" type="checkbox"  class="radio" value="" ></td >
+      <td width="12%" align="right">
+      <c:choose>
+      <c:when test="${b.bipPeasent eq 'y'}">
+      <input name="sfnzf" type="checkbox"  class="radio" value="y" checked>
+      </c:when>
+      <c:otherwise>
+      <input name="sfnzf" type="checkbox"  class="radio" value="n" >
+      </c:otherwise>
+      </c:choose>
+      </td >
       <td colspan="18%">          农转非</td >
-      <td width="12%" align="right" ><input type="checkbox" name="sfllsf"  class="radio" value="" ></td >
+      
+      <td width="12%" align="right" >
+      <c:choose>
+      <c:when test="${b.bipCriminal eq 'y'}">
+      <input name="sfllsf" type="checkbox"  class="radio" value="y" checked>
+      </c:when>
+      <c:otherwise>
+      <input name="sfllsf" type="checkbox"  class="radio" value="n" >
+      </c:otherwise>
+      </c:choose>
+      </td >
       <td width="18%" >          两劳释放</td >
-      <td width="12%" align="right" ><input type="checkbox" class="radio" name="sfczjyyhz" value="">  </td >
+      
+      <td width="12%" align="right" >
+      <c:choose>
+      <c:when test="${b.bipCzjyyhz eq 'y'}">
+      <input name="sfczjyyhz" type="checkbox"  class="radio" value="y" checked>
+      </c:when>
+      <c:otherwise>
+      <input name="sfczjyyhz" type="checkbox"  class="radio" value="n" >
+      </c:otherwise>
+      </c:choose>
+      </td >
       <td width="26%" > 是否持再就业优惠证</td >
   </tr >
 </table>
@@ -217,7 +332,7 @@
         </tr >
       </table>
     </td >
-    <td valign="bottom">具有信息</td >
+    <td valign="bottom">具体信息</td >
   </tr >
 </table>
 	
@@ -270,7 +385,7 @@
 			  <table  width="100%" border="0" cellpadding="0" align="center"  cellspacing="1">
               <tr class="line1" align="center" >
                 <td width="13%" align="right">计算机等级</td >
-                <td width="19%"><select name="jsjdj" size="1"  style="WIDTH: 100%" ><option value="">
+                <td width="19%"><select name="jsjdj" size="1"  style="WIDTH: 100%" ><option value="${b.bipPc }">
                 </select></td >
                 <td width="10%" align="right">熟练程度</td >
                 <td width="18%"><select name="jsjslcd" size="1" style="WIDTH: 100%" ><option value=""></select></td >
@@ -300,22 +415,22 @@
         <tr class="line1">
           <td width="13%" align="right">单位性质</td >
           <td width="22%" ><select name="dwxz" size="1"  style="WIDTH: 100%" onChange="jjlx_dis()">
-            <option value=""> 
+            <option value="${b.Dwxz }"> ${b.Dwxz }
             </select></td >
           <td width="10%" align="right">单位行业</td >
           <td width="21%" ><select name="dwhy" size="1"  style="WIDTH: 100%">
-						<option value="">	
+						<option value="${b.Dwhy }">	${b.Dwhy }
           </select></td >
           <td width="11%" align="right">经济类型</td >
           <td width="23%" ><select name="dwjjlx" size="1"  style="WIDTH: 100%">
-					<option value="">		
+					<option value="${b.Jjlx }">	${b.Jjlx }	
           </select></td >
         </tr>
         <tr class="line2">
           <td align="right">工作地区</td >
           <td >
 		     <select name="gzdq" size="1"  style="WIDTH: 100%">
-			 <option value="">
+			 <option value="${b.gzdq }">${b.gzdq }
              </select></td>
           <td align="right">工作地区</td >
           <td >
@@ -333,11 +448,35 @@
 		  <table width="100%" border="0" cellpadding="0" cellspacing="1">
 		    <tr class="line2">
 		      <td width="14%" align="right">是否接收短信</td >
-		      <td width="17%"><input name="sfjsdx" type="checkbox" value="1"  class="radio" onClick="toShowDiv()"></td >
+		      <c:choose>
+              <c:when test="${b.Sfjsdx eq 'y'}">
+              <td width="17%"><input name="sfjsdx" type="checkbox" value="y"  class="radio" onClick="toShowDiv()" checked></td >
+              </c:when>
+              <c:otherwise>
+              <td width="17%"><input name="sfjsdx" type="checkbox" value="n"  class="radio"></td >
+              </c:otherwise>
+              </c:choose>
+		      
 		      <td width="14%" align="right">是否参加培训</td >
-		      <td width="14%"><input name="sfcjpx" type="checkbox" value="1"  class="radio"></td >
+		      <c:choose>
+              <c:when test="${b.Sfcjpx eq 'y'}">
+              <td width="14%"><input name="sfcjpx" type="checkbox" value="y"  class="radio" checked></td >
+              </c:when>
+              <c:otherwise>
+              <td width="17%"><input name="sfcjpx" type="checkbox" value="n"  class="radio"></td >
+              </c:otherwise>
+              </c:choose>
+		      
 		      <td width="18%" align="right">是否接受职业指导</td >
-		      <td width="23%"><input name="sfjszyzd" type="checkbox" value="1"  class="radio"></td >
+		       <c:choose>
+              <c:when test="${b.Sfjszyzd eq 'y'}">
+              <td width="23%"><input name="sfjszyzd" type="checkbox" value="y"  class="radio" checked></td >
+              </c:when>
+              <c:otherwise>
+              <td width="17%"><input name="sfjszyzd" type="checkbox" value="n"  class="radio"></td >
+              </c:otherwise>
+              </c:choose>
+		      
 		    </tr>
 		</table>
 			<div id="dxsj" style="display:none">
@@ -375,7 +514,7 @@
 			  <tr class="line1" align="center">
 			    <td width="40"><span class="redtxt">*</span>工种</td>
 				<td width="110"><select name="qzgz1" size="1"  style="WIDTH: 100%"  >
-						<option value=""></select></td >
+						<option value="${b.gzbh }">${b.gz }</option></select></td >
 			    <td width="50">用工形式</td>
 				<td width="60"><select name="ygxs1" size="1"  style="WIDTH: 100%" onchange="changyxrx()">
 						
@@ -383,17 +522,17 @@
 			    <td width="50" align="right"><input name="xs" type="text" size="6" value="月薪"  class='inputline' readonly></td>
 				<td width="140">
 					<div id="yx" style="display:">
-					<table><tr><td><input name="zdyx1" type="text" style="width:40px" onblur="checkJe(this);">
+					<table><tr><td><input name="zdyx1" type="text" style="width:40px" value="${b.zdyx }" onblur="checkJe(this);">
                   至
 
                   <input name="zgyx1" type="text" style="width:40px" onblur="checkJe(this);">
 					元</td></tr></table>
 					</div>
 					<div id="rx" style="display:none">
-					<table><tr><td><br><input name="zdrx1" type="text" style="width:40px" onblur="checkJe(this);">
+					<table><tr><td><br><input name="zdrx1" type="text" value="${b.zgyx }" style="width:40px" onblur="checkJe(this);">
                   至
 
-                  <input name="zgrx1" type="text" style="width:40px" onblur="checkJe(this);">
+                  <input name="zgrx1" type="text" style="width:40px"  onblur="checkJe(this);">
 					元<br><br></td></tr></table>
 					</div>
 				</td >
@@ -419,6 +558,7 @@
       <INPUT name="cz" type="reset" class="BUTTONs3" id="cz" value="取 消" onClick="valueReset();">
   </tr >
 </TABLE>
+</c:forEach>
 </form>
 </body>
 </html>

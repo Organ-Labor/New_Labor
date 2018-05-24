@@ -20,7 +20,7 @@ public class NationOperation implements IAppConfig{
 			}
 		}
 		return true;
-	}
+	} 
 	
 	public static String getNameById(String id){
 		if(id!=null){

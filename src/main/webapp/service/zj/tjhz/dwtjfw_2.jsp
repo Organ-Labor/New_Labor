@@ -53,7 +53,7 @@
         </TR>
         <c:forEach items="${info.list}" var="s">
         	<TR> 
-        	  <TD align="center" class="line2"><a href="<%=request.getContextPath()%>/service/getDwmc/${s.bioId}">推荐</a></TD>
+        	  <TD align="center" class="line2"><a href="<%=request.getContextPath()%>/service/getBio2/${s.bioId}">推荐</a></TD>
         	  <TD align="center" class="line2"><a href="<%=request.getContextPath()%>/service/getDwxq/${s.bioId}">${s.bioName}</a></TD>
         	  <TD align="center" class="line2">${s.bioAddress}</TD>
         	  <TD align="center" class="line2">${s.tel}</TD>
@@ -65,7 +65,7 @@
 <table width="98%" border="0" align="center" cellspacing="0" cellpadding="0">
   <tr> 
      <td class="line2" align="center">
-		<input name="button2" type="button"class=BUTTONs3  value="返 回" onClick="toBack()">
+		<input name="button2" type="button" class=BUTTONs3  value="返 回" onClick="toBack()">
 	 </td>
   </tr>
 </table>

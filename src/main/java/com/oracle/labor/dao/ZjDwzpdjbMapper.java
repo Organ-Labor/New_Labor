@@ -45,4 +45,12 @@ public interface ZjDwzpdjbMapper {
     public void updatedw_gd(@Param("id") String id,@Param("gdsj") String gdsj);
     
     public List<ZjDwzpdjb> getAll_wgd();
+
+    List<Map<String,Object>> getZpgz(@Param("bioId") String bioId);
+    
+    List<Map<String,Object>> getBB(@Param("bioId") String bioId,@Param("bipId") String bipId,@Param("gzbh") String gzbh);
+    
+    List<Map<String,Object>> getSearch(@Param("bipSex") String bipSex,@Param("hjxz") String hjxz,@Param("minAge") String minAge,@Param("maxAge") String maxAge,@Param("rylb") String rylb,@Param("gz") String gz,@Param("whcd1") String whcd1,@Param("whcd2") String whcd2,@Param("orgtype") String orgtype,@Param("gwlb") String gwlb,@Param("djsj1") String djsj1,@Param("djsj2") String djsj2,@Param("tjsj1") String tjsj1,@Param("tjsj2") String tjsj2,@Param("hzzt") String hzzt);
+   
+
 }

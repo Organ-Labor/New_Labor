@@ -11,6 +11,7 @@ public class ZjDwzpgzb {
 
     private String gwlb;
 
+
     @Override
 	public String toString() {
 		return "ZjDwzpgzb [zpgzbh=" + zpgzbh + ", zpbh=" + zpbh + ", zpgz=" + zpgz + ", zpgzbm=" + zpgzbm + ", gwlb="
@@ -23,7 +24,7 @@ public class ZjDwzpgzb {
 	}
 
 	private String zrs;
-
+	
     private String zprsn;
 
     private String zprsnv;
