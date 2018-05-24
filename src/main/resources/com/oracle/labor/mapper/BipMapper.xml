@@ -149,7 +149,7 @@ LEFT JOIN cdg_healthstate ON cdg_healthstate.cd_id=bip_jkzk
 LEFT JOIN cdg_regioncode ON cdg_regioncode.cd_id=bip.bip_hkszd
 LEFT JOIN zj_tjxxhzb ON zj_tjxxhzb.QZGZBH=gzb.QZGZBH
  WHERE gzb.GZ=#{gz} AND bip_sex=#{bipSex} AND bip_hyzk=#{bipHyzk} AND bip_whcd=#{bipWhcd} AND bip_hjxz=#{bipHjxz} AND bip_rylb=#{bipRylb} AND bip_jkzk=#{bipJkzk} AND bip_t_newgraduate=#{bipTNewgraduate} AND
-djb.gzdq=#{gzdq}  AND djb.SFDJ="n" AND bip_age>#{minAge} AND #{maxAge}>bip_age AND zj_tjxxhzb.SFHZ='0'
+djb.gzdq=#{gzdq}  AND djb.SFDJ="n" AND bip_age>#{minAge} AND #{maxAge}>bip_age AND zj_tjxxhzb.SFHZ='n'
     
   </select> 
   

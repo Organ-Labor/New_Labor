@@ -124,36 +124,36 @@
 									<td width="13%" align="right"><span class="redtxt"></span>单位法人码</td>
 
 									<td width="18%"><input id="i1" name="dwfrm" type="text"
-										style="WIDTH: 100%" maxlength="32" value="${d.bioNo}"></td>
+										style="WIDTH: 100%" maxlength="32" value="${b.bioNo}"></td>
 
 									<td width="13%" align="right"><span class="redtxt"></span>单位全称</td>
 									<td width="20%"><INPUT id="i2" name="dwqc"
 
-										style="WIDTH: 100%" maxlength="64" value="${d.bioName}" type="text">
+										style="WIDTH: 100%" maxlength="64" value="${b.bioName}" type="text">
 
 									</td>
 									<td width="14%" align="right">单位简称</td>
 									<td width="20%"><INPUT id="i3" name="dwjc"
 
-										style="WIDTH: 100%" maxlength="32" value="${d.bioShortname}" type="text">
+										style="WIDTH: 100%" maxlength="32" value="${b.bioShortname}" type="text">
 
 									</td>
 								</tr>
 								<tr class="line1">
 									<td align="right"><span class="redtxt"></span>单位性质</td>
 
-									<td width="18%"><input id="i4" name="dwxz" value="${d.orgtypeName}"
+									<td width="18%"><input id="i4" name="dwxz" value="${b.orgtypeName}"
 										style="WIDTH: 100%;" type="text">
 
 									</td>
 									<td align="right"><span class="redtxt"></span>经济类型</td>
 
-									<td><input id="i5" type="text" name="dwjjlx" style="WIDTH: 100%" value="${d.regtypeName}">
+									<td><input id="i5" type="text" name="dwjjlx" style="WIDTH: 100%" value="${b.regtypeName}">
 
 									</td>
 									<td align="right"><span class="redtxt"></span>单位行业</td>
 
-									<td><input type="text" id="i6" name="dwhy" style="WIDTH: 100%" value="${d.industryName}">
+									<td><input type="text" id="i6" name="dwhy" style="WIDTH: 100%" value="${b.industryName}">
 
 									</td>
 								</tr>
@@ -162,19 +162,19 @@
 									<td align="right">邮政编码</td>
 
 									<td><INPUT type="text" id="i7" name="yzbm" style="WIDTH: 100%"
-										maxlength="32" value="${d.bioBuaPostcode}">
+										maxlength="32" value="${b.bioBuaPostcode}">
 
 									</td>
 									<td align="right">传真机号</td>
 									<td><input id="i8" name="czjh" style="WIDTH: 100%"
 
-										type="text" maxlength="32" value="${d.bioConFax}">
+										type="text" maxlength="32" value="${b.bioConFax}">
 
 									</td>
 									<td align="right">Email</td>
 									<td><INPUT id="i9" name="email" style="WIDTH: 100%"
 										
-										maxlength="64" value="${d.bioConMail}">
+										maxlength="64" value="${b.bioConMail}">
 
 									</td>
 								</tr>

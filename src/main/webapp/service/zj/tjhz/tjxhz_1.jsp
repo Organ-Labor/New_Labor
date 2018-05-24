@@ -11,13 +11,13 @@
 	var sfzreg = /^[1-9]([0-9]{5})(([1][9])||([2][0]))[0-9]{2}(([0][1-9])||([1][0-2]))(([0][1-9])||([1-2][0-9])||([3][0-1]))[0-9]{3}([0-9]||[X])$/;
 	
 	function doSubmit(){
-		/* var a = $.trim($("#bioSfz").val());
-		var b = $.trim($("#bioName").val());
-		var c = $.trim($("#bioNo").val());
-		var d = $.trim($("#bioName").val());
-		var e = $.trim($("#tjsj1").val());
-		var f = $.trim($("#tjsj2").val());
-		var g = $.trim($("#tjxlx").val());
+		var a = $.trim($("#sfz").val());
+		var b = $.trim($("#xm").val());
+		var c = $.trim($("#frm").val());
+		var d = $.trim($("#mc").val());
+		var e = $.trim($("#qs").val());
+		var f = $.trim($("#jz").val());
+		var g = $.trim($("#lx").val());
 		if(a == "" || b == "" || c == "" || d == "" || e == "" || f == "" || g == ""){
    			alert("信息不全！！");
 			return;
@@ -36,10 +36,8 @@
 		}
 		var s = a + b + c + d + e + f + g;
 		form1.cx.disabled = true;
-
 		form1.qk.disabled = true;
 		form1.action="<%=request.getContextPath()%>/grtj/hzcx";
-
 		form1.submit();
 	}
 	
@@ -94,35 +92,33 @@ $(function(){
 <table width="98%" align="center" border="0" cellpadding="0" cellspacing="1">
 	<tr class="line1"> 
 		<td width="" align="right" class="line2">身份证号码</td>
-		<td width="" align="left" class="line2"><input id="bipSfz" name="bipSfz" style="WIDTH: 200px;"  maxlength="18"></td>
+		<td width="" align="left" class="line2"><input id="sfz" name="citizenid" style="WIDTH: 200px;"  maxlength="18"></td>
 	</tr>
 	<tr class="line1"> 
 		<td width="" align="right" class="line2">姓      名</td>
-		<td width="" align="left" class="line2"><input id="bipName" name="bipName" style="WIDTH: 200px" maxlength="32"></td>
+		<td width="" align="left" class="line2"><input id="xm" name="bip_name" style="WIDTH: 200px" maxlength="32"></td>
 	</tr>
 	<tr class="line1"> 
 		<td width="" align="right" class="line1">单位法人码</td>
-		<td width="" align="left" class="line1"><input id="bioNo" name="bioNo" style="WIDTH: 200px;"  maxlength="32"></td>
+		<td width="" align="left" class="line1"><input id="frm" name="bio_no" style="WIDTH: 200px;"  maxlength="32"></td>
 	</tr>
 	<tr class="line1"> 
 		<td width="" align="right" class="line1">单位名称</td>
-		<td width="" align="left" class="line1"><input id="bioName" name="bioName" style="WIDTH: 200px"  maxlength="32"></td>
+		<td width="" align="left" class="line1"><input id="mc" name="bio_name" style="WIDTH: 200px"  maxlength="32"></td>
 	</tr>
 	<tr class="line1"> 
 		<td width="" align="right" class="line2">推荐日期起</td>
-		<td width="" align="left" class="line2"><input id="tjsj1" name="tjsj1"  style="WIDTH: 200px"  maxlength="10"></td>
+		<td width="" align="left" class="line2"><input id="qs" name="tjFirstDate"  style="WIDTH: 200px"  maxlength="10"></td>
 	</tr>
 	<tr class="line1"> 
 		<td width="" align="right" class="line2">至</td>
-		<td width="" align="left" class="line2"><input id="tjsj2" name="tjsj2"  style="WIDTH: 200px"  maxlength="10"></td>
+		<td width="" align="left" class="line2"><input id="jz" name="tjLastDate"  style="WIDTH: 200px"  maxlength="10"></td>
 	</tr>
 	<tr class="line1"> 
 		<td width="" align="right" class="line1">推荐信类型</td>
 		<td width="" align="left" class="line1">
-
 		<SELECT id="lx" NAME="tjxType" style="WIDTH: 200px">
 		<option value="">
-
 		<option value="g">个人推荐信
 
 		<option value="d">单位推荐信
@@ -135,7 +131,7 @@ $(function(){
 <table width="98%" align="center"
 	border="0" cellPadding="0" cellSpacing="1" bordercolor="#FFFFFF" class="tablebody">
 	<tr align="center"> 
-		<td height="25" align="center" class="line2"> <input name="cx" type="button" class="BUTTONs3" value="查 询" onClick=doSubmit(); >
+		<td height="25" align="center" class="line2"> <input name="cx" type="button" class="BUTTONs3" value="查 询" onClick=doSubmit()>
 			&nbsp;&nbsp;<input name="qk" type="reset"class="BUTTONs3" value="取 消"> 
 		 </td>
 	</tr>

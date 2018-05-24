@@ -217,7 +217,7 @@ GROUP BY bip.bip_id
      <if test="SFDJ != ''">
       dj.SFDJ=#{SFDJ} and
      </if>
-     true
+     true and dj.GDSJ="" 
      ORDER BY STR_TO_DATE(dj.DJSJ,'%Y-%m-%d')
      
   </select>

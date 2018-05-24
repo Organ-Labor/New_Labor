@@ -216,11 +216,11 @@ function check(myform){
 		  <td align="right">回执状态</td>
           <td><select name="hzzt" style="width: 100%;"> 
 		  <option value=""> 
-		  <option value="1">成功 
-		  <option value="0">未成功 
+		  <option value="s">成功 
+		  <option value="f">未成功 
  
  
-		  <option value="-1">未回执 
+		  <option value="n">未回执 
  
  
           </option></option></option></option></select>          </td>
