@@ -181,23 +181,23 @@
 								<tr class="line1">
 									<td align="right"><span class="redtxt"></span>注册省(市)</td>
 									<td><!--  <input id="province" name="dwszs" style="WIDTH: 100%" readonly="readonly" value="">-->
-									    <select id="province" name="dwszs" style="WIDTH: 100%" readonly="readonly" disabled="disabled"></select>
+									    <select id="province" name="dwszs" style="WIDTH: 100%" readonly="readonly" ></select>
 									</td>
 									<td align="right">市(区\县)</td>
 									<td id="sqx"><!-- <input id="city" name="dwszq"
 										style="WIDTH: 100%" readonly="readonly"> -->
-										<select id="city" name="dwszq" style="WIDTH: 100%" readonly="readonly" disabled="disabled"></select>
+										<select id="city" name="dwszq" style="WIDTH: 100%" readonly="readonly" ></select>
 									</td>
 									<td align="right">街(镇\乡)</td>
 									<td id="jzx"><!--  <input id="village" name="dwszj"
 										style="WIDTH: 100%" readonly="readonly">-->
-										<select id="village" name="dwszj" style="WIDTH: 100%" readonly="readonly" disabled="disabled"></select>
+										<select id="village" name="dwszj" style="WIDTH: 100%" readonly="readonly" ></select>
 									</td>
 								</tr>
 								<tr class="line2">
 									<td align="right"><span class="redtxt"></span>经营地址</td>
 									<td colspan="5"><INPUT id="i13" name="lxdz"
-										style="WIDTH: 100%" maxlength="64" value="${d.bioAddress}">
+										style="WIDTH: 100%" maxlength="64" value="${b.bioAddress}">
 									</td>
 								</tr>
                                 </c:forEach>

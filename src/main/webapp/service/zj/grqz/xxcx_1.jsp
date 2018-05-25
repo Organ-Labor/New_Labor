@@ -19,6 +19,72 @@ $(function(){
 })
 
 </script>
+
+<script type="text/javascript">
+    
+    
+	 $(function(){
+		 //加载工种大类
+		 $("#gzdl").load("../../Specialtys");
+		 //寻找工种中类
+		 $("#gzdl").change(function(){
+			 var data=$("#gzdl").val();
+			// alert(data);
+			 $("#gzzl").load("../../Specialty/"+data+"/gz1");
+			 $("#gzxl").empty();
+			 $("#gzxl2").empty();
+			 $("#gzdm").val("");
+			 $("#gzmc").val("");
+		 });
+		 //小类
+		 $("#gzzl").change(function(){
+			 var data=$("#gzzl").val();
+			 $("#gzxl").load("../../Specialty/"+data+"/gz2");
+			 $("#gzxl2").empty();
+			 $("#gzdm").val("");
+			 $("#gzmc").val("");
+		 });
+		 //细类
+		 $("#gzxl").change(function(){
+			 var data=$("#gzxl").val();
+			 $("#gzxl2").load("../../Specialty/"+data+"/gz3",function(){
+				 var ss=$("#gzxl2").val();
+				 var dd=$("#gzxl2 option:selected").text();;
+				 $("#gzdm").val(ss);
+				 $("#gzmc").val(dd);
+			 });
+		 });
+		 //细类改变加载
+		 $("#gzxl2").change(function(){
+			 var ss=$("#gzxl2").val();
+			 var dd=$("#gzxl2 option:selected").text();;
+			 $("#gzdm").val(ss);
+			 $("#gzmc").val(dd);
+		 });
+		 
+		 //close 弹窗
+		 $("#bt_close").click(function(){
+			 $("#work_type").css('display','none');
+		 });
+		 //弹出工种
+		 $("#zpgz_name").click(function(){
+			 
+			 $("#work_type").css('display','block');
+		 });
+		 //提交工种
+		 $("#bt_gzqd").click(function(){
+			 var data=$("#gzmc").val();
+			 var dm=$("#gzdm").val();
+			// alert(dm);
+			 $("#zpgz").val(dm);
+			 $("#zpgz_name").val(data);
+			 $("#work_type").css('display','none');
+		 });
+		 
+	 })
+    
+    </script>
+
 <script>
 	function AS(){
 		var sfzhm=form1.bipSfz.value;
@@ -54,6 +120,45 @@ $(function(){
 <body>
 <input type="hidden" id="Name" value="${sessionScope.bipBasicinfo.bipName}"/>
 <input type="hidden" id="Sex" value="${sessionScope.bipBasicinfo.bipSex}">
+
+
+	<div style="position:reletive;">
+	   
+
+		<div id="work_type" style="background: white;width: 370px;height: 150px;position:absolute;left:50%;top:175px;transform:translate(-50%,-50%);display: none;" >
+				<div>
+	   				<input type="button" id="bt_close" value="close" style="float: right;">
+	   			</div>
+				
+				<table align="center" style="top: 50px">
+				<tr>
+				<td>大&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类</td>
+				<td><select id="gzdl" name="gzdl" style="width:120px"></select></td>
+				<td>中&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类</td>
+				<td><select id="gzzl" name="gzzl" style="width:120px"></select></td>
+				</tr>
+				<tr>
+				<td>小&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类</td>
+				<td><select id="gzxl" name="gzxl" style="width:120px"> </select></td>
+				<td>细&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类</td>
+				<td><select id="gzxl2" name="gzxl2" style="width:120px"></select></td>
+				</tr>
+				<tr>
+				<td>工种代码</td>
+				<td><input type="text" id="gzdm" name="gzdm" readonly="readonly" style="width:120px"></td>
+				<td>工种名称</td>
+				<td><input type="text" id="gzmc" name="gzmc" readonly="readonly" style="width:120px"></td>
+				</tr>
+				</table>
+				
+				<table align="center">
+				<tr>
+				<td><input type="button" value="确定" id="bt_gzqd"></td>
+				</tr>
+				</table>
+		</div>
+</div>
+
 <form  method="post" name="form1">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -144,9 +249,7 @@ $(function(){
 			
 			</select></td>
 			<td align="right" class="line2">求职岗位</td>
-			<td align="center" class="line2"><select name="qzgw" style="WIDTH: 100%" onclick="">
-				<%=SpecialtyOperation.getOption()%>				
-			</select></td>
+			<td align="center" class="line2"><input type="text" id="zpgz_name" id="qzgw"></td>
         </tr>
         <tr class="line1">
         	<td align="right">人员类别</td>

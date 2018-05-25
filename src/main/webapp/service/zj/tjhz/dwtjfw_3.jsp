@@ -185,12 +185,13 @@
 		});
      })
  </script>
+
 </head>
 <body>
 	<!-- 隐藏域获得value -->
 	<input type="hidden" id="ID" name="bioId"
 		value="${sessionScope.bioInfomation[0].bioId} ">
-
+    
 	<form name="form1" action="" method="post">
 		<%-- <c:set var="bio" value="${sessionScope.b}"/> --%>
 		<table width="98%" align="center" border="0" align="center"

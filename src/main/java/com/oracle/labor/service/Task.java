@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.oracle.labor.dao.ZjDwzpdjbMapper;
 import com.oracle.labor.po.ZjDwzpdjb;
 
-@Component
+//@Component
 public class Task{
 		@Scheduled(cron="0/20 * *  * * ? ")
 		public void show(){

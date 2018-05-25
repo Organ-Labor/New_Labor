@@ -224,6 +224,7 @@ public class DwtjHandler {
 		r.setZpgzbh(zpgzbh);
 		r.setQzgzbh(qzgzbh);
 		r.setTjsj(tjsj);
+		r.setSfhz("n");
 		
 		//4.向数据库中插入记录
 		tjxService.insert(record);
