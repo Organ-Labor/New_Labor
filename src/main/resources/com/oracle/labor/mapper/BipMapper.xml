@@ -133,7 +133,11 @@
     from bip
     where bip_id = #{bipId,jdbcType=VARCHAR}
   </select>
-
+<!-- 主键最大值 -->
+<select id="getYouName" resultType="String" parameterType="String">
+	select bip_name from bip
+		where bip_citizenid=#{bipSfz}
+</select>
   
   <!-- 个人求职登记表、个人求职工种表、个人基本信息表以及各种内存表联查，查询出符合条件的求职者-->
   <select id="getQzz" resultType="map" parameterType="String">

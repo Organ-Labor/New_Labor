@@ -30,7 +30,8 @@ public interface BipMapper {
     int updateByPrimaryKeySelective(Bip record);
 
     int updateByPrimaryKey(Bip record);
-    
+    //查询最大主键
+    String getYouName(@Param("bipsfz") String bipsfz);
     //获得求职者
     List<Map<String,Object>> getQzz(@Param("gz") String gz,@Param("bipSex") String bipSex,@Param("bipHyzk") String bipHyzk,@Param("bipWhcd") String bipWhcd,@Param("bipHjxz") String bipHjxz,@Param("bipRylb") String bipRylb,@Param("bipJkzk") String bipJkzk,@Param("bipTNewgraduate") String bipTNewgraduate,@Param("gzdq") String gzdq,@Param("minAge") String minAge,@Param("maxAge") String maxAge);
     

@@ -15,6 +15,8 @@ public interface ZjGrqzdjbMapper {
     int insert(ZjGrqzdjb record);
 
     int insertSelective(ZjGrqzdjb record);
+    //查询最大主键
+    String getMax();
 
     List<ZjGrqzdjb> selectByExample(ZjGrqzdjbExample example);
 

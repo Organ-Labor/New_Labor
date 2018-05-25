@@ -243,7 +243,7 @@ $(function(){
 	    <table width="100%" border="0" cellspacing="1" cellpadding="0"   >
         <tr class="line1">
           <td width="13%" align="right"><span class="redtxt">*</span>身份证号码</td >
-          <td width="20%"><INPUT  id="sfzhm" name="sfzhm" style="WIDTH: 100%"  value="" /></td >
+          <td width="20%"><INPUT  id="sfzhm" name="sfzhm" style="WIDTH: 100%" /></td >
           <td width="13%" align="right" ><span class="redtxt">*</span>性　　别</td >
           <td width="20%"><select name="xb" id="xb" size="1"  style="WIDTH: 100%" ></select></td >
           <td width="13%" align="right">年　　龄</td >

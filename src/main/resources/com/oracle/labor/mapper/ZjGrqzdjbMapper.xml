@@ -120,6 +120,11 @@
       #{sfjszyzd,jdbcType=VARCHAR}, #{djyxq,jdbcType=VARCHAR}, #{djsj,jdbcType=VARCHAR}, 
       #{gdsj,jdbcType=VARCHAR})
   </insert>
+  
+  <!-- 主键最大值 -->
+<select id="getMax" resultType="String">
+	select MAX(qzbh) from zj_grqzdjb
+</select>
   <insert id="insertSelective" parameterType="com.oracle.labor.po.ZjGrqzdjb">
     insert into zj_grqzdjb
     <trim prefix="(" suffix=")" suffixOverrides=",">
