@@ -19,6 +19,12 @@ function checkeNO(NO){
 		alert("您输入的身份证号码不正确!");
 	}
 }
+
+//根据身份证号码回显姓名
+$("#sfzhm").blur(function(){
+	
+					
+})
 </script>
 <script language="javascript">
 function check(myform){

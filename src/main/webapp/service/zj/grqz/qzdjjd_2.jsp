@@ -43,7 +43,7 @@
 	
 </head>
 <body>
-<form method="post" action="../../jd2.do" name="form1">
+<form method="post" action="jd2.do" name="form1">
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
