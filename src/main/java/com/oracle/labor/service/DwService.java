@@ -1,5 +1,7 @@
 package com.oracle.labor.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,10 +14,13 @@ import com.oracle.labor.dao.BipMapper;
 import com.oracle.labor.dao.ZjDwdjjdbMapper;
 import com.oracle.labor.dao.ZjDwzpdjbMapper;
 import com.oracle.labor.dao.ZjDwzpgzbMapper;
+import com.oracle.labor.dao.ZjTjxxhzbMapper;
 import com.oracle.labor.po.ZjDwdjjdb;
 import com.oracle.labor.po.ZjDwzpdjb;
 import com.oracle.labor.po.ZjDwzpdjbExample;
 import com.oracle.labor.po.ZjDwzpgzb;
+import com.oracle.labor.po.ZjTjxxhzb;
+import com.oracle.labor.po.ZjTjxxhzbExample;
 
 
 @Service
@@ -27,10 +32,33 @@ public class DwService {
 	ZjDwzpgzbMapper dwgzDao;
 	@Autowired
 	ZjDwdjjdbMapper dwdjDao;
+	@Autowired
+	ZjTjxxhzbMapper hzDao;
 	
+	//根据id获取单位回执信息.招聘信息
+	public List<Map<String,Object>> select_dwgdbyid(@Param("id") String id){
+			return dwDao.select_dwgdbyid(id);
+	}
 	
-	//获取所有未归档的招聘信息
-	public List<ZjDwzpdjb> get_list(){
+	//对延期的进行自动回执
+	@Transactional
+	public void update_hz(List<String> id){
+		ZjTjxxhzbExample e=new ZjTjxxhzbExample();
+		e.createCriteria().andTjxidIn(id);
+		
+		ZjTjxxhzb tjhz=new ZjTjxxhzb();
+		SimpleDateFormat date=new SimpleDateFormat("yyyy-MM-dd");
+	    String now=date.format(new Date());
+		tjhz.setSfcg("y");
+		tjhz.setSfhz("y");
+		tjhz.setHzsj(now);
+		
+		hzDao.updateByExampleSelective(tjhz,e);
+	}
+	
+	//获取所有未归档的招聘编号以及回执信息
+	
+	public List<Map<String,Object>> get_list(){
 		return dwDao.getAll_wgd();
 	}
 	
@@ -38,6 +66,8 @@ public class DwService {
 	@Transactional
 	public void update_gd(@Param("id") String id,@Param("gdsj") String gdsj){
 		dwDao.updatedw_gd(id, gdsj);
+		dwDao.updatedwdj_gd(id, gdsj);
+		dwDao.updatedwgz_gd(id, gdsj);
 	}
 
 	

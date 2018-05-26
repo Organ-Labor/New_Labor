@@ -1,7 +1,9 @@
 package com.oracle.labor.web;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
@@ -56,6 +58,18 @@ public class DwzpHandler {
 		//获取时间
 		SimpleDateFormat date=new SimpleDateFormat("yyyy-MM-dd");
 	    String now=date.format(new Date());
+	    
+	    List<Map<String,Object>> list=dwservice.select_dwgdbyid(id);
+	    List<String> list_id=new ArrayList<>();
+	    
+	    if(list.isEmpty()){
+	    	for(Map<String,Object> obj:list){
+		    	if(obj.get("sfhz").equals("n"))
+		    		list_id.add((String) obj.get("tjxid"));
+		    }
+		    if(!list_id.isEmpty())
+		       dwservice.update_hz(list_id);
+	    }
 	    dwservice.update_gd(id, now);
 	    return "归档成功";
 	}
@@ -165,6 +179,8 @@ public class DwzpHandler {
 		    b1.setDjsj(now);
 		    b1.setDjyxq(12);
 		    b2.setZpgzbh(GenerateID.getGenerateId());
+		    b1.setGdsj("");
+		    b2.setGdsj("");
 		    
 		    b1.setZpbh(id);
 		    b2.setZpbh(id);

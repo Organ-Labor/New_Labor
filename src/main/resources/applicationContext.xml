@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:task="http://www.springframework.org/schema/task"
@@ -14,9 +15,7 @@
 	<!-- 数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="username" value="root"></property>
-
-		<property name="password" value="12345"></property>
-
+		<property name="password" value="123456"></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/labor"></property>
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 	</bean>
@@ -66,5 +65,17 @@
 	<!-- 扫描包 -->
 	<context:component-scan base-package="com.oracle.labor.dao,com.oracle.labor.service"></context:component-scan>
 
-
+	<!-- 启动注解驱动的定时任务 -->
+	<task:annotation-driven scheduler="myScheduler"/>
+	<!-- 配置线程池 -->
+	<task:scheduler id="myScheduler" pool-size="2"/>
+	
+	<bean id="Task" class="com.oracle.labor.service.Task"></bean> 
+	
+	<!-- <task:scheduled-tasks>
+	 	<task:scheduled ref="Task" method="show" cron="*/5 * * * * ?" /> 
+   		<task:scheduled ref="Task" method="print" cron="*/10 * * * * ?"/> 
+	</task:scheduled-tasks> -->
+	
+	
 </beans>

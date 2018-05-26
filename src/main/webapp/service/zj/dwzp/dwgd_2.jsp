@@ -23,7 +23,7 @@
  					url="../../update_gd/"+id;
  					$.post(url,function(data){
  						alert(data);
- 						
+ 						$("#fom").attr('action',"../../getdw_gd/1").submit();
  					});
  				}
 			}
@@ -43,6 +43,7 @@
 <link href="<%=request.getContextPath()%>/styles/css/common.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<form  id="fom" action=""></form>
 <form name="form1" method="post">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
  <tr> 

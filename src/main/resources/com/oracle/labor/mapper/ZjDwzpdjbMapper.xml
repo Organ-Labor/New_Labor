@@ -96,9 +96,18 @@
     where ZPBH = #{zpbh,jdbcType=VARCHAR}
   </select>
   
-  <!-- 获取全部的未归档的单位招聘信息 -->
-  <select id="getAll_wgd" resultType="list">
-  select * from zj_dwzpdjb dj where dj.GDSJ=""
+  <!-- 获取全部未归档的单位招聘编号及回执状况 -->
+  <select id="getAll_wgd" resultType="map">
+  SELECT dj.ZPBH djdwbh,gz.ZPGZBH zpgzbh,hz.TJXID tjxid,hz.SFHZ sfhz,dj.DJSJ djsj,dj.DJYXQ djyxq
+FROM zj_dwzpdjb dj LEFT JOIN zj_dwzpgzb gz ON dj.ZPBH=gz.ZPBH LEFT JOIN zj_tjxxhzb hz  on gz.ZPGZBH=hz.ZPGZBH 
+where dj.GDSJ=''
+ <!-- 根据id获取回执状况 -->
+  </select>
+  <select id="select_dwgdbyid" resultType="map" parameterType="String">
+  SELECT dj.ZPBH djdwbh,gz.ZPGZBH zpgzbh,hz.TJXID tjxid,hz.SFHZ sfhz,dj.DJSJ djsj,dj.DJYXQ djyxq
+  FROM zj_dwzpdjb dj LEFT JOIN zj_dwzpgzb gz ON dj.ZPBH=gz.ZPBH LEFT JOIN zj_tjxxhzb hz  on gz.ZPGZBH=hz.ZPGZBH 
+  where  dj.ZPBH IN(${id})
+
   </select>
   
   <!-- 根据单位法人码和单位名称查找匹配单位 -->
@@ -309,11 +318,21 @@ GROUP BY bip.bip_id
     </if>
   </select>
   
-  <!-- 批量归档 -->
+  <!-- 批量招聘表归档 -->
   <update id="updatedw_gd" parameterType="String">
 			update zj_dwzpdjb d set d.GDSJ=#{gdsj} 
 			where d.ZPBH in  (${id})
-  </update>  
+  </update>
+   <!-- 批量冻结表表归档 -->
+  <update id="updatedwdj_gd" parameterType="String">
+  			UPDATE zj_dwdjjdb dj set dj.GDSJ=#{gdsj} where dj.ZPBH in(${id})
+   		
+  </update>
+   <!-- 批量工种表归档 -->
+  <update id="updatedwgz_gd" parameterType="String">
+			update zj_dwzpgzb gz set gz.GDSJ=#{gdsj} where gz.ZPBH IN(${id})
+			 and gz.GDSJ=''
+  </update>    
   
   
   
