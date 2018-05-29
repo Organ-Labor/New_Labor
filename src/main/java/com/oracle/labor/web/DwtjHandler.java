@@ -189,7 +189,7 @@ public class DwtjHandler {
 		System.out.println("list中的bioName:"+list.get(0).get("bioName"));
 		System.out.println("list中的bioId:"+list.get(0).get("bioId"));
 		System.out.println("list中的contactTel:"+list.get(0).get("contactTel"));
-		return new ModelAndView("service/zj/tjhz/dwtjfw_3","bioInfomation",list);
+		return new ModelAndView("redirect:/service/zj/tjhz/dwtjfw_3.jsp","bioInfomation",list);
 	}
 	
 	//查询出求职工种编号和招聘工种编号以便向推荐信息表中插入记录

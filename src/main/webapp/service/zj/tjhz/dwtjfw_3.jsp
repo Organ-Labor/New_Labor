@@ -150,6 +150,52 @@
     		 })
     		
     	 })	 
+    	 
+    	 	 //招聘地区
+		 $("#zpdq_name").click(function(){
+			
+			 $("#work_eara").css('display','block');
+		 });
+		 //close
+		 $("#bt_close2").click(function(){
+			 $("#work_eara").css('display','none');
+		 });
+		 //
+		 
+		//省
+			$("#sheng").load("../../Provinces");
+			
+			$("#sheng").change(function(){
+				var data=$("#sheng").val();
+				//alert(data);
+				$("#shi").load("../../Citys/"+data);
+				$("#qu").empty();
+				$("#zpdq_code").val("");
+				$("#dq_name").val("");
+			});
+			
+			$("#shi").change(function(){
+				var data=$("#shi").val();
+				//alert(data);
+				$("#qu").load("../../villages/"+data);
+				$("#zpdq_code").val("");
+				$("#dq_name").val("");
+			});
+			$("#qu").change(function(){
+				var aa=$("#qu").val();
+				var ss=$("#qu").find("option:selected").text();
+				$("#zpdq_code").val(aa);
+				$("#dq_name").val(ss);
+			});
+			//提交地区
+			$("#bt_dq").click(function(){
+				 var data=$("#dq_name").val();
+				 var aa=$("#qu").val();
+				 $("#zpdq").val(aa);
+				 $("#zpdq_name").val(data);
+				 $("#work_eara").css('display','none');
+			 });
+    	 
  		 //对表单进行处理
  		$("#qd").click(function(){
  			form1.action = "<%=request.getContextPath()%>/service/getQzz/1";
@@ -191,7 +237,37 @@
 	<!-- 隐藏域获得value -->
 	<input type="hidden" id="ID" name="bioId"
 		value="${sessionScope.bioInfomation[0].bioId} ">
-    
+    <div style="position:reletive;">
+    <div id="work_eara" style="background: white;width: 370px;height: 150px;position:absolute;left:50%;top:175px;transform:translate(-50%,-50%);display: none;" >
+			<div>
+	   			<input type="button" id="bt_close2" value="close" style="float: right;">
+	   		</div>
+		<br>
+		<table align="center">
+		<tr>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;省</td>
+		<td><select id="sheng" name="sheng" style="width:120px"></select></td>
+		</tr>
+		<tr>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市</td>
+		<td><select id="shi" name="shi" style="width:120px"></select></td>
+		</tr>
+		<tr>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区</td>
+		<td><select id="qu" name="qu" style="width:120px"></select></td>
+		</tr>
+		</table>
+		<table align="center">
+		<tr><td>地区代码</td><td><input id="zpdq_code" name="zpdq_code"  style="width:120px" type="text" readonly="readonly"></td></tr>
+		<tr><td>地区名称</td><td><input id="dq_name" name="dq_name" style="width:120px" type="text" readonly="readonly"></td></tr>
+		</table>
+		<table align="center">
+				<tr>
+				<td><input type="button" value="确定" id="bt_dq"></td>
+				</tr>
+				</table>
+		</div>
+    </div>
 	<form name="form1" action="" method="post">
 		<%-- <c:set var="bio" value="${sessionScope.b}"/> --%>
 		<table width="98%" align="center" border="0" align="center"
@@ -315,8 +391,9 @@
 							<option value="k">无要求</option>
 					</select></td>
 					<td align="right" class="line1">工作地区</td>
-					<td align="center" class="line1"><select id="gzdq" name="gzdq"
-						style="WIDTH: 100%"></select></td>
+					<td align="center" class="line1">
+					<input id="zpdq_name" name="gzdq" value="" style="WIDTH: 100%">
+				   </td>
 				</tr>
 				<tr>
 					<td align="right" class="line1">年 龄</td>
