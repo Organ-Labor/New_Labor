@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+
 public interface ZjDwzpdjbMapper {
     long countByExample(ZjDwzpdjbExample example);
 
@@ -41,10 +42,16 @@ public interface ZjDwzpdjbMapper {
     public void dwzp_jxdj(@Param("id") String id, @Param("reason") String reason);
     
     public List<Map<String,Object>> getDw_gd(@Param("bio_no") String bio_no,@Param("bio_name") String bio_name,@Param("DJSJ") String DJSJ,@Param("DJSJZ") String DJSJZ,@Param("SFDJ") String SFDJ);
-    
+    //归档单位招聘信息
     public void updatedw_gd(@Param("id") String id,@Param("gdsj") String gdsj);
-    
-    public List<ZjDwzpdjb> getAll_wgd();
+    //归档冻结信息
+    public void updatedwdj_gd(@Param("id") String id,@Param("gdsj") String gdsj);
+    //归档工种信息
+    public void updatedwgz_gd(@Param("id") String id,@Param("gdsj") String gdsj);
+    //获取所有未归档的单位招聘信息与回执情况
+    public List<Map<String,Object>> getAll_wgd();
+    //根据id获取回执信息
+    List<Map<String,Object>> select_dwgdbyid(@Param("id") String id);
 
     List<Map<String,Object>> getZpgz(@Param("bioId") String bioId);
     
@@ -52,5 +59,5 @@ public interface ZjDwzpdjbMapper {
     
     List<Map<String,Object>> getSearch(@Param("bipSex") String bipSex,@Param("hjxz") String hjxz,@Param("minAge") String minAge,@Param("maxAge") String maxAge,@Param("rylb") String rylb,@Param("gz") String gz,@Param("whcd1") String whcd1,@Param("whcd2") String whcd2,@Param("orgtype") String orgtype,@Param("gwlb") String gwlb,@Param("djsj1") String djsj1,@Param("djsj2") String djsj2,@Param("tjsj1") String tjsj1,@Param("tjsj2") String tjsj2,@Param("hzzt") String hzzt);
    
-
+    
 }
